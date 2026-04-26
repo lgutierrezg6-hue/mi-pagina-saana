@@ -5,93 +5,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Usuario - SAANA</title>
     <style>
-        /* --- ESTILOS BASE (Igual que antes) --- */
+        /* --- ESTILOS BASE (Para recrear la visual original) --- */
         body {
             margin: 0; padding: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             /* REEMPLAZA 'fondo_tienda.jpg' por tu imagen real */
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('fondo_tienda.jpg');
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('fondo_tienda.jpg');
             background-size: cover; background-position: center; background-attachment: fixed;
             color: white; min-height: 100vh; display: flex; flex-direction: column;
         }
 
         /* --- HEADER Y LOGO --- */
-        .header { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; }
+        .header { padding: 30px 40px; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-weight: bold; font-size: 24px; letter-spacing: 2px; display: flex; align-items: center; }
         .logo-icon { color: #d4af37; margin-right: 10px; font-size: 28px; }
         
-        /* --- NUEVO ESTILO PARA EL BOTÓN "Sign in" --- */
+        /* --- ESTILO PARA EL BOTÓN "Sign in" (ARREGLADO) --- */
         .signin-btn {
-            color: white; /* Texto blanco */
+            color: white;
             text-decoration: none;
             font-weight: bold;
             border: 2px solid white; /* Borde blanco */
-            padding: 10px 20px;
-            border-radius: 30px; /* Redondeado */
+            padding: 10px 25px;
+            border-radius: 30px; /* Forma de botón redondeado */
             transition: all 0.3s ease;
             font-size: 14px;
             text-transform: uppercase;
         }
         .signin-btn:hover {
             background-color: white;
-            color: black; /* Al pasar el mouse se invierten colores */
+            color: black;
         }
 
-        /* --- CONTENEDOR PRINCIPAL (Efecto Vidrio) --- */
+        /* --- CONTENEDOR PRINCIPAL CENTRADO --- */
         .main-container {
             flex: 1; display: flex; justify-content: center; align-items: center; padding: 40px 20px;
         }
-        .glass-container {
-            background: rgba(255, 255, 255, 0.1); /* Más transparente */
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 30px; padding: 50px; width: 100%; max-width: 900px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+
+        /* --- CAJA DEL FORMULARIO (Visual Original: Fondo oscuro transparente) --- */
+        .form-box {
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo negro semi-transparente */
+            padding: 50px;
+            border-radius: 20px;
+            width: 100%; max-width: 900px;
+            /* Sin bordes ni sombras exageradas, para mantenerlo limpio como el original */
         }
 
-        /* --- FORMULARIO EN DOS COLUMNAS --- */
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        h2 { font-size: 28px; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px; }
-        .form-group { margin-bottom: 25px; }
-        label { display: block; margin-bottom: 10px; font-weight: bold; font-size: 14px; letter-spacing: 1px; }
+        /* --- ESTRUCTURA EN DOS COLUMNAS --- */
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
+        h2 { font-size: 24px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold;}
+        .form-group { margin-bottom: 20px; }
         
-        /* Estilos de Inputs */
-        .saana-input {
-            width: 100%; padding: 15px 20px; border-radius: 50px; border: none;
-            outline: none; font-size: 16px; background-color: rgba(255, 255, 255, 0.9); color: #333;
-            box-sizing: border-box; transition: all 0.3s;
+        /* Estilos de Etiquetas (Labels) */
+        label {
+            display: block; margin-bottom: 8px; font-weight: bold; font-size: 13px;
+            letter-spacing: 1px; text-transform: uppercase; color: white;
         }
-        .saana-input:focus { background-color: white; box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
         
-        /* Estilos para fecha */
+        /* Estilos de Inputs (Blancos y Redondeados) */
+        .saana-input {
+            width: 100%; padding: 12px 20px; border-radius: 30px; border: none;
+            outline: none; font-size: 16px; background-color: white; color: #333;
+            box-sizing: border-box;
+        }
+        /* Para los select de fecha */
         .date-group { display: flex; gap: 10px; }
-        .date-input { flex: 1; text-align: center; padding: 15px 10px; }
+        .date-input { flex: 1; text-align: center; padding: 12px 10px; -webkit-appearance: none; -moz-appearance: none; appearance: none; background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); background-repeat: no-repeat; background-position-x: 90%; background-position-y: center; }
         
         /* Botón de registro */
-        .btn-submit-container {
-            grid-column: 1 / -1; /* Ocupa todo el ancho abajo */
-            display: flex; justify-content: flex-end; margin-top: 20px;
-        }
+        .btn-submit-container { grid-column: 1 / -1; display: flex; justify-content: flex-end; margin-top: 20px; }
         .btn-submit {
             background-color: white; color: black; border: none;
-            padding: 15px 40px; border-radius: 50px; font-size: 18px; font-weight: bold;
-            cursor: pointer; display: flex; align-items: center; transition: transform 0.2s, background-color 0.3s;
+            padding: 12px 35px; border-radius: 30px; font-size: 16px; font-weight: bold;
+            cursor: pointer; display: flex; align-items: center; text-transform: lowercase;
         }
-        .btn-submit:hover { background-color: #f0f0f0; transform: scale(1.02); }
-        .btn-arrow { margin-left: 10px; font-size: 24px; }
+        .btn-arrow { margin-left: 10px; font-size: 20px; }
 
         /* Ajuste para móviles */
-        @media (max-width: 768px) { .form-grid { grid-template-columns: 1fr; gap: 20px; } .header { padding: 20px; }}
+        @media (max-width: 768px) {
+            .form-grid { grid-template-columns: 1fr; gap: 20px; }
+            .header { padding: 20px; }
+            .form-box { padding: 30px 20px; }
+        }
     </style>
 </head>
 <body>
+    <!-- HEADER -->
     <div class="header">
         <div class="logo"><span class="logo-icon">♦</span> SAANA</div>
-        <!-- Botón "Sign in" arreglado -->
+        <!-- Botón "Sign in" con el nuevo estilo -->
         <a href="login.html" class="signin-btn">Sign in</a>
     </div>
 
+    <!-- CONTENEDOR PRINCIPAL -->
     <div class="main-container">
-        <div class="glass-container">
+        <!-- Caja del formulario con la visual original -->
+        <div class="form-box">
             <!-- Formulario conectado a auth.js -->
             <form id="form-registro-saana">
                 <div class="form-grid">
@@ -101,20 +109,19 @@
                         <div class="form-group">
                             <label>NOMBRE:</label>
                             <!-- AÑADIDO 'required' -->
-                            <input type="text" id="reg-nombre" class="saana-input" placeholder="Tu nombre" required>
+                            <input type="text" id="reg-nombre" class="saana-input" required>
                         </div>
                         <div class="form-group">
                             <label>APELLIDO:</label>
                             <!-- AÑADIDO 'required' -->
-                            <input type="text" id="reg-apellido" class="saana-input" placeholder="Tu apellido" required>
+                            <input type="text" id="reg-apellido" class="saana-input" required>
                         </div>
                         <div class="form-group">
                             <label>FECHA DE NACIMIENTO:</label>
                             <div class="date-group">
-                                <!-- AÑADIDO 'required' a los select -->
+                                <!-- AÑADIDO 'required' -->
                                 <select id="reg-dia" class="saana-input date-input" required>
                                     <option value="">DIA</option>
-                                    <!-- Generamos días con JS simple para no llenar el HTML -->
                                     <script>for(let i=1;i<=31;i++) document.write(`<option value="${i}">${i}</option>`);</script>
                                 </select>
                                 <select id="reg-mes" class="saana-input date-input" required>
@@ -129,23 +136,27 @@
                         </div>
                         <div class="form-group">
                             <label>CORREO:</label>
-                            <input type="email" id="reg-email" class="saana-input" placeholder="ejemplo@gmail.com" required>
+                            <!-- AÑADIDO 'required' -->
+                            <input type="email" id="reg-email" class="saana-input" required>
                         </div>
                         <div class="form-group">
                             <label>TELEFONO</label>
-                            <input type="tel" id="reg-telefono" class="saana-input" placeholder="Tu número celular" required>
+                            <!-- AÑADIDO 'required' -->
+                            <input type="tel" id="reg-telefono" class="saana-input" required>
                         </div>
                     </div>
 
                     <!-- COLUMNA DERECHA -->
                     <div class="right-column">
                         <h2>CREAR CONTRASEÑA</h2>
-                        <div class="form-group" style="margin-top: 45px;">
+                        <div class="form-group" style="margin-top: 50px;">
                              <label>CREAR CONTRASEÑA:</label>
+                             <!-- AÑADIDO 'required' -->
                             <input type="password" id="reg-password" class="saana-input" placeholder="*********" required>
                         </div>
                          <div class="form-group">
                             <label>REPERTIR CONTRASEÑA</label>
+                            <!-- AÑADIDO 'required' -->
                             <input type="password" id="reg-confirm-password" class="saana-input" placeholder="*********" required>
                         </div>
                     </div>
