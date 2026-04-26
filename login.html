@@ -3,89 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión - SAANA</title>
+    <title>Login - SAANA</title>
     <style>
-        /* --- ESTILOS GENERALES --- */
-        body, html {
-            margin: 0; padding: 0; height: 100%;
-            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
-        }
+        /* --- ESTILOS PARA RECREAR LA VISUAL EXACTA DE TU IMAGEN --- */
         body {
-            /* REEMPLAZA 'fondo_tienda.jpg' con tu imagen de fondo */
-            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('fondo_tienda.jpg');
-            background-size: cover; background-position: center; background-repeat: no-repeat;
-            display: flex; align-items: center; justify-content: center; position: relative;
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            /* Fondo de la tienda con un filtro oscuro encima */
+            /* ASEGÚRATE QUE 'fondo-tienda.jpg' ESTÉ EN LA CARPETA */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('fondo-tienda.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh; /* Altura completa de la pantalla */
+            display: flex;
+            flex-direction: column;
         }
-        /* --- LOGO DE IMAGEN EN LA ESQUINA --- */
-        .logo-container {
-            position: absolute; top: 0; left: 0; padding: 20px; z-index: 10;
+        
+        /* Header con el logo de texto en la esquina */
+        .header {
+            padding: 30px;
         }
-        .logo-img {
-            width: 100px; height: auto; display: block;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        .logo {
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
         }
-        /* --- CONTENEDOR CENTRAL (Efecto Vidrio) --- */
-        .login-box {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 25px; padding: 50px 60px; width: 100%; max-width: 450px;
-            text-align: center; color: white; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            box-sizing: border-box;
+        /* Icono simulado (puedes cambiar el símbolo si quieres) */
+        .logo-icon {
+            color: #d4af37; /* Color dorado/beige */
+            margin-right: 10px;
+            font-size: 30px;
         }
-        h2 {
-            margin: 0 0 40px 0; font-size: 28px; font-weight: 700;
-            letter-spacing: 1px; text-transform: uppercase;
+
+        /* Contenedor principal centrado */
+        .login-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding-bottom: 50px; /* Un poco de espacio abajo */
         }
-        .input-group { margin-bottom: 30px; text-align: left; }
-        label {
-            display: block; margin-bottom: 10px; font-size: 14px;
-            font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
-        }
-        .saana-input {
-            width: 100%; padding: 15px 20px; border: none; border-radius: 50px;
-            background-color: white; color: #333; font-size: 18px; outline: none;
-            box-sizing: border-box;
-        }
-        .btn-signup {
-            width: 100%; padding: 15px; border: none; border-radius: 50px;
-            background-color: white; color: black; font-size: 18px; font-weight: bold;
-            cursor: pointer; transition: background-color 0.3s; margin-top: 10px;
+
+        h1 {
+            font-size: 36px;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            font-weight: bold;
             text-transform: uppercase;
         }
-        .btn-signup:hover { background-color: #f0f0f0; }
+
+        /* --- FORMULARIO CON FONDO OSCURO TRANSPARENTE --- */
+        .login-form {
+            background: rgba(0, 0, 0, 0.2); /* Fondo negro muy transparente */
+            padding: 50px;
+            border-radius: 25px;
+            width: 100%;
+            max-width: 400px;
+            /* Sombra suave para separarlo del fondo */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+        
+        /* --- INPUTS BLANCOS Y REDONDEADOS --- */
+        .saana-input {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 30px; /* Bordes muy redondos */
+            border: none;
+            background-color: white;
+            color: black;
+            font-size: 16px;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        /* --- BOTÓN "Sign up" BLANCO Y REDONDEADO --- */
+        .btn-signup {
+            width: 50%; /* Más pequeño, como en la imagen */
+            padding: 15px;
+            border-radius: 30px;
+            border: none;
+            background-color: white;
+            color: black;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        .btn-signup:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Enlace de abajo */
         .register-link {
-            display: block; margin-top: 30px; color: white; text-decoration: underline;
-            font-size: 14px; letter-spacing: 0.5px;
+            display: block;
+            margin-top: 30px;
+            color: white;
+            text-decoration: underline;
+            font-size: 16px;
+            letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
-    <!-- Contenedor para la imagen del logo -->
-    <div class="logo-container">
-        <!-- REEMPLAZA 'logo-saana.jpg' con el nombre de tu imagen del logo -->
-        <img src="logo-saana.jpg" alt="Logo SAANA" class="logo-img">
+    <!-- Header con el logo de texto -->
+    <div class="header">
+        <div class="logo"><span class="logo-icon">♦</span> SAANA</div>
     </div>
 
-    <!-- Contenedor central -->
-    <div class="login-box">
-        <h2>INICIAR SESIÒN</h2>
-        <!-- El formulario está conectado al JS mediante su ID -->
-        <form id="form-login-saana">
+    <div class="login-container">
+        <h1>INICIAR SESIÓN</h1>
+        
+        <!-- 
+          Este formulario tiene el ID correcto (form-login-saana)
+          para conectarse con el archivo auth.js
+        -->
+        <form id="form-login-saana" class="login-form">
             <div class="input-group">
-                <label for="login-email">CORREO:</label>
+                <label>CORREO:</label>
+                <!-- ID correcto para el email -->
                 <input type="email" id="login-email" class="saana-input" required>
             </div>
+
             <div class="input-group">
-                <label for="login-password">CONTRASEÑA:</label>
+                <label>CONTRASEÑA:</label>
+                <!-- ID correcto para la contraseña -->
                 <input type="password" id="login-password" class="saana-input" required>
             </div>
+
             <button type="submit" class="btn-signup">Sign up</button>
         </form>
+
         <a href="registro.html" class="register-link">Necesito registrarme</a>
     </div>
 
-    <!-- ESTA LÍNEA ES LA QUE HACE LA MAGIA: Carga el archivo JS -->
+    <!-- Conexión con el archivo de funcionalidad -->
     <script src="auth.js"></script>
 </body>
 </html>
