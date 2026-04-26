@@ -5,67 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - SAANA</title>
     <style>
-        /* Estilos basados en el PDF de Login */
+        /* Estilos para recrear image_0.png */
         body {
-            margin: 0; padding: 0; font-family: sans-serif;
-            background-color: #1E1E24;
-            color: white;
-            display: flex; flex-direction: column; align-items: center; height: 100vh;
+            margin: 0; padding: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            /* REEMPLAZA 'fondo-tienda.jpg' POR TU IMAGEN REAL */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('fondo-tienda.jpg');
+            background-size: cover; background-position: center;
+            height: 100vh; display: flex; flex-direction: column;
         }
-        .header-login {
-            margin-top: 30px; margin-bottom: 40px;
-            text-align: center;
-        }
-        .header-login h3 { letter-spacing: 2px; font-weight: 400; margin: 0; font-size: 1.1rem;}
-        .header-login h1 { letter-spacing: 3px; font-weight: bold; margin: 10px 0; font-size: 2rem;}
         
-        .login-container { width: 90%; max-width: 350px; text-align: center;}
-        h2 { letter-spacing: 3px; font-weight: 400; margin-bottom: 40px; font-size: 1.2rem;}
+        .header { padding: 20px; }
+        .logo { color: white; font-weight: bold; font-size: 24px; letter-spacing: 2px; display: flex; align-items: center;}
+        .logo-icon { color: #d4af37; margin-right: 10px; font-size: 30px;} /* Icono dorado simulado */
 
-        .form-group { margin-bottom: 25px; text-align: left;}
-        label { display: block; font-size: 0.7rem; font-weight: bold; letter-spacing: 1px; margin-bottom: 8px; margin-left: 15px;}
+        .login-container {
+            flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            color: white; text-align: center;
+        }
+
+        h1 { font-size: 36px; letter-spacing: 3px; margin-bottom: 40px; font-weight: bold;}
+
+        /* Formulario transparente */
+        .login-form {
+            background: rgba(255, 255, 255, 0.1); /* Fondo sutilmente transparente */
+            padding: 50px; border-radius: 20px; width: 100%; max-width: 400px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+        }
+
+        .input-group { margin-bottom: 25px; text-align: left;}
+        label { display: block; font-weight: bold; margin-bottom: 10px; letter-spacing: 1px; font-size: 14px;}
         
+        /* Inputs blancos redondeados como en la imagen */
         .saana-input {
-            width: 100%; padding: 15px 20px; border-radius: 30px;
-            border: none; background-color: #4A4A52;
-            color: white; outline: none; box-sizing: border-box;
+            width: 100%; padding: 15px 20px; border-radius: 30px; border: none;
+            background-color: white; color: black; font-size: 16px; outline: none; box-sizing: border-box;
         }
-        .saana-input::placeholder { color: #ccc; letter-spacing: 2px;}
 
-        .btn-sign-up {
-             width: 50%; padding: 15px; border-radius: 30px; border: none;
-            background-color: #A0A0A8; color: #1E1E24;
-            font-weight: bold; letter-spacing: 1px; cursor: pointer;
-            margin-top: 20px;
+        /* Botón blanco redondeado */
+        .btn-signup {
+            width: 50%; padding: 15px; border-radius: 30px; border: none;
+            background-color: white; color: black; font-weight: bold; font-size: 16px;
+            cursor: pointer; margin-top: 20px; transition: background-color 0.3s;
         }
-        .register-link { display: block; margin-top: 30px; color: #ccc; text-decoration: underline; font-size: 0.8rem;}
+        .btn-signup:hover { background-color: #f0f0f0; }
+
+        .register-link {
+            display: block; margin-top: 30px; color: white; text-decoration: underline; font-size: 16px; letter-spacing: 1px;
+        }
     </style>
 </head>
 <body>
-    <div class="header-login">
-        <h3>I N G R E S A R A</h3>
-        <h1>SAANA</h1>
-        <h3>C A T A L O G O</h3>
+    <div class="header">
+        <div class="logo"><span class="logo-icon">♦</span> SAANA</div>
     </div>
 
     <div class="login-container">
-        <h2>INICIAR SESIÓN</h2>
+        <h1>INICIAR SESIÓN</h1>
         
-        <!-- IMPORTANTE: ID del formulario -->
-        <form id="form-login-saana">
-            <div class="form-group">
-                <label>C O R R E O :</label>
-                <!-- IMPORTANTE: ID del email -->
+        <!-- ID del formulario para el JS -->
+        <form id="form-login-saana" class="login-form">
+            <div class="input-group">
+                <label>CORREO:</label>
+                <!-- ID del email para el JS -->
                 <input type="email" id="login-email" class="saana-input" required>
             </div>
 
-            <div class="form-group">
-                <label>C O N T R A S E Ñ A :</label>
-                <!-- IMPORTANTE: ID del password -->
-                <input type="password" id="login-password" class="saana-input" placeholder="************" required>
+            <div class="input-group">
+                <label>CONTRASEÑA:</label>
+                <!-- ID del password para el JS -->
+                <input type="password" id="login-password" class="saana-input" required>
             </div>
 
-            <button type="submit" class="btn-sign-up">Sign up</button>
+            <button type="submit" class="btn-signup">Sign up</button>
         </form>
 
         <a href="registro.html" class="register-link">Necesito registrarme</a>
