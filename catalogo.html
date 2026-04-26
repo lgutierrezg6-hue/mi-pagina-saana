@@ -4,291 +4,444 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo - SAANA</title>
-    <!-- Iconos FontAwesome -->
+    <!-- Enlace a la librería de iconos Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* --- ESTILOS BASE DEL CATÁLOGO (Igual que antes) --- */
+        /* --- ESTILOS GENERALES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
         body {
-            margin: 0; padding: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            background-color: #121212; color: white; display: flex; height: 100vh; overflow: hidden;
+            display: flex;
+            height: 100vh;
+            background-color: #121212; /* Fondo general oscuro */
+            color: white;
         }
-        /* Sidebar */
+
+        /* --- SIDEBAR (Mismo estilo que tenías) --- */
         .sidebar {
-            width: 260px; background-color: #000000; padding: 25px; display: flex; flex-direction: column; border-right: 1px solid #333;
+            width: 250px;
+            background-color: #000000;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #333;
         }
-        .logo { font-weight: bold; font-size: 22px; letter-spacing: 2px; display: flex; align-items: center; margin-bottom: 40px;}
-        .logo-icon { color: #d4af37; margin-right: 10px; font-size: 26px;}
-        .user-profile { display: flex; align-items: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #333;}
-        .avatar { width: 45px; height: 45px; border-radius: 50%; background-color: #333; margin-right: 15px; border: 2px solid #d4af37;}
-        .user-info h3 { margin: 0; font-size: 16px; font-weight: bold;} .user-info p { margin: 5px 0 0; font-size: 12px; color: #888;}
-        .nav-menu { list-style: none; padding: 0; margin: 0; flex: 1;} .nav-item { margin-bottom: 5px; }
-        .nav-link { display: flex; align-items: center; padding: 12px 15px; color: #888; text-decoration: none; border-radius: 10px; transition: all 0.3s; font-weight: 500; font-size: 15px;}
-        .nav-link i { margin-right: 15px; width: 20px; text-align: center; font-size: 18px;}
-        .nav-link.active { background-color: white; color: black; font-weight: bold;}
-        .nav-link:hover:not(.active) { color: white; background-color: #222;}
-        .bottom-nav { margin-top: auto; } .logout-link { color: #d4af37; cursor: pointer;}
 
-        /* Contenido Principal */
-        .main-content { flex: 1; padding: 20px 40px; overflow-y: auto; background-color: #121212;}
-        .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;}
-        h1 { font-size: 32px; margin: 0; font-weight: bold;}
-        .search-bar { background-color: #222; border-radius: 20px; padding: 10px 20px; display: flex; align-items: center; width: 400px; border: 1px solid #333;}
-        .search-bar input { border: none; outline: none; flex: 1; font-size: 16px; background: transparent; color: white;}
-        .search-bar i { color: #888; }
+        .brand {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            letter-spacing: 2px;
+        }
+        .brand-icon { color: #d4af37; margin-right: 10px; }
 
-        /* --- GRID DE PRODUCTOS Y TARJETAS --- */
+        .user-profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #333;
+        }
+        .user-avatar {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            background-color: #333;
+            margin-right: 15px;
+            border: 2px solid #d4af37;
+        }
+        .user-info h3 { font-size: 16px; margin-bottom: 5px; }
+        .user-info p { font-size: 12px; color: #888; }
+
+        .menu {
+            list-style: none;
+            flex-grow: 1;
+        }
+        .menu-item { margin-bottom: 15px; }
+        .menu-link {
+            text-decoration: none;
+            color: #888;
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border-radius: 10px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        .menu-link:hover, .menu-link.active {
+            background-color: white;
+            color: black;
+        }
+        .menu-icon { margin-right: 15px; font-size: 18px; }
+
+        .logout-link {
+            text-decoration: none;
+            color: #d4af37;
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            margin-top: auto;
+            font-weight: bold;
+        }
+
+        /* --- ÁREA PRINCIPAL DE CONTENIDO --- */
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+            /* Fondo de tienda con desenfoque y capa oscura */
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('fondo_tienda.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* --- HEADER DEL CATÁLOGO --- */
+        .catalog-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .catalog-title {
+            font-size: 32px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .search-bar-container {
+            position: relative;
+            width: 300px;
+        }
+        .search-bar {
+            width: 100%;
+            padding: 12px 20px;
+            padding-right: 40px;
+            border-radius: 25px;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.1); /* Transparente */
+            color: white;
+            font-size: 14px;
+            outline: none;
+        }
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
+
+        /* --- BANNER DESTACADO (HERO) --- */
+        .hero-banner {
+            background-color: white;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .hero-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            /* Puedes usar una imagen real aquí */
+            background: url('banner_destacado.jpg') center/cover no-repeat; 
+            min-height: 300px; /* Altura mínima para el banner */
+        }
+
+        /* --- PAGINACIÓN --- */
+        .pagination {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .page-link {
+            text-decoration: none;
+            color: white;
+            margin: 0 10px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        .page-link:hover, .page-link.active {
+            opacity: 1;
+        }
+        .page-nav {
+            font-size: 18px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        /* --- GRID DE PRODUCTOS (NUEVO ESTILO) --- */
         .product-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 25px; padding-bottom: 40px;
+            display: grid;
+            /* Crea columnas automáticamente según el ancho disponible */
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
         }
-        
-        /* Estilo de la tarjeta del producto */
-        .card {
-            background-color: #1E1E1E; border-radius: 20px; padding: 20px;
-            color: white; display: flex; flex-direction: column; border: 1px solid #333;
-            cursor: pointer; /* Manito al pasar el mouse */
-            transition: transform 0.3s, border-color 0.3s;
-            height: 350px; /* Altura fija para uniformidad */
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: #d4af37; /* Borde dorado al pasar el mouse */
-        }
-        
-        /* Área de la imagen dentro de la tarjeta */
-        .card-img-container {
-            flex: 1; /* Ocupa el espacio disponible */
-            background-color: #2a2a2a; border-radius: 15px; margin-bottom: 15px;
-            overflow: hidden; display: flex; align-items: center; justify-content: center;
-        }
-        .card-img {
-            width: 100%; height: 100%; object-fit: cover; /* La imagen cubre el área sin deformarse */
-            transition: transform 0.5s;
-        }
-        .card:hover .card-img { transform: scale(1.05); } /* Pequeño zoom al pasar mouse */
 
-        /* Info de la tarjeta */
-        .card-info { flex-shrink: 0; /* No se encoge */ }
-        .card h2 { font-size: 16px; margin: 0 0 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
-        .card p { font-size: 12px; color: #aaa; margin: 0; height: 32px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;}
-        .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 15px;}
-        .price { font-weight: bold; font-size: 18px; color: #d4af37;}
-        .btn-add-cart-small { background-color: #333; color: white; border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background-color 0.3s;}
-        .btn-add-cart-small:hover { background-color: #d4af37; color: black;}
-
-
-        /* --- ESTILOS DEL MODAL (Pop-up de detalles) --- */
-        .modal-overlay {
-            display: none; /* Oculto por defecto */
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.85); /* Fondo oscuro semi-transparente */
-            z-index: 1000; justify-content: center; align-items: center;
-            padding: 20px; box-sizing: border-box;
-            opacity: 0; transition: opacity 0.3s ease;
-        }
-        /* Clase para mostrar el modal */
-        .modal-overlay.active { display: flex; opacity: 1; }
-
-        .modal-content {
-            background-color: #fff; /* Fondo blanco como en tu ejemplo */
+        /* --- TARJETA DE PRODUCTO (Estilo Blanco) --- */
+        .product-card {
+            background-color: #ffffff; /* Fondo blanco */
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             color: #333; /* Texto oscuro */
-            width: 100%; max-width: 900px; border-radius: 25px;
-            overflow: hidden; display: flex; position: relative;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-            transform: translateY(50px); transition: transform 0.4s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
         }
-        .modal-overlay.active .modal-content { transform: translateY(0); }
 
-        .modal-close-btn {
-            position: absolute; top: 15px; right: 20px; font-size: 30px;
-            color: #999; cursor: pointer; z-index: 10; transition: color 0.3s;
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
         }
-        .modal-close-btn:hover { color: #333; }
 
-        /* Estructura interna del modal (Izquierda Imagen / Derecha Info) */
-        .modal-left { flex: 1; background-color: #f4f4f4; padding: 40px; display: flex; align-items: center; justify-content: center; }
-        .modal-img { max-width: 100%; max-height: 400px; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2)); }
-        
-        .modal-right { flex: 1.2; padding: 50px 40px; display: flex; flex-direction: column; }
-        .modal-title { font-size: 32px; font-weight: bold; margin: 0 0 20px; color: #000;}
-        .modal-description { font-size: 16px; line-height: 1.6; color: #555; margin-bottom: 30px; flex-grow: 1;}
-        .modal-price-container { display: flex; align-items: center; justify-content: space-between; margin-top: auto; pt-30px; border-top: 1px solid #eee;}
-        .modal-price { font-size: 36px; font-weight: bold; color: #d4af37; /* Morado/Dorado de tu ejemplo */}
-        
-        .modal-actions { display: flex; gap: 15px; align-items: center;}
-        .btn-modal-buy { background: none; border: none; color: #000; font-weight: bold; text-decoration: underline; cursor: pointer; font-size: 16px;}
-        .btn-modal-add { background-color: #000; color: white; border: none; padding: 12px 25px; border-radius: 30px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: background-color 0.3s;}
-        .btn-modal-add:hover { background-color: #333; }
-
-        @media (max-width: 768px) {
-            .modal-content { flex-direction: column; overflow-y: auto; max-height: 90vh;}
-            .modal-left { padding: 20px; } .modal-img { max-height: 250px; }
-            .modal-right { padding: 30px 20px; }
+        .product-image-container {
+            height: 200px;
+            overflow: hidden;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
+
+        .product-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .product-info {
+            padding: 15px 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-price {
+            color: #d450e6; /* Color rosa/morado del ejemplo */
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .product-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: black;
+            text-transform: uppercase;
+        }
+
+        /* Botón de añadir al carrito */
+        .add-to-cart-btn {
+            background-color: #f0f0f0;
+            color: #333;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            align-self: flex-end; /* Alineado a la derecha */
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #d450e6; /* Cambia al color de énfasis al pasar el mouse */
+            color: white;
+        }
+
     </style>
 </head>
 <body>
-    <!-- SIDEBAR IZQUIERDO -->
+    <!-- SIDEBAR (Sin cambios) -->
     <div class="sidebar">
-        <div class="logo"><span class="logo-icon">♦</span> SAANA</div>
+        <div class="brand">
+            <span class="brand-icon">♦</span>
+            SAANA
+        </div>
         <div class="user-profile">
-            <div class="avatar"></div>
+            <div class="user-avatar"></div>
             <div class="user-info">
                 <h3>Bienvenido</h3>
                 <p>Mi Cuenta</p>
             </div>
         </div>
-        <ul class="nav-menu">
-            <li class="nav-item"><a href="#" class="nav-link active"><i class="fas fa-home"></i> Home</a></li>
-            <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-shopping-cart"></i> Carrito</a></li>
+        <ul class="menu">
+            <li class="menu-item">
+                <a href="#" class="menu-link active">
+                    <i class="fas fa-home menu-icon"></i>
+                    Home
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="fas fa-shopping-cart menu-icon"></i>
+                    Carrito
+                </a>
+            </li>
         </ul>
-        <ul class="nav-menu bottom-nav">
-             <!-- ID para el logout JS -->
-            <li class="nav-item"><a href="#" class="nav-link logout-link" id="btn-logout"><i class="fas fa-sign-out-alt"></i> Log Out</a></li>
-        </ul>
+        <a href="login.html" class="logout-link">
+            <i class="fas fa-sign-out-alt menu-icon"></i>
+            Log Out
+        </a>
     </div>
 
     <!-- CONTENIDO PRINCIPAL -->
     <div class="main-content">
-        <div class="top-bar">
-            <h1>Catálogo de Productos</h1>
-            <div class="search-bar">
-                <input type="text" placeholder="Buscar productos...">
-                <i class="fas fa-search"></i>
+        <div class="catalog-header">
+            <h1 class="catalog-title">Catálogo de Productos</h1>
+            <div class="search-bar-container">
+                <input type="text" class="search-bar" placeholder="Buscar productos...">
+                <i class="fas fa-search search-icon"></i>
             </div>
         </div>
 
-        <!-- GRID DE PRODUCTOS -->
+        <!-- BANNER DESTACADO -->
+        <div class="hero-banner">
+            <!-- Usando una imagen de marcador de posición, reemplaza 'banner_destacado.jpg' con tu imagen -->
+            <div class="hero-image" style="background-image: url('https://via.placeholder.com/1200x400/ffffff/000000?text=Banner+Destacado:+iPhone+14+Pro+Max');"></div>
+        </div>
+
+        <!-- PAGINACIÓN -->
+        <div class="pagination">
+            <span class="page-nav"><</span>
+            <a href="#" class="page-link active">1</a>
+            <a href="#" class="page-link">2</a>
+            <a href="#" class="page-link">3</a>
+            <span class="page-nav">></span>
+        </div>
+
+        <!-- GRID DE PRODUCTOS (Estilo Blanco) -->
         <div class="product-grid">
-            <!-- 
-              IMPORTANTE:
-              1. Reemplaza el 'src' de las imágenes por tus imágenes reales.
-              2. Los atributos 'data-name', 'data-price', etc., son los que JS usará para el modal. ¡Edítalos!
-            -->
-
-            <!-- PRODUCTO 1 -->
-            <div class="card" 
-                 data-name="Reloj Inteligente Aura-Fit" 
-                 data-price="$180.000" 
-                 data-image="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
-                 data-description="Descubre el equilibrio perfecto entre tecnología y estilo. Monitoreo de salud 24/7, notificaciones inteligentes y resistencia al agua. Ideal para tu día a día y tus entrenamientos.">
-                <div class="card-img-container">
-                    <!-- Reemplaza src con tu imagen -->
-                    <img src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3" alt="Smartwatch" class="card-img">
+            <!-- Producto 1: Reloj -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://via.placeholder.com/300x300?text=Reloj+Aura-Fit" alt="Reloj Aura-Fit" class="product-image">
                 </div>
-                <div class="card-info">
-                    <h2>Reloj Aura-Fit</h2>
-                    <p>Monitoreo de salud, GPS y notificaciones.</p>
-                    <div class="card-footer">
-                        <span class="price">$180.000</span>
-                        <button class="btn-add-cart-small"><i class="fas fa-shopping-cart"></i></button>
-                    </div>
+                <div class="product-info">
+                    <span class="product-price">$180.000</span>
+                    <h3 class="product-title">Reloj Aura-Fit</h3>
+                    <button class="add-to-cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
                 </div>
             </div>
 
-            <!-- PRODUCTO 2 -->
-             <div class="card" 
-                 data-name="Audífonos Pro Sound" 
-                 data-price="$75.000" 
-                 data-image="https://images.unsplash.com/photo-1608156630920-76517725556a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
-                 data-description="Sumérgete en el sonido con cancelación de ruido activa. Batería de larga duración (hasta 30 horas), conexión Bluetooth 5.0 ultra estable y un diseño ergonómico para máxima comodidad.">
-                <div class="card-img-container">
-                    <img src="https://images.unsplash.com/photo-1608156630920-76517725556a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3" alt="Audífonos" class="card-img">
+            <!-- Producto 2: Case -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://via.placeholder.com/300x300?text=Case+360" alt="Case 360°" class="product-image">
                 </div>
-                 <div class="card-info">
-                    <h2>Audífonos Pro Sound</h2>
-                    <p>Cancelación de ruido activa y alta fidelidad.</p>
-                    <div class="card-footer">
-                        <span class="price">$75.000</span>
-                        <button class="btn-add-cart-small"><i class="fas fa-shopping-cart"></i></button>
-                    </div>
+                <div class="product-info">
+                    <span class="product-price">$25.000</span>
+                    <h3 class="product-title">Case 360° iPhone</h3>
+                    <button class="add-to-cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
                 </div>
             </div>
 
-            <!-- PRODUCTO 3 -->
-             <div class="card" 
-                 data-name="Case 360° iPhone 14" 
-                 data-price="$25.000" 
-                 data-image="https://images.unsplash.com/photo-1603351154351-5e2d0600bb77?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
-                 data-description="Protección total para tu dispositivo. Este case de doble capa (PC + TPU) ofrece resistencia contra caídas de grado militar, protegiendo tanto la pantalla como la parte trasera sin sacrificar el diseño.">
-                <div class="card-img-container">
-                    <img src="https://images.unsplash.com/photo-1603351154351-5e2d0600bb77?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3" alt="Case iPhone" class="card-img">
+            <!-- Producto 3: AirPods -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://via.placeholder.com/300x300?text=AirPods" alt="AirPods Pro" class="product-image">
                 </div>
-                 <div class="card-info">
-                    <h2>Case 360° iPhone 14</h2>
-                    <p>Protección de grado militar doble capa.</p>
-                    <div class="card-footer">
-                        <span class="price">$25.000</span>
-                        <button class="btn-add-cart-small"><i class="fas fa-shopping-cart"></i></button>
-                    </div>
+                <div class="product-info">
+                    <span class="product-price">$75.000</span>
+                    <h3 class="product-title">AirPods Pro</h3>
+                    <button class="add-to-cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
                 </div>
             </div>
 
-             <!-- PRODUCTO 4 -->
-             <div class="card" 
-                 data-name="Batería Portátil MagSafe" 
-                 data-price="$55.000" 
-                 data-image="https://images.unsplash.com/photo-1625472656682-53523750182b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
-                 data-description="Carga inalámbrica magnética sobre la marcha. Diseño delgado y ligero, se adhiere perfectamente a tu iPhone 12 o superior. Capacidad de 5000mAh para una carga completa adicional.">
-                <div class="card-img-container">
-                    <img src="https://images.unsplash.com/photo-1625472656682-53523750182b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3" alt="Powerbank" class="card-img">
+            <!-- Producto 4: Funda Wallet -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://via.placeholder.com/300x300?text=Funda+Wallet" alt="Funda Wallet" class="product-image">
                 </div>
-                 <div class="card-info">
-                    <h2>Batería MagSafe</h2>
-                    <p>5000mAh, carga rápida inalámbrica.</p>
-                    <div class="card-footer">
-                        <span class="price">$55.000</span>
-                        <button class="btn-add-cart-small"><i class="fas fa-shopping-cart"></i></button>
-                    </div>
+                <div class="product-info">
+                    <span class="product-price">$25.000</span>
+                    <h3 class="product-title">Funda Wallet MagSafe</h3>
+                    <button class="add-to-cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
                 </div>
             </div>
-            
-            <!-- Puedes añadir más tarjetas copiando y pegando la estructura <div class="card">...</div> -->
 
-        </div> <!-- Fin product-grid -->
-    </div> <!-- Fin main-content -->
-
-
-    <!-- --- ESTRUCTURA DEL MODAL (Pop-up de detalles) --- -->
-    <!-- Esto está oculto hasta que se hace clic en un producto -->
-    <div class="modal-overlay" id="product-modal">
-        <div class="modal-content">
-            <span class="modal-close-btn" id="close-modal-btn">&times;</span>
-            
-            <div class="modal-left">
-                <!-- La imagen cambiará dinámicamente con JS -->
-                <img src="" alt="Detalle Producto" class="modal-img" id="modal-img">
-            </div>
-            
-            <div class="modal-right">
-                <!-- El título, precio y descripción cambiarán dinámicamente con JS -->
-                <h2 class="modal-title" id="modal-title">Nombre del Producto</h2>
-                
-                <div class="modal-description">
-                    <p id="modal-description-text">Descripción detallada del producto...</p>
-                     <!-- Ejemplo de lista de características (estática por ahora) -->
-                    <ul style="margin-top: 20px; padding-left: 20px; color: #666;">
-                        <li>Garantía de 1 año</li>
-                        <li>Envío gratis a todo el país</li>
-                        <li>Soporte técnico 24/7</li>
-                    </ul>
+            <!-- Producto 5: Cargador (Nuevo) -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://via.placeholder.com/300x300?text=Cargador+20W" alt="Cargador USB-C 20W" class="product-image">
                 </div>
-                
-                <div class="modal-price-container">
-                    <span class="modal-price" id="modal-price">$0.00</span>
-                    <div class="modal-actions">
-                        <button class="btn-modal-buy">Comprar ahora</button>
-                        <button class="btn-modal-add">
-                            <i class="fas fa-shopping-cart"></i> Agregar al carrito
-                        </button>
-                    </div>
+                <div class="product-info">
+                    <span class="product-price">$19.990</span>
+                    <h3 class="product-title">Cargador USB-C 20W</h3>
+                    <button class="add-to-cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
                 </div>
             </div>
+
+            <!-- Producto 6: Cable (Nuevo) -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://via.placeholder.com/300x300?text=Cable+Lightning" alt="Cable Lightning" class="product-image">
+                </div>
+                <div class="product-info">
+                    <span class="product-price">$14.990</span>
+                    <h3 class="product-title">Cable Lightning 1m</h3>
+                    <button class="add-to-cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Producto 7: Soporte (Nuevo) -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://via.placeholder.com/300x300?text=Soporte+Auto" alt="Soporte para Auto" class="product-image">
+                </div>
+                <div class="product-info">
+                    <span class="product-price">$12.500</span>
+                    <h3 class="product-title">Soporte Magnético Auto</h3>
+                    <button class="add-to-cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Producto 8: Powerbank (Nuevo) -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://via.placeholder.com/300x300?text=Powerbank+10k" alt="Powerbank 10000mAh" class="product-image">
+                </div>
+                <div class="product-info">
+                    <span class="product-price">$35.000</span>
+                    <h3 class="product-title">Powerbank 10000mAh</h3>
+                    <button class="add-to-cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                </div>
+            </div>
+
         </div>
     </div>
-
-
-    <!-- Conexión con el cerebro JS -->
-    <script src="auth.js"></script>
 </body>
 </html>
