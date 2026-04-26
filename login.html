@@ -2,48 +2,36 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión - SAANA</title>
-    <link rel="stylesheet" href="login.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Login SAANA</title>
+    <!-- TUS ESTILOS CSS ORIGINALES AQUÍ (He puesto unos básicos de ejemplo) -->
+    <style>
+        body { font-family: sans-serif; background: url('tu-fondo.jpg') no-repeat center center fixed; background-size: cover; color: white; text-align: center; }
+        .login-container { background: rgba(0,0,0,0.7); margin: 100px auto; padding: 40px; width: 300px; border-radius: 20px;}
+        input { display: block; margin: 10px auto; padding: 15px; width: 90%; border-radius: 30px; border: none; background: #aaa;}
+        button { padding: 15px 50px; border-radius: 30px; cursor: pointer; background: #ccc; border: none; font-weight: bold; font-size: 16px; margin-top: 20px;}
+        label { display: block; text-align: left; margin-left: 10px; font-weight: bold;}
+    </style>
 </head>
 <body>
-
-    <div class="logo-container-fixed">
-        <div class="logo-compound-fixed">
-            <i class="fa-brands fa-slack logo-icon-small"></i>
-            <div class="logo-text-block">
-                <img src="logo-sa.png" alt="SA" class="logo-sa-img-small">
-                <span class="logo-saana-text">SAANA</span>
-            </div>
-        </div>
-    </div>
-
+    <!-- LOGO Y HEADER AQUÍ -->
     <div class="login-container">
-        <h2 class="login-title">INICIAR SESIÓN</h2>
+        <!-- IMPORTANTE: El formulario debe tener el ID 'form-login' -->
+        <form id="form-login">
+            <label>CORREO:</label>
+            <!-- IMPORTANTE: El ID debe ser 'login-email' -->
+            <input type="email" id="login-email" placeholder="ivanessa.g.g02@gmail.com" required>
 
-        <!-- LE PUSIMOS ID AL FORMULARIO -->
-        <form class="login-form" id="form-login">
-            <div class="input-group">
-                <label for="email">CORREO:</label>
-                <!-- ID PARA EL CORREO -->
-                <input type="email" id="login-email" required>
-            </div>
+            <label>CONTRASEÑA:</label>
+             <!-- IMPORTANTE: El ID debe ser 'login-password' -->
+            <input type="password" id="login-password" placeholder=".........." required>
 
-            <div class="input-group">
-                <label for="password">CONTRASEÑA:</label>
-                <!-- ID PARA LA CONTRASEÑA -->
-                <input type="password" id="login-pass" required>
-            </div>
-
-            <button type="submit" class="login-submit-btn">Sign up</button>
-
-            <a href="registro.html" class="register-link-bottom">Necesito registrarme</a>
+            <button type="submit">Sign up (Ingresar)</button>
         </form>
+        <!-- Asegúrate de que este enlace apunte a tu nuevo registro.html -->
+        <p><a href="registro.html" style="color: #aaa; text-decoration: underline;">Necesito registrarme</a></p>
     </div>
 
-    <!-- CONECTAMOS EL CEREBRO (JAVASCRIPT) -->
-    <script src="script.js"></script>
+    <!-- VINCULAR EL ARCHIVO JS AL FINAL DEL BODY -->
+    <script src="auth.js"></script>
 </body>
 </html>
