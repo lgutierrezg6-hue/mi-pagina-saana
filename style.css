@@ -57,19 +57,20 @@ body {
 }
 
 /* Botón "Sign up" de la barra superior */
-.signup-btn-top {
-    background-color: white;
-    color: #000;
+/* Botón "Sign up" (Estilo original blanco) */
+.signup-btn {
+    background-color: white; /* Fondo blanco */
+    color: #000; /* Texto negro */
     text-decoration: none;
     padding: 12px 28px;
-    border-radius: 30px;
+    border-radius: 30px; /* Bordes muy redondos */
     font-weight: 600;
     display: flex;
     align-items: center;
     transition: transform 0.3s ease;
 }
-.signup-btn-top i { margin-left: 10px; }
-.signup-btn-top:hover { transform: scale(1.05); }
+.signup-btn i { margin-left: 10px; }
+.signup-btn:hover { transform: scale(1.05); }
 
 
 /* --- CONTENIDO CENTRAL --- */
