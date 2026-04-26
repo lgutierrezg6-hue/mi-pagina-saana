@@ -5,55 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión - SAANA</title>
     <style>
-        /* --- ESTILOS GENERALES PARA RECREAR LA IMAGEN --- */
+        /* --- ESTILOS GENERALES --- */
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
-            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif; /* Tipografía moderna y limpia */
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
         }
 
         body {
-            /* Fondo de la tienda con un filtro oscuro encima para que se lea el texto */
-            /* REEMPLAZA 'fondo_tienda.jpg' con el nombre de tu imagen de fondo */
-            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('fondo_tienda.jpg');
+            /* Fondo de la tienda con un filtro oscuro encima */
+            /* REEMPLAZA 'fondo_tienda.jpg' con tu imagen de fondo */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('fondo_tienda.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
+            position: relative; /* Necesario para posicionar el logo absoluto */
         }
 
-        /* --- LOGO EN LA ESQUINA SUPERIOR IZQUIERDA --- */
+        /* --- NUEVO: ESTILO PARA EL LOGO DE IMAGEN EN LA ESQUINA --- */
         .logo-container {
             position: absolute;
-            top: 30px;
-            left: 40px;
-            /* Eliminamos los estilos de texto anteriores */
+            top: 0;
+            left: 0;
+            padding: 20px; /* Espacio desde el borde */
+            z-index: 10; /* Asegura que quede por encima del fondo */
         }
         
-         /* Nuevo estilo para la imagen del logo */
-        .logo-container img {
-            width: 80px; /* Ajusta este valor para hacerlo más grande o más pequeño */
+        .logo-img {
+            width: 100px; /* Tamaño del cuadro del logo. Ajústalo si es necesario */
             height: auto;
             display: block;
+            /* Opcional: una pequeña sombra para que resalte como en la imagen */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
 
-        /* --- CONTENEDOR CENTRAL (Efecto Vidrio) --- */
+        /* --- CONTENEDOR CENTRAL (Efecto Vidrio - Igual que antes) --- */
         .login-box {
-            /* Fondo blanco transparente */
             background: rgba(255, 255, 255, 0.15);
-            /* Efecto de desenfoque (frosted glass) */
             backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px); /* Para Safari */
-            /* Borde blanco delgado */
+            -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 25px;
             padding: 50px 60px;
             width: 100%;
-            max-width: 450px; /* Ancho máximo similar al de la imagen */
+            max-width: 450px;
             text-align: center;
             color: white;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -63,9 +62,9 @@
         /* --- TÍTULO --- */
         h2 {
             margin: 0 0 40px 0;
-            font-size: 32px;
+            font-size: 28px; /* Un poco más pequeño para ajustar a la imagen */
             font-weight: 700;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             text-transform: uppercase;
         }
 
@@ -78,9 +77,10 @@
         label {
             display: block;
             margin-bottom: 10px;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 600;
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         /* --- ESTILO DE LOS CAMPOS DE TEXTO (Blancos y Redondeados) --- */
@@ -88,18 +88,12 @@
             width: 100%;
             padding: 15px 20px;
             border: none;
-            border-radius: 50px; /* Forma de píldora */
+            border-radius: 50px;
             background-color: white;
             color: #333;
             font-size: 18px;
             outline: none;
-            box-sizing: border-box; /* Para que el padding no afecte el ancho */
-        }
-        
-        /* Placeholder con la barra vertical como en la imagen */
-        .saana-input::placeholder {
-            color: #333;
-            font-weight: bold;
+            box-sizing: border-box;
         }
 
         /* --- BOTÓN "Sign up" --- */
@@ -110,11 +104,12 @@
             border-radius: 50px;
             background-color: white;
             color: black;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
             cursor: pointer;
             transition: background-color 0.3s;
-            margin-top: 20px;
+            margin-top: 10px;
+            text-transform: uppercase; /* Para que diga "SIGN UP" en mayúsculas si quieres */
         }
 
         .btn-signup:hover {
@@ -124,41 +119,41 @@
         /* --- ENLACE DE REGISTRO --- */
         .register-link {
             display: block;
-            margin-top: 40px;
+            margin-top: 30px;
             color: white;
             text-decoration: underline;
-            font-size: 16px;
+            font-size: 14px;
             letter-spacing: 0.5px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Logo en la esquina -->
+    <!-- NUEVO: Contenedor para la imagen del logo -->
     <div class="logo-container">
-        <span class="logo-icon">⟡S</span>
-        <span class="logo-text">SAANA</span>
+        <!-- 
+          IMPORTANTE: Reemplaza 'logo-saana.jpg' con el nombre real 
+          de tu archivo de imagen del logo (el cuadro negro con letras blancas).
+        -->
+        <img src="logo-saana.jpg" alt="Logo SAANA" class="logo-img">
     </div>
 
     <!-- Contenedor central con efecto de vidrio -->
     <div class="login-box">
         <h2>INICIAR SESIÒN</h2>
         
-        <!-- 
-          IMPORTANTE PARA LA FUNCIONALIDAD:
-          El id="form-login-saana" conecta este formulario con el script auth.js 
-        -->
+        <!-- ID del formulario para la funcionalidad JS -->
         <form id="form-login-saana">
             
             <div class="input-group">
                 <label for="login-email">CORREO:</label>
-                <!-- ID "login-email" para el script -->
-                <input type="email" id="login-email" class="saana-input" required placeholder="|">
+                <!-- ID para JS -->
+                <input type="email" id="login-email" class="saana-input" required>
             </div>
 
             <div class="input-group">
                 <label for="login-password">CONTRASEÑA:</label>
-                <!-- ID "login-password" para el script -->
+                <!-- ID para JS -->
                 <input type="password" id="login-password" class="saana-input" required>
             </div>
 
@@ -169,10 +164,7 @@
         <a href="registro.html" class="register-link">Necesito registrarme</a>
     </div>
 
-    <!-- 
-      VINCULACIÓN CON EL SCRIPT DE FUNCIONALIDAD 
-      Asegúrate de que auth.js esté en la misma carpeta.
-    -->
+    <!-- Vinculación con el script JS (asegúrate que esté en la carpeta) -->
     <script src="auth.js"></script>
 
 </body>
