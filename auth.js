@@ -1,113 +1,148 @@
-// --- LÓGICA DE REGISTRO ---
-function registrarUsuario(event) {
-    // Evita que el formulario recargue la página
-    event.preventDefault();
+// auth.js - El motor funcional para GitHub Pages
 
-    console.log("Intentando registrar...");
+// --- CONSTANTES PARA EL ALMACENAMIENTO ---
+// Usamos claves específicas para que no se mezclen con otros datos
+const STORAGE_KEY_USER_DATA = 'saanaUserData_v1'; // Guarda email, pass y nombre
+const STORAGE_KEY_SESSION = 'saanaUserSession_v1'; // Guarda quién está logueado actualmente
 
-    // 1. Obtener valores del formulario de registro
-    // (Asegúrate de que en tu HTML de registro los inputs tengan estos IDs)
+// --- FUNCIÓN 1: REGISTRO (Se ejecuta en registro.html) ---
+function procesarRegistro(event) {
+    event.preventDefault(); // Evita que la página se recargue
+    console.log("Procesando registro...");
+
+    // 1. Obtener los elementos del HTML por su ID
+    // IMPORTANTE: Los inputs en registro.html DEBEN tener estos IDs
     const nombreInput = document.getElementById('reg-nombre');
     const emailInput = document.getElementById('reg-email');
     const passwordInput = document.getElementById('reg-password');
 
-    // Validación simple
-    if (!nombreInput.value || !emailInput.value || !passwordInput.value) {
-        alert("Por favor, completa todos los campos para registrarte.");
+    // 2. Validaciones básicas
+    if (!nombreInput || !emailInput || !passwordInput) {
+        console.error("Error: No se encontraron los inputs necesarios en el HTML.");
         return;
     }
 
-    // 2. Crear el objeto de usuario
+    if (nombreInput.value === "" || emailInput.value === "" || passwordInput.value === "") {
+        alert("Por favor, completa todos los campos.");
+        return;
+    }
+
+    // 3. Crear el paquete de datos del usuario
     const nuevoUsuario = {
         nombre: nombreInput.value,
-        email: emailInput.value,
+        email: emailInput.value.toLowerCase().trim(), // Guardamos el email en minúsculas y sin espacios
         password: passwordInput.value
     };
 
-    // 3. GUARDAR EN LOCALSTORAGE (Simulación de Base de Datos)
-    // Convertimos el objeto a texto (JSON) para guardarlo
-    localStorage.setItem('usuarioRegistrado', JSON.stringify(nuevoUsuario));
+    // 4. GUARDAR EN LOCALSTORAGE (La "base de datos" del navegador)
+    try {
+        // Convertimos el objeto a texto JSON antes de guardar
+        localStorage.setItem(STORAGE_KEY_USER_DATA, JSON.stringify(nuevoUsuario));
+        console.log("Usuario guardado con éxito:", nuevoUsuario.email);
 
-    // 4. Feedback y redirección
-    alert('¡Registro exitoso! Ahora serás redirigido al login.');
-    window.location.href = 'login.html';
+        // 5. Éxito y redirección
+        alert("¡Registro exitoso! Ahora serás redirigido para iniciar sesión.");
+        // Limpiamos el formulario
+        nombreInput.value = ''; emailInput.value = ''; passwordInput.value = '';
+        // Redirigimos al login
+        window.location.href = 'login.html';
+
+    } catch (error) {
+        console.error("Error al guardar en localStorage:", error);
+        alert("Hubo un error al intentar guardar los datos en este navegador.");
+    }
 }
 
-
-// --- LÓGICA DE LOGIN (Aquí es donde tenías el error) ---
-function iniciarSesion(event) {
+// --- FUNCIÓN 2: LOGIN (Se ejecuta en login.html) ---
+function procesarLogin(event) {
     event.preventDefault();
-    console.log("Intentando iniciar sesión...");
+    console.log("Procesando login...");
 
-    // 1. Obtener datos del formulario de login
-    // (Asegúrate que en tu login.html los inputs tengan estos IDs)
-    const emailLogin = document.getElementById('login-email').value;
-    const passwordLogin = document.getElementById('login-password').value;
+    // 1. Obtener los elementos del HTML por su ID
+    const emailLoginInput = document.getElementById('login-email');
+    const passwordLoginInput = document.getElementById('login-password');
 
-    // 2. RECUPERAR DATOS DEL LOCALSTORAGE
-    // Buscamos si hay algo guardado bajo la llave 'usuarioRegistrado'
-    const usuarioGuardadoJSON = localStorage.getItem('usuarioRegistrado');
+    // Validar que existan los inputs
+    if (!emailLoginInput || !passwordLoginInput) return;
 
-    // 3. Verificar si el usuario existe
-    if (!usuarioGuardadoJSON) {
-        // AQUÍ ESTABA TU ERROR: No encontraba nada en la memoria
-        alert('Error: Usuario no encontrado en este navegador. Por favor regístrate primero.');
+    const emailIngresado = emailLoginInput.value.toLowerCase().trim();
+    const passwordIngresado = passwordLoginInput.value;
+
+    // 2. BUSCAR LOS DATOS GUARDADOS
+    const datosGuardadosJSON = localStorage.getItem(STORAGE_KEY_USER_DATA);
+
+    // 3. Verificar si existe algún usuario registrado
+    if (!datosGuardadosJSON) {
+        // ESTE ES EL ERROR QUE TE SALÍA EN LA FOTO. Ahora ya sabemos por qué.
+        alert("Error: Usuario no encontrado. Por favor regístrate primero.");
         return;
     }
 
-    // Convertimos el texto guardado de vuelta a un objeto Javascript
-    const usuarioGuardado = JSON.parse(usuarioGuardadoJSON);
+    // Convertimos los datos guardados de texto JSON a objeto real
+    const usuarioRegistrado = JSON.parse(datosGuardadosJSON);
+    console.log("Comparando con usuario registrado:", usuarioRegistrado.email);
 
-    // 4. Validar credenciales (Email y Contraseña coinciden)
-    if (emailLogin === usuarioGuardado.email && passwordLogin === usuarioGuardado.password) {
-        // ¡Login Correcto!
+    // 4. Comparar credenciales
+    if (emailIngresado === usuarioRegistrado.email && passwordIngresado === usuarioRegistrado.password) {
+        // ¡LOGIN EXITOSO!
+
+        // Guardamos en sessionStorage que el usuario está activo actualmente.
+        // sessionStorage se borra al cerrar la pestaña, lo cual es ideal para "sesiones".
+        sessionStorage.setItem(STORAGE_KEY_SESSION, usuarioRegistrado.nombre);
         
-        // Guardamos una "sesión activa" temporalmente para la página de catálogo
-        sessionStorage.setItem('usuarioActivoNombre', usuarioGuardado.nombre);
-        
-        alert('Credenciales correctas. Redirigiendo al catálogo...');
-        // REDIRECCIÓN
+        console.log("Login correcto. Redirigiendo...");
+        // REDIRECCIÓN FINAL AL CATÁLOGO
         window.location.href = 'catalogo.html';
     } else {
-        alert('Error: El correo o la contraseña son incorrectos.');
+        // Credenciales incorrectas
+        alert("Error: El correo o la contraseña son incorrectos.");
+    }
+}
+
+// --- FUNCIÓN 3: CONTROL DEL CATÁLOGO (Se ejecuta en catalogo.html) ---
+function verificarSesionCatalogo() {
+    // Esta función verifica si hay alguien logueado al entrar al catálogo
+    const nombreUsuarioActivo = sessionStorage.getItem(STORAGE_KEY_SESSION);
+    const headerNombreElemento = document.getElementById('header-nombre-usuario');
+
+    if (nombreUsuarioActivo) {
+        // Si hay sesión, mostramos el nombre
+        if (headerNombreElemento) {
+            headerNombreElemento.textContent = "Hola, " + nombreUsuarioActivo;
+        }
+    } else {
+        // Si NO hay sesión (intentaron entrar directo por la URL)
+        // Opcional: Redirigirlos fuera o mostrar un mensaje.
+        if (headerNombreElemento) {
+            headerNombreElemento.textContent = "Modo Invitado (No has iniciado sesión)";
+        }
+         // Descomenta la siguiente línea si quieres forzarlos a loguearse para ver el catálogo:
+         // window.location.href = 'login.html';
     }
 }
 
 
-// --- LÓGICA DEL CATÁLOGO (Para mostrar el nombre) ---
-function cargarDatosCatalogo() {
-    // Verificar si venimos de un login exitoso
-    const nombreUsuarioActivo = sessionStorage.getItem('usuarioActivoNombre');
-    
-    const elementoNombre = document.getElementById('nombre-usuario-header');
-
-    if (nombreUsuarioActivo && elementoNombre) {
-        // Si hay usuario y encontramos el elemento donde poner el nombre
-        elementoNombre.textContent = "Hola, " + nombreUsuarioActivo;
-    } else if (elementoNombre) {
-        // Si entró directo sin loguearse
-        elementoNombre.textContent = "Invitado";
-       // Opcional: redirigir al login si no está logueado
-       // window.location.href = 'login.html'; 
-    }
-}
-
-// Detectar en qué página estamos para ejecutar la función correcta
-document.addEventListener('DOMContentLoaded', () => {
-    // Si estamos en login.html
-    const loginForm = document.getElementById('form-login');
-    if (loginForm) {
-        loginForm.addEventListener('submit', iniciarSesion);
+// --- INICIALIZADOR PRINCIPAL ---
+// Este código detecta en qué página estamos y activa las funciones necesarias.
+document.addEventListener('DOMContentLoaded', function() {
+    // Detectar si estamos en la página de Registro
+    const formRegistro = document.getElementById('form-registro-saana');
+    if (formRegistro) {
+        // Escuchamos el evento 'submit' del formulario
+        formRegistro.addEventListener('submit', procesarRegistro);
+        console.log("Escuchando formulario de registro.");
     }
 
-    // Si estamos en registro.html
-    const registerForm = document.getElementById('form-registro');
-    if (registerForm) {
-        registerForm.addEventListener('submit', registrarUsuario);
+    // Detectar si estamos en la página de Login
+    const formLogin = document.getElementById('form-login-saana');
+    if (formLogin) {
+        formLogin.addEventListener('submit', procesarLogin);
+        console.log("Escuchando formulario de login.");
     }
 
-    // Si estamos en catalogo.html
-    if (window.location.pathname.includes('catalogo.html')) {
-        cargarDatosCatalogo();
+    // Detectar si estamos en el catálogo (buscando un elemento específico del catálogo)
+    if (document.getElementById('pagina-catalogo-wrapper')) {
+        verificarSesionCatalogo();
+        console.log("Verificando sesión en catálogo.");
     }
 });
