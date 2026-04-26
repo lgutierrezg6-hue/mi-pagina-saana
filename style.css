@@ -3,30 +3,29 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif; /* Usamos la fuente Poppins */
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
-    background-color: #000; /* Fondo negro de respaldo */
-    color: white; /* Texto blanco */
-    overflow-x: hidden; /* Evita scroll horizontal no deseado */
+    background-color: #000;
+    color: white;
+    overflow-x: hidden;
 }
 
 /* --- CONTENEDOR PRINCIPAL (La pantalla completa) --- */
 .landing-page {
-    height: 100vh; /* 100% de la altura de la ventana */
+    height: 100vh;
     width: 100%;
-    /* Fondo: Una capa oscura semitransparente sobre la imagen para que el texto se lea bien */
+    /* AQUÍ ESTÁ EL CAMBIO: Usamos 'fondo-tienda.jpg' */
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.85)),
-                url('https://images.unsplash.com/photo-1555664424-778a1e5877b1?q=80&w=1920&auto=format&fit=crop'); /* <- URL de la imagen de fondo */
-    background-size: cover; /* La imagen cubre todo el espacio */
+                url('fondo-tienda.jpg'); 
+    background-size: cover;
     background-position: center;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Distribuye el contenido: arriba, centro, abajo */
-    padding: 30px 50px; /* Margen interno alrededor de toda la página */
+    justify-content: space-between;
+    padding: 30px 50px;
 }
-
 
 /* --- BARRA SUPERIOR --- */
 .top-bar {
@@ -43,7 +42,7 @@ body {
 .logo-icon-box {
     width: 40px;
     height: 40px;
-    background: linear-gradient(45deg, #ff00cc, #333399); /* Degradado para el icono */
+    background: linear-gradient(45deg, #ff00cc, #333399);
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -57,30 +56,30 @@ body {
     letter-spacing: 2px;
 }
 
-/* Botón "Sign up" */
-.signup-btn {
+/* Botón "Sign up" de la barra superior */
+.signup-btn-top {
     background-color: white;
     color: #000;
     text-decoration: none;
     padding: 12px 28px;
-    border-radius: 30px; /* Bordes muy redondos */
+    border-radius: 30px;
     font-weight: 600;
     display: flex;
     align-items: center;
     transition: transform 0.3s ease;
 }
-.signup-btn i { margin-left: 10px; }
-.signup-btn:hover { transform: scale(1.05); } /* Efecto al pasar el mouse */
+.signup-btn-top i { margin-left: 10px; }
+.signup-btn-top:hover { transform: scale(1.05); }
 
 
 /* --- CONTENIDO CENTRAL --- */
 .hero-content {
-    margin-bottom: auto; /* Empuja hacia arriba */
-    margin-top: auto;    /* Empuja hacia abajo para centrar verticalmente */
+    margin-bottom: auto;
+    margin-top: auto;
 }
 
 h1 {
-    font-size: 4rem; /* Título muy grande */
+    font-size: 4rem;
     font-weight: 800;
     margin-bottom: 15px;
     line-height: 1.1;
@@ -102,7 +101,7 @@ h1 {
     border-radius: 50px;
     display: inline-flex;
     align-items: center;
-    min-width: 280px; /* Ancho mínimo */
+    min-width: 280px;
     justify-content: space-between;
     transition: transform 0.3s ease;
 }
@@ -114,7 +113,7 @@ h1 {
 .btn-arrow-circle {
     width: 50px;
     height: 50px;
-    background-color: #222; /* Círculo oscuro */
+    background-color: #222;
     color: white;
     border-radius: 50%;
     display: flex;
@@ -123,11 +122,10 @@ h1 {
     font-size: 1.2rem;
     transition: all 0.3s ease;
 }
-/* Efectos al pasar el mouse sobre el botón principal */
 .catalog-btn:hover { transform: translateY(-5px); }
 .catalog-btn:hover .btn-arrow-circle {
     background-color: #000;
-    transform: rotate(-45deg); /* La flecha gira */
+    transform: rotate(-45deg);
 }
 
 
@@ -140,10 +138,9 @@ h1 {
 
 .contact-info {
     display: flex;
-    gap: 20px; /* Espacio entre los elementos de contacto */
+    gap: 20px;
 }
 
-/* Píldoras de contacto (Email y WhatsApp) */
 .contact-pill {
     background-color: white;
     color: #000;
@@ -165,10 +162,9 @@ h1 {
     color: white;
     font-size: 0.9rem;
 }
-.icon-circle.red { background-color: #e74c3c; } /* Rojo para email */
-.icon-circle.green { background-color: #25d366; } /* Verde para WhatsApp */
+.icon-circle.red { background-color: #e74c3c; }
+.icon-circle.green { background-color: #25d366; }
 
-/* Icono de Usuario */
 .user-icon-container {
     width: 60px;
     height: 60px;
@@ -184,17 +180,13 @@ h1 {
 }
 .user-icon-container:hover { transform: scale(1.1); }
 
-/* --- RESPONSIVE (Para celulares) --- */
+/* --- RESPONSIVE --- */
 @media (max-width: 768px) {
     .landing-page { padding: 25px; }
     h1 { font-size: 2.8rem; }
     .subtitle { font-size: 1.2rem; }
-    .bottom-bar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-    }
+    .bottom-bar { flex-direction: column; align-items: flex-start; gap: 20px; }
     .contact-info { flex-direction: column; width: 100%; }
     .user-icon-container { align-self: flex-end; }
-    .logo-text { display: none; } /* Oculta el texto del logo en pantallas pequeñas */
+    .logo-text { display: none; }
 }
