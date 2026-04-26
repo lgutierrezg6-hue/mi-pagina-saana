@@ -5,40 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo - SAANA</title>
     <style>
-        body { font-family: sans-serif; background-color: #f0f0f0; margin: 0;}
-        
-        /* Header de ejemplo para mostrar el nombre */
-        .catalogo-header {
-            background-color: #1a1a1a; color: white; padding: 20px;
-            display: flex; justify-content: space-between; align-items: center;
+        /* Estructura básica del layout del PDF */
+        body {
+            margin: 0; padding: 0; font-family: sans-serif;
+            background-color: #1E1E24; color: white;
+            display: flex; height: 100vh;
         }
-        .logo { color: #d4af37; font-weight: bold; font-size: 1.5rem;}
+        /* --- SIDEBAR IZQUIERDO (Donde va el usuario) --- */
+        .sidebar {
+            width: 250px; background-color: #292930; /* Un poco más claro que el fondo */
+            padding: 30px; display: flex; flex-direction: column;
+        }
+        .logo { font-weight: bold; letter-spacing: 2px; margin-bottom: 50px;}
         
-        /* ESTE ES EL ELEMENTO DONDE APARECERÁ EL NOMBRE */
-        #header-nombre-usuario { font-weight: bold; color: #d4af37;}
-        
-        .contenido { padding: 20px; }
+        /* Perfil de usuario */
+        .user-profile { display: flex; flex-direction: column; align-items: flex-start; margin-bottom: 50px;}
+        .user-avatar {
+            width: 60px; height: 60px; background-color: #555; border-radius: 50%; margin-bottom: 15px;
+            /* Aquí iría la imagen de perfil si tuvieran */
+        }
+        /* AQUÍ APARECERÁ EL NOMBRE QUE VIENE DEL LOGIN */
+        #sidebar-user-name {
+            font-weight: bold; font-size: 1.1rem; letter-spacing: 1px; margin-bottom: 5px; color: #E0E0E0;
+        }
+        .user-handle { font-size: 0.8rem; color: #888;}
+
+        /* Navegación */
+        .nav-menu { list-style: none; padding: 0; margin: 0; flex-grow: 1;}
+        .nav-menu li { margin-bottom: 25px; font-size: 0.9rem; letter-spacing: 1px; cursor: pointer; color: #ccc;}
+        .nav-menu li.active { color: white; font-weight: bold;}
+        .logout { margin-top: auto; color: #888; cursor: pointer;}
+
+        /* --- CONTENIDO PRINCIPAL (Derecha) --- */
+        .main-content { flex: 1; padding: 40px; overflow-y: auto;}
+        .top-bar { display: flex; justify-content: space-between; margin-bottom: 40px;}
+        .page-title { font-size: 2rem; font-weight: bold; letter-spacing: 1px;}
+        /* Placeholder para productos */
+        .products-placeholder { 
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;
+        }
+        .product-card { background-color: #292930; height: 250px; border-radius: 15px;}
     </style>
 </head>
 <body>
-    <!-- ID contenedor para que JS sepa que estamos en el catálogo -->
-    <div id="pagina-catalogo-wrapper">
-        <header class="catalogo-header">
-            <div class="logo">SAANA CATÁLOGO</div>
-            
-            <!-- AQUÍ ES DONDE JS PONDRÁ EL NOMBRE -->
-            <!-- IMPORTANTE: Debe tener el ID 'header-nombre-usuario' -->
-            <div id="header-nombre-usuario">Cargando usuario...</div>
-        </header>
+    <!-- SIDEBAR IZQUIERDO -->
+    <div class="sidebar">
+        <div class="logo">SAANA</div>
+        
+        <div class="user-profile">
+            <div class="user-avatar"></div>
+            <!-- ID IMPORTANTE: Aquí JS pondrá el nombre -->
+            <div id="sidebar-user-name">Cargando...</div>
+            <div class="user-handle">@reallygreatsite</div>
+        </div>
 
-        <div class="contenido">
-            <h1>Bienvenido a la sección de productos</h1>
-            <p>Si ves tu nombre arriba a la derecha, ¡el login funcionó correctamente!</p>
-            <!-- Aquí irían tus productos... -->
+        <ul class="nav-menu">
+            <li class="active">Home</li>
+            <li>Trending Now</li>
+            <li>Tecnología</li>
+            <li>Carrito</li>
+            <li>Accesorios</li>
+            <li>Setting</li>
+        </ul>
+
+        <!-- ID para el botón de cerrar sesión -->
+        <div class="logout" id="btn-logout">Log Out</div>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL DERECHO -->
+    <div class="main-content">
+        <div class="top-bar">
+            <div class="page-title">Trending Now</div>
+            <div>...</div>
+        </div>
+        
+        <!-- Aquí irían tus productos -->
+        <div class="products-placeholder">
+            <div class="product-card"></div>
+            <div class="product-card"></div>
+            <div class="product-card"></div>
         </div>
     </div>
 
-    <!-- VINCULAR JS AL FINAL -->
+    <!-- Conexión con el cerebro JS -->
     <script src="auth.js"></script>
 </body>
 </html>
