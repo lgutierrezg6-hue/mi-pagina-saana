@@ -2,33 +2,86 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Registro SAANA</title>
-    <!-- Tus estilos CSS aquí -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - SAANA</title>
     <style>
-        body { font-family: sans-serif; background: #222; color: white; text-align: center; padding-top: 50px;}
-        input { display: block; margin: 10px auto; padding: 10px; width: 250px; border-radius: 20px; border: none;}
-        button { padding: 10px 30px; border-radius: 20px; cursor: pointer; background: #aaa; border: none; font-weight: bold;}
+        /* MISMOS ESTILOS QUE EL LOGIN PARA MANTENER CONSISTENCIA VISUAL */
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a; 
+            /* Usa la misma imagen de fondo que en el login si la tienes */
+            background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('tu-imagen-de-fondo.jpg');
+            background-size: cover; background-position: center;
+            height: 100vh; display: flex; flex-direction: column; align-items: center; color: white;
+        }
+        .header-logo {
+            margin-top: 20px; font-size: 2rem; font-weight: bold; letter-spacing: 2px; color: #d4af37;
+        }
+        .login-wrapper {
+            background-color: rgba(255, 255, 255, 0.05); backdrop-filter: blur(5px);
+            padding: 40px; border-radius: 20px; width: 90%; max-width: 400px;
+            text-align: center; margin-top: 30px; /* Un poco más arriba porque es más largo */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        h2 { letter-spacing: 3px; margin-bottom: 30px; font-weight: 300;}
+        .input-group { margin-bottom: 20px; text-align: left; } /* Un poco menos de margen */
+        label {
+            display: block; font-size: 0.9rem; font-weight: bold; letter-spacing: 1px;
+            margin-bottom: 10px; margin-left: 15px;
+        }
+        .saana-input {
+            width: 100%; padding: 15px 20px; border-radius: 30px; border: none;
+            background-color: #808080; color: #1a1a1a; font-size: 1rem; outline: none; box-sizing: border-box;
+        }
+        .saana-input::placeholder { color: #444; }
+        .btn-saana {
+            width: 60%; padding: 15px; border-radius: 30px; border: none;
+            background-color: #a0a0a0; color: #1a1a1a; font-size: 1.1rem; font-weight: bold;
+            cursor: pointer; margin-top: 20px; transition: background-color 0.3s;
+        }
+        .btn-saana:hover { background-color: #b0b0b0; }
+        .register-link {
+            display: block; margin-top: 30px; color: #aaa; text-decoration: underline; font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
-    <h2>Crear Cuenta</h2>
-    <!-- Es importante que el formulario tenga el ID 'form-registro' -->
-    <form id="form-registro">
-        <!-- Campo NOMBRE (Importante para que aparezca luego) -->
-        <label>Nombre:</label>
-        <input type="text" id="reg-nombre" placeholder="Tu nombre" required>
+    <div class="header-logo">SAANA</div>
 
-        <label>Correo:</label>
-        <input type="email" id="reg-email" placeholder="Correo" required>
+    <div class="login-wrapper">
+        <h2>CREAR CUENTA</h2>
 
-        <label>Contraseña:</label>
-        <input type="password" id="reg-password" placeholder="Contraseña" required>
+        <!-- FORMULARIO DE REGISTRO: ID IMPORTANTE 'form-registro-saana' -->
+        <form id="form-registro-saana">
+            
+            <!-- CAMPO NOMBRE (NUEVO) -->
+            <div class="input-group">
+                <label for="reg-nombre">NOMBRE:</label>
+                <!-- ID IMPORTANTE 'reg-nombre' -->
+                <input type="text" id="reg-nombre" class="saana-input" placeholder="Tu Nombre" required>
+            </div>
 
-        <button type="submit">Registrarme</button>
-    </form>
-    <p><a href="login.html" style="color: #aaa;">Ya tengo cuenta, ir al login</a></p>
+            <div class="input-group">
+                <label for="reg-email">CORREO:</label>
+                 <!-- ID IMPORTANTE 'reg-email' -->
+                <input type="email" id="reg-email" class="saana-input" placeholder="tu.correo@gmail.com" required>
+            </div>
 
-    <!-- VINCULAR EL ARCHIVO JS AL FINAL DEL BODY -->
+            <div class="input-group">
+                <label for="reg-password">CONTRASEÑA:</label>
+                 <!-- ID IMPORTANTE 'reg-password' -->
+                <input type="password" id="reg-password" class="saana-input" placeholder=".........." required>
+            </div>
+
+            <button type="submit" class="btn-saana">Registrarme</button>
+
+        </form>
+
+        <a href="login.html" class="register-link">Ya tengo cuenta, ir al login</a>
+    </div>
+
+    <!-- CONEXIÓN FUNDAMENTAL CON EL JAVASCRIPT -->
     <script src="auth.js"></script>
 </body>
 </html>
