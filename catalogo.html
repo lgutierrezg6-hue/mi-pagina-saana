@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo - SAANA</title>
     <link rel="stylesheet" href="catalogo.css">
-    <!-- Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
@@ -16,25 +15,25 @@
         <!-- === BARRA LATERAL (SIDEBAR) === -->
         <aside class="sidebar">
             <div class="sidebar-header">
-                <!-- NUEVO LOGO "SA" -->
-                <img src="logo-sa.png" alt="SA Logo" class="sidebar-logo">
+                <!-- NUEVO LOGO COMPUESTO (Pequeño y elegante) -->
+                <div class="logo-compound-sidebar">
+                    <i class="fa-brands fa-slack logo-icon-small"></i>
+                    <div class="logo-text-block">
+                        <img src="logo-sa.png" alt="SA" class="logo-sa-img-small">
+                        <span class="logo-saana-text">SAANA</span>
+                    </div>
+                </div>
             </div>
 
             <nav class="sidebar-menu">
-                <!-- Enlace activo (con fondo blanco) -->
-                <a href="#" class="menu-item active">
+                <a href="index.html" class="menu-item"> <!-- Enlace al Home -->
                     <i class="fa-solid fa-house"></i> 
                     <span>Home</span>
-                    <i class="fa-solid fa-arrow-right-long arrow-icon"></i>
                 </a>
-                <a href="#" class="menu-item">
-                    <i class="fa-solid fa-chart-simple"></i> 
-                    <span>Tecnología</span>
-                </a>
-                <!-- Enlace Accesorios SIN la flecha roja -->
-                <a href="#" class="menu-item">
+                <a href="#" class="menu-item active"> <!-- Catálogo activo -->
                     <i class="fa-solid fa-grip"></i> 
-                    <span>Accesorios</span>
+                    <span>Catálogo</span>
+                    <i class="fa-solid fa-arrow-right-long arrow-icon"></i>
                 </a>
                 <a href="#" class="menu-item">
                     <i class="fa-solid fa-cart-shopping"></i> 
@@ -43,7 +42,6 @@
             </nav>
 
             <div class="sidebar-footer">
-                <!-- Botón para ir a Iniciar Sesión -->
                 <a href="login.html" class="login-link-sidebar">
                     <i class="fa-solid fa-arrow-right-to-bracket"></i>
                     <span>Iniciar Sesión</span>
@@ -54,165 +52,111 @@
 
         <!-- === CONTENIDO PRINCIPAL (DERECHA) === -->
         <main class="main-content">
-            
-            <!-- Barra de búsqueda superior -->
             <header class="content-header">
-                <h2 class="page-title">Home</h2>
+                <h2 class="page-title">Catálogo</h2>
                 <div class="search-bar">
                     <input type="text" placeholder="Buscar productos...">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
             </header>
 
-            <!-- Sección del Banner Principal (Slider) -->
             <section class="banner-section">
                 <div class="banner-slide">
-                     <img src="https://images.unsplash.com/photo-1550009158-9ebf69173e03?q=80&w=1200&auto=format&fit=crop" alt="Banner Tecnología">
+                     <img src="https://images.unsplash.com/photo-1550009158-9ebf69173e03?w=1200&q=80" alt="Banner Tecnología">
                 </div>
                 <div class="banner-slide desktop-only">
-                     <img src="https://images.unsplash.com/photo-1593642532744-d377ab507dc8?q=80&w=1200&auto=format&fit=crop" alt="Banner Accesorios">
+                     <img src="https://images.unsplash.com/photo-1593642532744-d377ab507dc8?w=1200&q=80" alt="Banner Accesorios">
                 </div>
             </section>
 
-            <!-- Cuadrícula de Productos (Imágenes arregladas) -->
+            <!-- Cuadrícula de Productos (Imágenes Verificadas) -->
             <section class="products-grid">
-                
                 <!-- Producto 1 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&auto=format&fit=crop&q=60" alt="Reloj Aura-Fit">
+                        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80" alt="Reloj Aura-Fit">
                     </div>
-                    <div class="product-info">
-                        <span class="price">$180.000</span>
-                        <h3 class="product-title">RELOJ AURA-FIT WHITE</h3>
-                    </div>
+                    <div class="product-info"><span class="price">$180.000</span><h3 class="product-title">RELOJ AURA-FIT WHITE</h3></div>
                 </div>
-
                 <!-- Producto 2 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1603351154351-5e2d0600bb77?w=400&auto=format&fit=crop&q=60" alt="Case 360">
+                        <img src="https://images.unsplash.com/photo-1603351154351-5e2d0600bb77?w=500&q=80" alt="Case 360">
                     </div>
-                    <div class="product-info">
-                        <span class="price">$25.000</span>
-                        <h3 class="product-title">CASE IPHONE SILICONE</h3>
-                    </div>
+                    <div class="product-info"><span class="price">$25.000</span><h3 class="product-title">CASE IPHONE SILICONE</h3></div>
                 </div>
-
                 <!-- Producto 3 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1588423771073-b8903fbb85b5?w=400&auto=format&fit=crop&q=60" alt="Airpods">
+                        <img src="https://images.unsplash.com/photo-1588423771073-b8903fbb85b5?w=500&q=80" alt="Airpods">
                     </div>
-                    <div class="product-info">
-                        <span class="price">$75.000</span>
-                        <h3 class="product-title">EARBUDS PRO WIRELESS</h3>
-                    </div>
+                    <div class="product-info"><span class="price">$75.000</span><h3 class="product-title">EARBUDS PRO WIRELESS</h3></div>
                 </div>
-                
                  <!-- Producto 4 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=400&auto=format&fit=crop&q=60" alt="Funda Wallet">
+                        <img src="https://images.unsplash.com/photo-1627123424574-724758594e93?w=500&q=80" alt="Funda Wallet">
                     </div>
-                    <div class="product-info">
-                        <span class="price">$25.000</span>
-                        <h3 class="product-title">FUNDA WALLET LEATHER</h3>
-                    </div>
+                    <div class="product-info"><span class="price">$25.000</span><h3 class="product-title">FUNDA WALLET LEATHER</h3></div>
                 </div>
-
                 <!-- Producto 5 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=400&auto=format&fit=crop&q=60" alt="Smartwatch Pro">
+                        <img src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=500&q=80" alt="Smartwatch Pro">
                     </div>
-                    <div class="product-info">
-                        <span class="price">$210.000</span>
-                        <h3 class="product-title">SMARTWATCH SERIES 7</h3>
-                    </div>
+                    <div class="product-info"><span class="price">$210.000</span><h3 class="product-title">SMARTWATCH SERIES 7</h3></div>
                 </div>
-
                 <!-- Producto 6 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1583863226068-93c706555488?w=400&auto=format&fit=crop&q=60" alt="Cargador Rápido">
+                        <img src="https://images.unsplash.com/photo-1583863226068-93c706555488?w=500&q=80" alt="Cargador Rápido">
                     </div>
-                    <div class="product-info">
-                        <span class="price">$45.000</span>
-                        <h3 class="product-title">CARGADOR USB-C FAST</h3>
-                    </div>
+                    <div class="product-info"><span class="price">$45.000</span><h3 class="product-title">CARGADOR USB-C FAST</h3></div>
                 </div>
-
                 <!-- Producto 7 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=400&auto=format&fit=crop&q=60" alt="Soporte Laptop">
+                        <img src="https://images.unsplash.com/photo-1616410011236-7a421b19a594?w=500&q=80" alt="Soporte Laptop">
                     </div>
-                    <div class="product-info">
-                        <span class="price">$120.000</span>
-                        <h3 class="product-title">SOPORTE ALUMINIO LAPTOP</h3>
-                    </div>
+                    <div class="product-info"><span class="price">$120.000</span><h3 class="product-title">SOPORTE ALUMINIO LAPTOP</h3></div>
                 </div>
-
                 <!-- Producto 8 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1553062407-98e9543b38d5?w=400&auto=format&fit=crop&q=60" alt="Mochila Tech">
+                        <img src="https://images.unsplash.com/photo-1553062407-98e9543b38d5?w=500&q=80" alt="Mochila Tech">
                     </div>
-                    <div class="product-info">
-                        <span class="price">$150.000</span>
-                        <h3 class="product-title">MOCHILA URBAN TECH</h3>
-                    </div>
+                    <div class="product-info"><span class="price">$150.000</span><h3 class="product-title">MOCHILA URBAN TECH</h3></div>
                 </div>
-
                 <!-- Producto 9 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&auto=format&fit=crop&q=60" alt="Teclado Mecánico">
+                        <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500&q=80" alt="Teclado Mecánico">
                     </div>
-                    <div class="product-info">
-                        <span class="price">$350.000</span>
-                        <h3 class="product-title">TECLADO MECÁNICO RGB</h3>
-                    </div>
+                    <div class="product-info"><span class="price">$350.000</span><h3 class="product-title">TECLADO MECÁNICO RGB</h3></div>
                 </div>
-
                 <!-- Producto 10 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=400&auto=format&fit=crop&q=60" alt="Mouse Ergonómico">
+                        <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500&q=80" alt="Mouse Ergonómico">
                     </div>
-                    <div class="product-info">
-                        <span class="price">$90.000</span>
-                        <h3 class="product-title">MOUSE WIRELESS ERGO</h3>
-                    </div>
+                    <div class="product-info"><span class="price">$90.000</span><h3 class="product-title">MOUSE WIRELESS ERGO</h3></div>
                 </div>
-
                 <!-- Producto 11 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1625308874494-e5e43a3b7c1b?w=400&auto=format&fit=crop&q=60" alt="Power Bank">
+                        <img src="https://images.unsplash.com/photo-1609592424665-3a4df1860303?w=500&q=80" alt="Power Bank">
                     </div>
-                    <div class="product-info">
-                        <span class="price">$60.000</span>
-                        <h3 class="product-title">POWER BANK SLIM 10K</h3>
-                    </div>
+                    <div class="product-info"><span class="price">$60.000</span><h3 class="product-title">POWER BANK SLIM 10K</h3></div>
                 </div>
-
                 <!-- Producto 12 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1585336261022-680e295ce3fe?w=400&auto=format&fit=crop&q=60" alt="Gafas VR">
+                        <img src="https://images.unsplash.com/photo-1626387552550-d556d73762d7?w=500&q=80" alt="Gafas VR">
                     </div>
-                    <div class="product-info">
-                        <span class="price">$550.000</span>
-                        <h3 class="product-title">GAFAS VR ADVANCE</h3>
-                    </div>
+                    <div class="product-info"><span class="price">$550.000</span><h3 class="product-title">GAFAS VR ADVANCE</h3></div>
                 </div>
-
             </section>
-
         </main>
     </div>
-
 </body>
 </html>
