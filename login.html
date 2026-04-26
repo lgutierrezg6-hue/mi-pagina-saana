@@ -5,130 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - SAANA</title>
     <style>
-        /* Estilos para recrear la estética de tu captura de pantalla */
+        /* Estilos basados en el PDF de Login */
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* Fondo oscuro simulado. Si tenías una imagen, ponla aquí */
-            background-color: #1a1a1a; 
-            background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('tu-imagen-de-fondo.jpg'); /* Reemplaza si tienes imagen */
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            margin: 0; padding: 0; font-family: sans-serif;
+            background-color: #1E1E24;
             color: white;
+            display: flex; flex-direction: column; align-items: center; height: 100vh;
         }
-
-        .header-logo {
-            margin-top: 20px;
-            font-size: 2rem;
-            font-weight: bold;
-            letter-spacing: 2px;
-            /* Ajusta esto si tienes una imagen de logo real */
-             color: #d4af37; /* Color dorado similar al logo de la foto */
-        }
-
-        .login-wrapper {
-            /* El contenedor transparente de tu diseño */
-            background-color: rgba(255, 255, 255, 0.05); /* Muy transparente */
-            backdrop-filter: blur(5px); /* Efecto borroso si el navegador lo soporta */
-            padding: 40px;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 400px;
+        .header-login {
+            margin-top: 30px; margin-bottom: 40px;
             text-align: center;
-            margin-top: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
+        .header-login h3 { letter-spacing: 2px; font-weight: 400; margin: 0; font-size: 1.1rem;}
+        .header-login h1 { letter-spacing: 3px; font-weight: bold; margin: 10px 0; font-size: 2rem;}
+        
+        .login-container { width: 90%; max-width: 350px; text-align: center;}
+        h2 { letter-spacing: 3px; font-weight: 400; margin-bottom: 40px; font-size: 1.2rem;}
 
-        h2 { letter-spacing: 3px; margin-bottom: 30px; font-weight: 300;}
-
-        /* Estilos de tus etiquetas y campos */
-        .input-group { margin-bottom: 25px; text-align: left; }
-        label {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-            margin-left: 15px; /* Alineado con el inicio de la curva del input */
-        }
-
-        /* TUS INPUTS GRISES REDONDEADOS */
+        .form-group { margin-bottom: 25px; text-align: left;}
+        label { display: block; font-size: 0.7rem; font-weight: bold; letter-spacing: 1px; margin-bottom: 8px; margin-left: 15px;}
+        
         .saana-input {
-            width: 100%;
-            padding: 15px 20px;
-            border-radius: 30px;
-            border: none;
-            background-color: #808080; /* Color gris de tu diseño */
-            color: #1a1a1a; /* Texto oscuro dentro del input */
-            font-size: 1rem;
-            outline: none;
-            box-sizing: border-box; /* Importante para que el padding no rompa el ancho */
+            width: 100%; padding: 15px 20px; border-radius: 30px;
+            border: none; background-color: #4A4A52;
+            color: white; outline: none; box-sizing: border-box;
         }
-        .saana-input::placeholder { color: #444; }
+        .saana-input::placeholder { color: #ccc; letter-spacing: 2px;}
 
-        /* TU BOTÓN REDONDEADO */
-        .btn-saana {
-            width: 60%;
-            padding: 15px;
-            border-radius: 30px;
-            border: none;
-            background-color: #a0a0a0; /* Un gris un poco más claro para el botón */
-            color: #1a1a1a;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
+        .btn-sign-up {
+             width: 50%; padding: 15px; border-radius: 30px; border: none;
+            background-color: #A0A0A8; color: #1E1E24;
+            font-weight: bold; letter-spacing: 1px; cursor: pointer;
             margin-top: 20px;
-            transition: background-color 0.3s;
         }
-        .btn-saana:hover { background-color: #b0b0b0; }
-
-        /* ENLACE DE REGISTRO */
-        .register-link {
-            display: block;
-            margin-top: 30px;
-            color: #aaa;
-            text-decoration: underline;
-            font-size: 0.9rem;
-        }
+        .register-link { display: block; margin-top: 30px; color: #ccc; text-decoration: underline; font-size: 0.8rem;}
     </style>
 </head>
 <body>
-    <!-- Header simple para el logo -->
-    <div class="header-logo">SAANA</div>
+    <div class="header-login">
+        <h3>I N G R E S A R A</h3>
+        <h1>SAANA</h1>
+        <h3>C A T A L O G O</h3>
+    </div>
 
-    <div class="login-wrapper">
+    <div class="login-container">
         <h2>INICIAR SESIÓN</h2>
-
-        <!-- FORMULARIO: ID IMPORTANTE 'form-login-saana' -->
+        
+        <!-- IMPORTANTE: ID del formulario -->
         <form id="form-login-saana">
-            
-            <div class="input-group">
-                <label for="login-email">CORREO:</label>
-                <!-- INPUT EMAIL: ID IMPORTANTE 'login-email' -->
-                <input type="email" id="login-email" class="saana-input" placeholder="tu.correo@gmail.com" required>
+            <div class="form-group">
+                <label>C O R R E O :</label>
+                <!-- IMPORTANTE: ID del email -->
+                <input type="email" id="login-email" class="saana-input" required>
             </div>
 
-            <div class="input-group">
-                <label for="login-password">CONTRASEÑA:</label>
-                <!-- INPUT PASSWORD: ID IMPORTANTE 'login-password' -->
-                <input type="password" id="login-password" class="saana-input" placeholder=".........." required>
+            <div class="form-group">
+                <label>C O N T R A S E Ñ A :</label>
+                <!-- IMPORTANTE: ID del password -->
+                <input type="password" id="login-password" class="saana-input" placeholder="************" required>
             </div>
 
-            <!-- Botón de acción (En tu diseño dice "Sign up" aunque sea login) -->
-            <button type="submit" class="btn-saana">Sign up</button>
-
+            <button type="submit" class="btn-sign-up">Sign up</button>
         </form>
 
-        <!-- Enlace al registro -->
         <a href="registro.html" class="register-link">Necesito registrarme</a>
     </div>
 
-    <!-- CONEXIÓN FUNDAMENTAL CON EL JAVASCRIPT -->
+    <!-- Conexión con el cerebro JS -->
     <script src="auth.js"></script>
 </body>
 </html>
