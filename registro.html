@@ -4,16 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Usuario - SAANA</title>
-    <!-- Vinculamos el CSS específico para registro -->
     <link rel="stylesheet" href="registro.css">
-    <!-- Iconos y Fuentes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Logo en la esquina superior izquierda (Fijo igual que en las otras páginas) -->
-    <!-- Logo en la esquina superior izquierda (NUEVO ESTILO PEQUEÑO) -->
     <div class="logo-container-fixed">
         <div class="logo-compound-fixed">
             <i class="fa-brands fa-slack logo-icon-small"></i>
@@ -23,87 +19,81 @@
             </div>
         </div>
     </div>
-    <!-- Enlace "Sign up" superior derecho (visible en la imagen) -->
     <a href="login.html" class="top-right-link">Sign up <i class="fa-solid fa-arrow-right-long"></i></a>
 
-
-    <!-- Contenedor principal del formulario de registro -->
     <div class="register-container">
-        
-        <form class="register-form">
+        <!-- LE PUSIMOS ID AL FORMULARIO -->
+        <form class="register-form" id="form-registro">
             
-            <!-- Contenedor de las dos columnas -->
             <div class="form-columns">
-                
-                <!-- COLUMNA IZQUIERDA: Datos del usuario -->
+                <!-- COLUMNA IZQUIERDA -->
                 <div class="col-left">
                     <h2 class="section-title">REGISTRAR USUARIO</h2>
-
                     <div class="input-group">
                         <label>NOMBRE:</label>
-                        <input type="text" required>
+                        <!-- ID NUEVO -->
+                        <input type="text" id="reg-nombre" required>
                     </div>
-
                     <div class="input-group">
-                        <label>APELLIDO:</label> <!-- Corregí "Apallido" por "Apellido" -->
-                        <input type="text" required>
+                        <label>APELLIDO:</label>
+                        <!-- ID NUEVO -->
+                        <input type="text" id="reg-apellido" required>
                     </div>
-
-                    <!-- Sección especial para Fecha de Nacimiento -->
                     <div class="input-group date-group">
                         <label style="width: 100%; display:block; margin-bottom: 10px;">FECHA DE NACIMIENTO:</label>
                         <div class="date-inputs">
                             <div class="date-field">
-                                <input type="text" placeholder="" maxlength="2">
+                                <!-- ID NUEVOS PARA FECHA -->
+                                <input type="text" id="reg-dia" placeholder="DD" maxlength="2" required>
                                 <span class="label-below">DIA</span>
                             </div>
                             <div class="date-field">
-                                <input type="text" placeholder="" maxlength="2">
+                                <input type="text" id="reg-mes" placeholder="MM" maxlength="2" required>
                                 <span class="label-below">MES</span>
                             </div>
                             <div class="date-field">
-                                <input type="text" placeholder="" maxlength="4">
+                                <input type="text" id="reg-anio" placeholder="AAAA" maxlength="4" required>
                                 <span class="label-below">AÑO</span>
                             </div>
                         </div>
                     </div>
-
                     <div class="input-group">
                         <label>CORREO:</label>
-                        <input type="email" required>
+                        <!-- ID NUEVO (Será la clave principal) -->
+                        <input type="email" id="reg-correo" required>
                     </div>
-
                     <div class="input-group">
                         <label>TELEFONO</label>
-                        <input type="tel" required>
+                        <!-- ID NUEVO -->
+                        <input type="tel" id="reg-telefono" required>
                     </div>
                 </div>
 
-                <!-- COLUMNA DERECHA: Contraseña -->
+                <!-- COLUMNA DERECHA -->
                 <div class="col-right">
                     <h2 class="section-title">CREAR CONTRASEÑA</h2>
-
                     <div class="input-group">
                         <label>CREAR CONTRASEÑA:</label>
-                        <input type="password" placeholder="********" required>
+                        <!-- ID NUEVO -->
+                        <input type="password" id="reg-pass1" placeholder="********" required minlength="6">
                     </div>
-
                     <div class="input-group">
-                        <label>REPERTIR CONTRASEÑA</label>
-                        <input type="password" placeholder="********" required>
+                        <label>REPETIR CONTRASEÑA</label>
+                        <!-- ID NUEVO -->
+                        <input type="password" id="reg-pass2" placeholder="********" required minlength="6">
                     </div>
                 </div>
             </div>
 
-            <!-- Botón de registro abajo a la derecha -->
             <div class="form-footer">
                 <button type="submit" class="btn-registrar">
                     registrarse <i class="fa-solid fa-arrow-right"></i>
                 </button>
             </div>
-
         </form>
     </div>
 
+    <!-- CONECTAMOS EL CEREBRO (JAVASCRIPT) -->
+    <script src="script.js"></script>
 </body>
 </html>
