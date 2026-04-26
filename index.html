@@ -34,9 +34,33 @@
         </nav>
 
         <!-- Contenido Principal (Aquí irá el resto de la página) -->
+        <!-- Contenido Principal -->
         <main class="main-content">
-            <h1>¡Hola!</h1>
-            <p>La barra lateral ya está lista. Pronto pondremos aquí el contenido.</p>
+            
+            <!-- SECCIÓN 1: Home / Trending Now (Esta se muestra al inicio) -->
+            <section id="home-section">
+                <header style="margin-bottom: 30px;">
+                     <h1 style="color: #333;">Trending Now</h1>
+                </header>
+                
+                <!-- Aquí es donde JAVASCRIPT inyectará los productos automáticamente -->
+                <div class="product-grid" id="products-container">
+                    <!-- Los productos aparecerán aquí mágicamente -->
+                </div>
+            </section>
+
+
+            <!-- SECCIÓN 2: El Carrito (Inicialmente oculta) -->
+            <section id="cart-section" class="hidden-section">
+                <header style="margin-bottom: 30px;">
+                    <h1 style="color: #333;">Tu Carrito de Compras</h1>
+               </header>
+               
+               <div id="cart-items-container">
+                   <p>Tu carrito está vacío por ahora.</p>
+               </div>
+            </section>
+
         </main>
 
     </div>
