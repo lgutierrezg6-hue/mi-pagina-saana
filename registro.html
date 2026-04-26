@@ -5,28 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Usuario - SAANA</title>
     <style>
-        /* --- ESTILOS BASE (Igual que en login.html para mantener el fondo y header) --- */
-        body, html {
+        /* --- ESTILOS BASE (Exactamente el mismo fondo y filtro que en la imagen de login) --- */
+        body {
             margin: 0;
             padding: 0;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            height: 100%;
-        }
-        body {
-            /* FONDO DE LA TIENDA CON FILTRO OSCURO (Igual que en el login) */
+            /* Fondo de la tienda con el filtro oscuro encima */
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('fondo_tienda.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            color: white;
+            color: white; /* Todo el texto es blanco */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* --- HEADER (Igual que en login.html) --- */
+        /* --- HEADER SENCILLO (Como en la imagen) --- */
         .header {
-            padding: 30px;
-            display: flex;
-            justify-content: space-between; /* Para separar el logo del botón */
-            align-items: center;
+            padding: 30px 40px;
         }
         .logo {
             font-weight: bold;
@@ -36,103 +33,82 @@
             align-items: center;
         }
         .logo-icon {
-            color: #d4af37; /* Color dorado/beige */
+            color: #d4af37;
             margin-right: 10px;
-            font-size: 30px;
-        }
-
-        /* --- BOTÓN "SIGN IN" DE LA ESQUINA (Estilo de botón blanco) --- */
-        .signin-btn {
-            color: black; /* Texto negro */
-            background-color: white; /* Fondo blanco */
-            text-decoration: none;
-            font-weight: bold;
-            padding: 10px 25px;
-            border-radius: 30px; /* Redondeado */
-            font-size: 14px;
-            text-transform: uppercase;
-            border: none;
-            transition: background-color 0.3s;
-        }
-        .signin-btn:hover {
-            background-color: #f0f0f0; /* Un poco más oscuro al pasar el mouse */
+            font-size: 28px;
         }
 
         /* --- CONTENEDOR PRINCIPAL CENTRADO --- */
+        /* Este contenedor solo centra el contenido, NO tiene fondo propio */
         .main-container {
+            flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
-            min-height: calc(100vh - 100px); /* Ajuste para centrar verticalmente */
         }
 
-        /* --- CAJA DEL FORMULARIO (Gris oscuro sólido, como en la imagen de referencia) --- */
-        .form-box {
-            background-color: #4A4A4A; /* Gris oscuro sólido */
-            padding: 50px;
-            border-radius: 25px;
+        /* --- ESTRUCTURA DEL FORMULARIO --- */
+        /* El formulario tampoco tiene fondo, los elementos flotan sobre la imagen */
+        .registro-form {
             width: 100%;
-            max-width: 900px; /* Ancho máximo para que no se estire demasiado */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Sombra suave */
+            max-width: 900px;
         }
 
-        /* --- ESTRUCTURA EN DOS COLUMNAS --- */
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* Grid de dos columnas para los campos */
         .form-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
-            gap: 50px; /* Espacio entre columnas */
-        }
-
-        /* Títulos */
-        h2 {
-            font-size: 24px;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: bold;
-            margin-top: 0;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
         }
 
         .form-group {
             margin-bottom: 25px;
+            text-align: left;
         }
 
-        /* Etiquetas (Labels) */
+        /* Etiquetas (Labels) blancas y en mayúsculas */
         label {
             display: block;
             margin-bottom: 10px;
             font-weight: bold;
-            font-size: 12px;
+            font-size: 14px;
             letter-spacing: 1px;
             text-transform: uppercase;
-            color: #E0E0E0; /* Color claro para las etiquetas */
         }
 
-        /* --- INPUTS (Blancos y Redondeados, igual que en el login) --- */
-        .saana-input-white {
+        /* --- INPUTS BLANCOS Y REDONDEADOS --- */
+        .saana-input {
             width: 100%;
             padding: 15px 20px;
-            border-radius: 30px;
+            border-radius: 30px; /* Muy redondos */
             border: none;
-            outline: none;
+            background-color: white;
+            color: black;
             font-size: 16px;
-            background-color: #FFFFFF; /* Fondo blanco */
-            color: #333; /* Texto oscuro */
+            outline: none;
             box-sizing: border-box;
-            height: 50px; /* Altura fija */
         }
 
-        /* --- GRUPO DE FECHAS (Tres select en fila) --- */
+        /* Estilos para el grupo de fechas (tres selects) */
         .date-group {
             display: flex;
-            gap: 15px;
+            gap: 10px;
         }
         .date-input {
-            flex: 1; /* Ocupan el mismo espacio */
+            flex: 1;
             text-align: center;
             padding: 15px 10px;
-            /* Estilo personalizado para el icono del select */
+            /* Icono de flecha personalizado para que se vea bien en el fondo blanco */
             -webkit-appearance: none; -moz-appearance: none; appearance: none;
             background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
             background-repeat: no-repeat;
@@ -140,125 +116,127 @@
             background-position-y: center;
         }
 
-        /* --- BOTÓN DE REGISTRO (Abajo a la derecha, blanco y redondo) --- */
+        /* --- BOTÓN DE REGISTRO CENTRADO --- */
         .btn-submit-container {
-            grid-column: 1 / -1; /* Ocupa el ancho completo de las dos columnas */
+            grid-column: 1 / -1; /* Ocupa todo el ancho */
             display: flex;
-            justify-content: flex-end; /* Alineado a la derecha */
+            justify-content: center;
             margin-top: 30px;
         }
         .btn-submit {
             background-color: white;
             color: black;
             border: none;
-            padding: 15px 50px; /* Botón ancho */
-            border-radius: 50px;
-            font-size: 16px;
+            padding: 15px 50px;
+            border-radius: 30px;
+            font-size: 18px;
             font-weight: bold;
             cursor: pointer;
-            display: flex;
-            align-items: center;
             text-transform: uppercase;
             transition: transform 0.2s;
         }
         .btn-submit:hover {
-            transform: scale(1.02);
-            background-color: #f0f0f0;
+            transform: scale(1.05);
+        }
+
+        /* Enlace para volver al login */
+        .login-link-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .login-link {
+            color: white;
+            text-decoration: underline;
+            font-size: 16px;
+            letter-spacing: 1px;
         }
 
         /* Responsive para móviles */
         @media (max-width: 768px) {
-            .form-grid { grid-template-columns: 1fr; gap: 20px; } /* Una sola columna */
+            .form-grid { grid-template-columns: 1fr; gap: 20px; }
             .header { padding: 20px; }
-            .form-box { padding: 30px 20px; }
-            .right-column-spacer { margin-top: 30px; }
-            .btn-submit-container { justify-content: center; } /* Botón centrado en móvil */
+            h1 { font-size: 28px; }
         }
     </style>
 </head>
 <body>
-    <!-- HEADER (Igual que en login.html) -->
+    <!-- HEADER SENCILLO -->
     <div class="header">
         <div class="logo"><span class="logo-icon">♦</span> SAANA</div>
-        <!-- Botón SIGN IN blanco en la esquina -->
-        <a href="login.html" class="signin-btn">SIGN IN</a>
     </div>
 
     <!-- CONTENEDOR PRINCIPAL -->
     <div class="main-container">
-        <!-- CAJA DEL FORMULARIO (Gris oscuro sólido) -->
-        <div class="form-box">
-            <!-- El formulario mantiene el ID y los required para que funcione el JS -->
+        <div class="registro-form">
+            <h1>REGISTRAR USUARIO</h1>
+            
+            <!-- Formulario conectado a auth.js (IDs y required mantenidos) -->
             <form id="form-registro-saana">
                 <div class="form-grid">
-                    <!-- COLUMNA IZQUIERDA: Datos Personales -->
-                    <div class="form-column">
-                        <h2>REGISTRAR USUARIO</h2>
-                        
+                    <!-- COLUMNA IZQUIERDA -->
+                    <div class="left-column">
                         <div class="form-group">
                             <label>NOMBRE:</label>
-                            <input type="text" id="reg-nombre" class="saana-input-white" placeholder="Tu Nombre" required>
+                            <input type="text" id="reg-nombre" class="saana-input" required>
                         </div>
                         <div class="form-group">
                             <label>APELLIDO:</label>
-                            <input type="text" id="reg-apellido" class="saana-input-white" placeholder="Tu Apellido" required>
+                            <input type="text" id="reg-apellido" class="saana-input" required>
                         </div>
                         <div class="form-group">
                             <label>FECHA DE NACIMIENTO:</label>
                             <div class="date-group">
-                                <select id="reg-dia" class="saana-input-white date-input" required>
+                                <select id="reg-dia" class="saana-input date-input" required>
                                     <option value="">DIA</option>
-                                    <!-- Generamos días con JS simple -->
                                     <script>for(let i=1;i<=31;i++) document.write(`<option value="${i}">${i}</option>`);</script>
                                 </select>
-                                <select id="reg-mes" class="saana-input-white date-input" required>
+                                <select id="reg-mes" class="saana-input date-input" required>
                                     <option value="">MES</option>
                                     <option value="Enero">Enero</option><option value="Febrero">Febrero</option><option value="Marzo">Marzo</option><option value="Abril">Abril</option><option value="Mayo">Mayo</option><option value="Junio">Junio</option><option value="Julio">Julio</option><option value="Agosto">Agosto</option><option value="Septiembre">Septiembre</option><option value="Octubre">Octubre</option><option value="Noviembre">Noviembre</option><option value="Diciembre">Diciembre</option>
                                 </select>
-                                <select id="reg-anio" class="saana-input-white date-input" required>
+                                <select id="reg-anio" class="saana-input date-input" required>
                                     <option value="">AÑO</option>
-                                    <!-- Generamos años con JS simple -->
                                     <script>for(let i=2023;i>=1950;i--) document.write(`<option value="${i}">${i}</option>`);</script>
                                 </select>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- COLUMNA DERECHA -->
+                    <div class="right-column">
                         <div class="form-group">
                             <label>CORREO:</label>
-                            <input type="email" id="reg-email" class="saana-input-white" placeholder="tu.correo@gmail.com" required>
+                            <input type="email" id="reg-email" class="saana-input" required>
                         </div>
                         <div class="form-group">
                             <label>TELEFONO</label>
-                            <input type="tel" id="reg-telefono" class="saana-input-white" placeholder="Tu teléfono" required>
+                            <input type="tel" id="reg-telefono" class="saana-input" required>
+                        </div>
+                        <div class="form-group">
+                             <label>CREAR CONTRASEÑA:</label>
+                            <input type="password" id="reg-password" class="saana-input" required>
+                        </div>
+                         <div class="form-group">
+                            <label>REPETIR CONTRASEÑA</label>
+                            <input type="password" id="reg-confirm-password" class="saana-input" required>
                         </div>
                     </div>
 
-                    <!-- COLUMNA DERECHA: Contraseña -->
-                    <div class="form-column right-column-spacer">
-                        <h2>CREAR CONTRASEÑA</h2>
-                        
-                        <!-- Espacio extra arriba para alinear visualmente -->
-                        <div class="form-group" style="margin-top: 50px;">
-                             <label>CREAR CONTRASEÑA:</label>
-                            <input type="password" id="reg-password" class="saana-input-white" placeholder="*********" required>
-                        </div>
-                         <div class="form-group">
-                            <label>REPERTIR CONTRASEÑA</label>
-                            <input type="password" id="reg-confirm-password" class="saana-input-white" placeholder="*********" required>
-                        </div>
-
-                        <!-- Botón de registro (Se mantiene el que teníamos) -->
-                        <div class="btn-submit-container">
-                            <button type="submit" class="btn-submit">
-                                REGISTRARSE
-                            </button>
-                        </div>
+                    <!-- Botón de registro centrado al final -->
+                    <div class="btn-submit-container">
+                        <button type="submit" class="btn-submit">REGISTRARSE</button>
                     </div>
                 </div>
             </form>
+            
+            <!-- Enlace para volver al login -->
+            <div class="login-link-container">
+                <a href="login.html" class="login-link">¿Ya tienes cuenta? Iniciar sesión</a>
+            </div>
         </div>
     </div>
 
-    <!-- Conexión con JavaScript (Funcionalidad intacta) -->
+    <!-- Conexión con JavaScript -->
     <script src="auth.js"></script>
 </body>
 </html>
