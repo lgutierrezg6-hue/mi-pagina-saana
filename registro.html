@@ -5,23 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Usuario - SAANA</title>
     <style>
-        /* --- ESTILOS BASE (Exactamente el mismo fondo y filtro que en la imagen de login) --- */
+        /* --- ESTILOS BASE --- */
+        /* Se aplica el fondo de la tienda con una capa oscura encima, 
+           exactamente como en la imagen del login que enviaste. */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            /* Fondo de la tienda con el filtro oscuro encima */
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('fondo_tienda.jpg');
+            /* ASEGÚRATE QUE TU IMAGEN SE LLAME 'fondo_tienda.jpg' */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('fondo_tienda.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            color: white; /* Todo el texto es blanco */
+            color: white; /* Texto blanco para contrastar */
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* --- HEADER SENCILLO (Como en la imagen) --- */
+        /* --- HEADER SIMPLE (Logo arriba a la izquierda) --- */
         .header {
             padding: 30px 40px;
         }
@@ -39,67 +41,68 @@
         }
 
         /* --- CONTENEDOR PRINCIPAL CENTRADO --- */
-        /* Este contenedor solo centra el contenido, NO tiene fondo propio */
         .main-container {
             flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 20px 40px;
         }
 
-        /* --- ESTRUCTURA DEL FORMULARIO --- */
-        /* El formulario tampoco tiene fondo, los elementos flotan sobre la imagen */
-        .registro-form {
+        /* --- CONTENEDOR DEL FORMULARIO "FLOTANTE" --- */
+        /* NO tiene color de fondo, los elementos flotan sobre la imagen */
+        .registro-form-container {
             width: 100%;
             max-width: 900px;
+            /* Sin background-color ni bordes */
         }
 
+        /* Título principal */
         h1 {
             text-align: center;
-            font-size: 36px;
+            font-size: 32px;
             letter-spacing: 3px;
             margin-bottom: 40px;
             font-weight: bold;
             text-transform: uppercase;
         }
 
-        /* Grid de dos columnas para los campos */
+        /* Grid de dos columnas para organizar los campos */
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            gap: 30px 50px; /* Espacio vertical y horizontal entre campos */
         }
 
         .form-group {
-            margin-bottom: 25px;
-            text-align: left;
+            margin-bottom: 20px;
         }
 
-        /* Etiquetas (Labels) blancas y en mayúsculas */
+        /* Etiquetas (Labels) blancas, en mayúsculas y bold */
         label {
             display: block;
             margin-bottom: 10px;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 13px;
             letter-spacing: 1px;
             text-transform: uppercase;
         }
 
-        /* --- INPUTS BLANCOS Y REDONDEADOS --- */
+        /* --- INPUTS BLANCOS REDONDEADOS (Estilo Login) --- */
         .saana-input {
             width: 100%;
             padding: 15px 20px;
-            border-radius: 30px; /* Muy redondos */
+            border-radius: 30px; /* Muy redondeados */
             border: none;
-            background-color: white;
-            color: black;
+            background-color: white; /* Fondo blanco sólido */
+            color: #333;
             font-size: 16px;
             outline: none;
             box-sizing: border-box;
+            height: 50px;
         }
 
-        /* Estilos para el grupo de fechas (tres selects) */
+        /* Estilos para los select de fecha para que coincidan */
         .date-group {
             display: flex;
             gap: 10px;
@@ -108,7 +111,7 @@
             flex: 1;
             text-align: center;
             padding: 15px 10px;
-            /* Icono de flecha personalizado para que se vea bien en el fondo blanco */
+            /* Flecha personalizada negra */
             -webkit-appearance: none; -moz-appearance: none; appearance: none;
             background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
             background-repeat: no-repeat;
@@ -118,7 +121,7 @@
 
         /* --- BOTÓN DE REGISTRO CENTRADO --- */
         .btn-submit-container {
-            grid-column: 1 / -1; /* Ocupa todo el ancho */
+            grid-column: 1 / -1; /* Ocupa todo el ancho abajo */
             display: flex;
             justify-content: center;
             margin-top: 30px;
@@ -127,7 +130,7 @@
             background-color: white;
             color: black;
             border: none;
-            padding: 15px 50px;
+            padding: 15px 60px;
             border-radius: 30px;
             font-size: 18px;
             font-weight: bold;
@@ -136,41 +139,45 @@
             transition: transform 0.2s;
         }
         .btn-submit:hover {
-            transform: scale(1.05);
+            transform: scale(1.05); /* Efecto al pasar el mouse */
         }
 
-        /* Enlace para volver al login */
+        /* Enlace inferior */
         .login-link-container {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 40px;
+            margin-bottom: 20px;
         }
         .login-link {
             color: white;
             text-decoration: underline;
-            font-size: 16px;
+            font-size: 14px;
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        /* Responsive para móviles */
+        /* Responsive para celulares */
         @media (max-width: 768px) {
-            .form-grid { grid-template-columns: 1fr; gap: 20px; }
+            .form-grid { grid-template-columns: 1fr; gap: 20px; } /* Una sola columna */
             .header { padding: 20px; }
-            h1 { font-size: 28px; }
+            .main-container { padding: 20px; }
+            h1 { font-size: 24px; }
         }
     </style>
 </head>
 <body>
-    <!-- HEADER SENCILLO -->
+    <!-- HEADER CON LOGO -->
     <div class="header">
         <div class="logo"><span class="logo-icon">♦</span> SAANA</div>
     </div>
 
     <!-- CONTENEDOR PRINCIPAL -->
     <div class="main-container">
-        <div class="registro-form">
-            <h1>REGISTRAR USUARIO</h1>
+        <!-- Formulario flotante sin fondo propio -->
+        <div class="registro-form-container">
+            <h1>CREAR CUENTA</h1>
             
-            <!-- Formulario conectado a auth.js (IDs y required mantenidos) -->
+            <!-- Formulario conectado a auth.js -->
             <form id="form-registro-saana">
                 <div class="form-grid">
                     <!-- COLUMNA IZQUIERDA -->
@@ -205,19 +212,19 @@
                     <!-- COLUMNA DERECHA -->
                     <div class="right-column">
                         <div class="form-group">
-                            <label>CORREO:</label>
+                            <label>CORREO ELECTRÓNICO:</label>
                             <input type="email" id="reg-email" class="saana-input" required>
                         </div>
                         <div class="form-group">
-                            <label>TELEFONO</label>
+                            <label>TELÉFONO:</label>
                             <input type="tel" id="reg-telefono" class="saana-input" required>
                         </div>
                         <div class="form-group">
-                             <label>CREAR CONTRASEÑA:</label>
+                             <label>CONTRASEÑA:</label>
                             <input type="password" id="reg-password" class="saana-input" required>
                         </div>
                          <div class="form-group">
-                            <label>REPETIR CONTRASEÑA</label>
+                            <label>CONFIRMAR CONTRASEÑA:</label>
                             <input type="password" id="reg-confirm-password" class="saana-input" required>
                         </div>
                     </div>
@@ -231,7 +238,7 @@
             
             <!-- Enlace para volver al login -->
             <div class="login-link-container">
-                <a href="login.html" class="login-link">¿Ya tienes cuenta? Iniciar sesión</a>
+                <a href="login.html" class="login-link">¿Ya tienes cuenta? Inicia sesión aquí</a>
             </div>
         </div>
     </div>
