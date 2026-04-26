@@ -1,4 +1,4 @@
-/* --- CONFIGURACIÓN BÁSICA (Igual que las otras páginas) --- */
+/* --- CONFIGURACIÓN BÁSICA --- */
 * {
     margin: 0;
     padding: 0;
@@ -7,8 +7,8 @@
 }
 
 body {
-    min-height: 100vh; /* Asegura altura mínima */
-    /* Usamos la misma imagen de fondo */
+    min-height: 100vh;
+    /* Misma imagen de fondo oscura */
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.85)),
                 url('fondo-tienda.jpg');
     background-size: cover;
@@ -22,31 +22,28 @@ body {
 }
 
 /* --- ELEMENTOS FIJOS SUPERIORES --- */
+
+/* Logo pequeño en la esquina (Igual que login.css) */
 .logo-container-fixed {
     position: absolute;
     top: 30px;
     left: 50px;
     display: flex;
     align-items: center;
+    max-height: 50px;
 }
-.logo-icon-box {
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(45deg, #ff00cc, #333399);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 12px;
-    font-size: 1.5rem;
-}
-.logo-text { font-size: 1.4rem; font-weight: 700; letter-spacing: 2px; }
+.logo-compound-fixed { display: flex; align-items: flex-start; }
+.logo-icon-small { font-size: 1rem; color: #d65db1; margin-right: 6px; margin-top: 4px; }
+.logo-text-block { display: flex; flex-direction: column; align-items: center; }
+.logo-sa-img-small { width: 35px; height: auto; display: block; }
+.logo-saana-text { font-size: 0.6rem; letter-spacing: 2px; margin-top: 2px; font-weight: 300; }
 
+/* Enlace superior derecho */
 .top-right-link {
     position: absolute;
     top: 30px;
     right: 50px;
-    color: #333999; /* Color azul/morado de la imagen */
+    color: #d65db1; /* Color rosado/morado similar al icono */
     text-decoration: none;
     font-weight: 600;
     display: flex;
@@ -57,17 +54,17 @@ body {
 /* --- CONTENEDOR PRINCIPAL DEL REGISTRO --- */
 .register-container {
     width: 100%;
-    max-width: 900px; /* Ancho máximo para las dos columnas */
-    margin-top: 60px; /* Espacio para el logo */
+    max-width: 900px; /* Ancho para dos columnas */
+    margin-top: 60px; /* Espacio para no chocar con el logo */
 }
 
 .form-columns {
     display: flex;
-    gap: 50px; /* Espacio entre las dos columnas grandes */
+    gap: 50px; /* Espacio entre columnas */
 }
 
 .col-left, .col-right {
-    flex: 1; /* Ambas columnas ocupan el mismo espacio */
+    flex: 1; /* Ambas columnas del mismo ancho */
 }
 
 .section-title {
@@ -89,7 +86,7 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* Estilo general para inputs largos */
+/* Estilo para inputs largos */
 .input-group input[type="text"],
 .input-group input[type="email"],
 .input-group input[type="tel"],
@@ -107,20 +104,20 @@ body {
 /* --- ESTILOS ESPECÍFICOS PARA LA FECHA --- */
 .date-inputs {
     display: flex;
-    gap: 20px; /* Espacio entre Día, Mes y Año */
+    gap: 20px;
 }
 
 .date-field {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80px; /* Ancho fijo para los huequitos de fecha */
+    width: 80px;
 }
 
 .date-field input {
     width: 100%;
     padding: 10px;
-    border-radius: 20px; /* Más redondeados y cortos */
+    border-radius: 20px;
     border: none;
     outline: none;
     text-align: center;
@@ -138,7 +135,7 @@ body {
 /* --- BOTÓN DE REGISTRO (Footer) --- */
 .form-footer {
     display: flex;
-    justify-content: flex-end; /* Alinea el botón a la derecha */
+    justify-content: flex-end;
     margin-top: 30px;
 }
 
@@ -158,10 +155,11 @@ body {
 .btn-registrar i { margin-left: 10px; }
 .btn-registrar:hover { transform: scale(1.05); }
 
-/* --- RESPONSIVE (Para celulares) --- */
+/* --- RESPONSIVE (Celulares) --- */
 @media (max-width: 768px) {
-    .form-columns { flex-direction: column; gap: 30px; } /* Columnas una debajo de otra */
+    .form-columns { flex-direction: column; gap: 30px; }
     .logo-container-fixed, .top-right-link { position: relative; top: 0; left: 0; right: 0; margin-bottom: 20px; }
+    .logo-saana-text { display: none; }
     .register-container { margin-top: 0; }
     .top-right-link { color: white; justify-content: flex-end;}
     .date-inputs { gap: 10px; justify-content: space-between; }
