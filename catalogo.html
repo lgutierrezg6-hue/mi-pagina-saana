@@ -4,86 +4,165 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo - SAANA</title>
+    <!-- Usamos una librería de iconos (FontAwesome) para los iconos del menú -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Estructura básica del layout del PDF */
+        /* Estilos para recrear image_2.png */
         body {
-            margin: 0; padding: 0; font-family: sans-serif;
-            background-color: #1E1E24; color: white;
-            display: flex; height: 100vh;
+            margin: 0; padding: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #121212; /* Fondo general oscuro */
+            color: white; display: flex; height: 100vh; overflow: hidden;
         }
-        /* --- SIDEBAR IZQUIERDO (Donde va el usuario) --- */
+
+        /* --- SIDEBAR IZQUIERDO --- */
         .sidebar {
-            width: 250px; background-color: #292930; /* Un poco más claro que el fondo */
-            padding: 30px; display: flex; flex-direction: column;
+            width: 260px; background-color: #000000; /* Sidebar negro */
+            padding: 25px; display: flex; flex-direction: column;
+            border-right: 1px solid #333;
         }
-        .logo { font-weight: bold; letter-spacing: 2px; margin-bottom: 50px;}
-        
+        .logo { font-weight: bold; font-size: 22px; letter-spacing: 2px; display: flex; align-items: center; margin-bottom: 40px;}
+        .logo-icon { color: #d4af37; margin-right: 10px; font-size: 26px;}
+
         /* Perfil de usuario */
-        .user-profile { display: flex; flex-direction: column; align-items: flex-start; margin-bottom: 50px;}
-        .user-avatar {
-            width: 60px; height: 60px; background-color: #555; border-radius: 50%; margin-bottom: 15px;
-            /* Aquí iría la imagen de perfil si tuvieran */
-        }
-        /* AQUÍ APARECERÁ EL NOMBRE QUE VIENE DEL LOGIN */
-        #sidebar-user-name {
-            font-weight: bold; font-size: 1.1rem; letter-spacing: 1px; margin-bottom: 5px; color: #E0E0E0;
-        }
-        .user-handle { font-size: 0.8rem; color: #888;}
+        .user-profile { display: flex; align-items: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #333;}
+        .avatar { width: 45px; height: 45px; border-radius: 50%; background-color: #555; margin-right: 15px; background-image: url('ruta-a-tu-avatar.jpg'); background-size: cover;}
+        .user-info h3 { margin: 0; font-size: 16px; font-weight: bold;}
+        .user-info p { margin: 5px 0 0; font-size: 12px; color: #888;}
+        .dropdown-icon { margin-left: auto; color: #888; cursor: pointer;}
 
         /* Navegación */
-        .nav-menu { list-style: none; padding: 0; margin: 0; flex-grow: 1;}
-        .nav-menu li { margin-bottom: 25px; font-size: 0.9rem; letter-spacing: 1px; cursor: pointer; color: #ccc;}
-        .nav-menu li.active { color: white; font-weight: bold;}
-        .logout { margin-top: auto; color: #888; cursor: pointer;}
-
-        /* --- CONTENIDO PRINCIPAL (Derecha) --- */
-        .main-content { flex: 1; padding: 40px; overflow-y: auto;}
-        .top-bar { display: flex; justify-content: space-between; margin-bottom: 40px;}
-        .page-title { font-size: 2rem; font-weight: bold; letter-spacing: 1px;}
-        /* Placeholder para productos */
-        .products-placeholder { 
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;
+        .nav-menu { list-style: none; padding: 0; margin: 0; flex: 1;}
+        .nav-item { margin-bottom: 5px; }
+        .nav-link {
+            display: flex; align-items: center; padding: 12px 15px;
+            color: #888; text-decoration: none; border-radius: 10px; transition: all 0.3s;
+            font-weight: 500; font-size: 15px;
         }
-        .product-card { background-color: #292930; height: 250px; border-radius: 15px;}
+        .nav-link i { margin-right: 15px; width: 20px; text-align: center; font-size: 18px;}
+        /* Estilo para el enlace activo (Home) */
+        .nav-link.active { background-color: white; color: black; font-weight: bold;}
+        .nav-link:hover:not(.active) { color: white; background-color: #222;}
+        
+        .badge { background-color: #d4af37; color: black; border-radius: 50%; padding: 2px 6px; font-size: 10px; position: absolute; top: 10px; right: 10px;}
+
+        .bottom-nav { margin-top: auto; }
+        .logout-link { color: #d4af37; cursor: pointer;}
+
+        /* --- CONTENIDO PRINCIPAL --- */
+        .main-content { flex: 1; padding: 20px 40px; overflow-y: auto; background-color: #121212;}
+        
+        /* Barra superior "Home" */
+        .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;}
+        h1 { font-size: 32px; margin: 0; font-weight: bold;}
+        .search-bar {
+            background-color: white; border-radius: 20px; padding: 10px 20px;
+            display: flex; align-items: center; width: 400px;
+        }
+        .search-bar input { border: none; outline: none; flex: 1; font-size: 16px;}
+        .search-bar i { color: #888; }
+
+        /* Grid de productos (Placeholder visual) */
+        .product-grid {
+            display: grid;
+            /* Creamos un grid complejo para imitar el diseño de la imagen */
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: auto auto;
+            gap: 25px;
+        }
+        
+        .card { background-color: white; border-radius: 20px; padding: 20px; color: black; display: flex; flex-direction: column;}
+        .card.large { grid-row: span 2; } /* Las tarjetas grandes de arriba */
+        .card-img-placeholder { flex: 1; background-color: #f0f0f0; border-radius: 15px; margin-top: 20px;}
+        .card h2 { font-size: 18px; margin: 0 0 10px;}
+        .card p { font-size: 12px; color: #666; margin: 0;}
+        .price { font-weight: bold; margin-top: 15px; font-size: 18px;}
     </style>
 </head>
 <body>
     <!-- SIDEBAR IZQUIERDO -->
     <div class="sidebar">
-        <div class="logo">SAANA</div>
-        
+        <div class="logo"><span class="logo-icon">♦</span> SAANA</div>
+
         <div class="user-profile">
-            <div class="user-avatar"></div>
-            <!-- ID IMPORTANTE: Aquí JS pondrá el nombre -->
-            <div id="sidebar-user-name">Cargando...</div>
-            <div class="user-handle">@reallygreatsite</div>
+            <div class="avatar"></div> <!-- Avatar placeholder -->
+            <div class="user-info">
+                <!-- ID IMPORTANTE: Aquí se mostrará el nombre del usuario logueado -->
+                <h3 id="sidebar-user-name">Cargando...</h3>
+                <p>@usuario</p>
+            </div>
+            <i class="fas fa-chevron-down dropdown-icon"></i>
         </div>
 
         <ul class="nav-menu">
-            <li class="active">Home</li>
-            <li>Trending Now</li>
-            <li>Tecnología</li>
-            <li>Carrito</li>
-            <li>Accesorios</li>
-            <li>Setting</li>
+            <li class="nav-item"><a href="#" class="nav-link active"><i class="fas fa-home"></i> Home <i class="fas fa-arrow-right" style="margin-left: auto;"></i></a></li>
+            <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-chart-bar"></i> Tecnología</a></li>
+            <li class="nav-item" style="position: relative;"><a href="#" class="nav-link"><i class="fas fa-th-large"></i> Accesorios</a></li>
+            <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-shopping-cart"></i> Carrito</a></li>
         </ul>
 
-        <!-- ID para el botón de cerrar sesión -->
-        <div class="logout" id="btn-logout">Log Out</div>
+        <ul class="nav-menu bottom-nav">
+            <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-cog"></i> Setting</a></li>
+            <!-- ID IMPORTANTE: Botón de logout -->
+            <li class="nav-item"><a href="#" class="nav-link logout-link" id="btn-logout"><i class="fas fa-sign-out-alt"></i> Log Out</a></li>
+        </ul>
     </div>
 
-    <!-- CONTENIDO PRINCIPAL DERECHO -->
+    <!-- CONTENIDO PRINCIPAL -->
     <div class="main-content">
         <div class="top-bar">
-            <div class="page-title">Trending Now</div>
-            <div>...</div>
+            <h1>Home</h1>
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar...">
+                <i class="fas fa-search"></i>
+            </div>
         </div>
-        
-        <!-- Aquí irían tus productos -->
-        <div class="products-placeholder">
-            <div class="product-card"></div>
-            <div class="product-card"></div>
-            <div class="product-card"></div>
+
+        <!-- Grid de productos (Visual Placeholder) -->
+        <div class="product-grid">
+            <!-- Tarjeta Grande 1 -->
+            <div class="card large">
+                <h2>iFox Clear</h2>
+                <p>PC + TPU. Protección doble capa.</p>
+                <div class="card-img-placeholder" style="background-image: url('ruta-imagen-producto-1.jpg'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
+            </div>
+            <!-- Tarjeta Grande 2 -->
+            <div class="card large">
+                <h2>Tiene protección anticolisión...</h2>
+                <p>Informe de caída SGS...</p>
+                <div class="card-img-placeholder"></div>
+            </div>
+             <!-- Tarjeta Grande 3 -->
+            <div class="card large">
+                <h2>Tiene protección anticolisión...</h2>
+                <p>Lista de modelos disponibles...</p>
+                <div class="card-img-placeholder"></div>
+            </div>
+            
+            <!-- Tarjetas Pequeñas de abajo -->
+            <div class="card">
+                <div class="card-img-placeholder" style="flex:none; height: 120px; margin-top:0;"></div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                     <span class="price" style="color:#d4af37;">$180.000</span> <span style="font-weight:bold;">RELOJ AURA-FIT</span>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img-placeholder" style="flex:none; height: 120px; margin-top:0;"></div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                     <span class="price" style="color:#d4af37;">$25.000</span> <span style="font-weight:bold;">CASE 360°</span>
+                </div>
+            </div>
+             <div class="card">
+                <div class="card-img-placeholder" style="flex:none; height: 120px; margin-top:0;"></div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                     <span class="price" style="color:#d4af37;">$75.000</span> <span style="font-weight:bold;">AIRPODS</span>
+                </div>
+            </div>
+             <div class="card">
+                <div class="card-img-placeholder" style="flex:none; height: 120px; margin-top:0;"></div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                     <span class="price" style="color:#d4af37;">$25.000</span> <span style="font-weight:bold;">FUNDA WALLET</span>
+                </div>
+            </div>
         </div>
     </div>
 
