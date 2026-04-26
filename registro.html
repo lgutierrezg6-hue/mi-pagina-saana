@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Usuario - SAANA</title>
+    <!-- Vinculamos el CSS específico para registro -->
+    <link rel="stylesheet" href="registro.css">
+    <!-- Iconos y Fuentes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Logo en la esquina superior izquierda (Fijo igual que en las otras páginas) -->
+    <div class="logo-container-fixed">
+        <div class="logo-icon-box">
+            <i class="fa-brands fa-slack"></i>
+        </div>
+        <span class="logo-text">SAANA</span>
+    </div>
+    <!-- Enlace "Sign up" superior derecho (visible en la imagen) -->
+    <a href="login.html" class="top-right-link">Sign up <i class="fa-solid fa-arrow-right-long"></i></a>
+
+
+    <!-- Contenedor principal del formulario de registro -->
+    <div class="register-container">
+        
+        <form class="register-form">
+            
+            <!-- Contenedor de las dos columnas -->
+            <div class="form-columns">
+                
+                <!-- COLUMNA IZQUIERDA: Datos del usuario -->
+                <div class="col-left">
+                    <h2 class="section-title">REGISTRAR USUARIO</h2>
+
+                    <div class="input-group">
+                        <label>NOMBRE:</label>
+                        <input type="text" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>APELLIDO:</label> <!-- Corregí "Apallido" por "Apellido" -->
+                        <input type="text" required>
+                    </div>
+
+                    <!-- Sección especial para Fecha de Nacimiento -->
+                    <div class="input-group date-group">
+                        <label style="width: 100%; display:block; margin-bottom: 10px;">FECHA DE NACIMIENTO:</label>
+                        <div class="date-inputs">
+                            <div class="date-field">
+                                <input type="text" placeholder="" maxlength="2">
+                                <span class="label-below">DIA</span>
+                            </div>
+                            <div class="date-field">
+                                <input type="text" placeholder="" maxlength="2">
+                                <span class="label-below">MES</span>
+                            </div>
+                            <div class="date-field">
+                                <input type="text" placeholder="" maxlength="4">
+                                <span class="label-below">AÑO</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>CORREO:</label>
+                        <input type="email" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>TELEFONO</label>
+                        <input type="tel" required>
+                    </div>
+                </div>
+
+                <!-- COLUMNA DERECHA: Contraseña -->
+                <div class="col-right">
+                    <h2 class="section-title">CREAR CONTRASEÑA</h2>
+
+                    <div class="input-group">
+                        <label>CREAR CONTRASEÑA:</label>
+                        <input type="password" placeholder="********" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>REPERTIR CONTRASEÑA</label>
+                        <input type="password" placeholder="********" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botón de registro abajo a la derecha -->
+            <div class="form-footer">
+                <button type="submit" class="btn-registrar">
+                    registrarse <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+</body>
+</html>
