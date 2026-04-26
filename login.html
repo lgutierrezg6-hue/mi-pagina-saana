@@ -3,86 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - SAANA</title>
+    <title>Iniciar Sesión - SAANA</title>
     <style>
-        /* Estilos para recrear image_0.png */
+        /* --- ESTILOS GENERALES PARA RECREAR LA IMAGEN --- */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif; /* Tipografía moderna y limpia */
+        }
+
         body {
-            margin: 0; padding: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            /* REEMPLAZA 'fondo-tienda.jpg' POR TU IMAGEN REAL */
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('fondo-tienda.jpg');
-            background-size: cover; background-position: center;
-            height: 100vh; display: flex; flex-direction: column;
+            /* Fondo de la tienda con un filtro oscuro encima para que se lea el texto */
+            /* REEMPLAZA 'fondo_tienda.jpg' con el nombre de tu imagen de fondo */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('fondo_tienda.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* --- LOGO EN LA ESQUINA SUPERIOR IZQUIERDA --- */
+        .logo-container {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            /* Eliminamos los estilos de texto anteriores */
         }
         
-        .header { padding: 20px; }
-        .logo { color: white; font-weight: bold; font-size: 24px; letter-spacing: 2px; display: flex; align-items: center;}
-        .logo-icon { color: #d4af37; margin-right: 10px; font-size: 30px;} /* Icono dorado simulado */
-
-        .login-container {
-            flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            color: white; text-align: center;
+        /* Nuevo estilo para la imagen del logo */
+        .logo-container img {
+            width: 80px; /* Ajusta este valor para hacerlo más grande o más pequeño */
+            height: auto;
+            display: block;
         }
 
-        h1 { font-size: 36px; letter-spacing: 3px; margin-bottom: 40px; font-weight: bold;}
-
-        /* Formulario transparente */
-        .login-form {
-            background: rgba(255, 255, 255, 0.1); /* Fondo sutilmente transparente */
-            padding: 50px; border-radius: 20px; width: 100%; max-width: 400px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+        /* --- CONTENEDOR CENTRAL (Efecto Vidrio) --- */
+        .login-box {
+            /* Fondo blanco transparente */
+            background: rgba(255, 255, 255, 0.15);
+            /* Efecto de desenfoque (frosted glass) */
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px); /* Para Safari */
+            /* Borde blanco delgado */
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            padding: 50px 60px;
+            width: 100%;
+            max-width: 450px; /* Ancho máximo similar al de la imagen */
+            text-align: center;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-sizing: border-box;
         }
 
-        .input-group { margin-bottom: 25px; text-align: left;}
-        label { display: block; font-weight: bold; margin-bottom: 10px; letter-spacing: 1px; font-size: 14px;}
-        
-        /* Inputs blancos redondeados como en la imagen */
+        /* --- TÍTULO --- */
+        h2 {
+            margin: 0 0 40px 0;
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* --- GRUPOS DE INPUTS --- */
+        .input-group {
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* --- ESTILO DE LOS CAMPOS DE TEXTO (Blancos y Redondeados) --- */
         .saana-input {
-            width: 100%; padding: 15px 20px; border-radius: 30px; border: none;
-            background-color: white; color: black; font-size: 16px; outline: none; box-sizing: border-box;
+            width: 100%;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50px; /* Forma de píldora */
+            background-color: white;
+            color: #333;
+            font-size: 18px;
+            outline: none;
+            box-sizing: border-box; /* Para que el padding no afecte el ancho */
+        }
+        
+        /* Placeholder con la barra vertical como en la imagen */
+        .saana-input::placeholder {
+            color: #333;
+            font-weight: bold;
         }
 
-        /* Botón blanco redondeado */
+        /* --- BOTÓN "Sign up" --- */
         .btn-signup {
-            width: 50%; padding: 15px; border-radius: 30px; border: none;
-            background-color: white; color: black; font-weight: bold; font-size: 16px;
-            cursor: pointer; margin-top: 20px; transition: background-color 0.3s;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 50px;
+            background-color: white;
+            color: black;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
         }
-        .btn-signup:hover { background-color: #f0f0f0; }
 
+        .btn-signup:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* --- ENLACE DE REGISTRO --- */
         .register-link {
-            display: block; margin-top: 30px; color: white; text-decoration: underline; font-size: 16px; letter-spacing: 1px;
+            display: block;
+            margin-top: 40px;
+            color: white;
+            text-decoration: underline;
+            font-size: 16px;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="logo"><span class="logo-icon">♦</span> SAANA</div>
+
+    <!-- Logo en la esquina (Reemplazado por imagen) -->
+    <div class="logo-container">
+        <!-- Reemplaza 'logo-sa.png' con el nombre real de tu archivo de imagen del logo -->
+        <img src="logo-sa.png" alt="Logo SAANA">
     </div>
 
-    <div class="login-container">
-        <h1>INICIAR SESIÓN</h1>
+    <!-- Contenedor central con efecto de vidrio -->
+    <div class="login-box">
+        <h2>INICIAR SESIÒN</h2>
         
-        <!-- ID del formulario para el JS -->
-        <form id="form-login-saana" class="login-form">
+        <!-- 
+          IMPORTANTE PARA LA FUNCIONALIDAD:
+          El id="form-login-saana" conecta este formulario con el script auth.js 
+        -->
+        <form id="form-login-saana">
+            
             <div class="input-group">
-                <label>CORREO:</label>
-                <!-- ID del email para el JS -->
-                <input type="email" id="login-email" class="saana-input" required>
+                <label for="login-email">CORREO:</label>
+                <!-- ID "login-email" para el script -->
+                <input type="email" id="login-email" class="saana-input" required placeholder="|">
             </div>
 
             <div class="input-group">
-                <label>CONTRASEÑA:</label>
-                <!-- ID del password para el JS -->
+                <label for="login-password">CONTRASEÑA:</label>
+                <!-- ID "login-password" para el script -->
                 <input type="password" id="login-password" class="saana-input" required>
             </div>
 
             <button type="submit" class="btn-signup">Sign up</button>
+
         </form>
 
         <a href="registro.html" class="register-link">Necesito registrarme</a>
     </div>
 
-    <!-- Conexión con el cerebro JS -->
+    <!-- 
+      VINCULACIÓN CON EL SCRIPT DE FUNCIONALIDAD 
+      Asegúrate de que auth.js esté en la misma carpeta.
+    -->
     <script src="auth.js"></script>
+
 </body>
 </html>
