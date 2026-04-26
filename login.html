@@ -2,36 +2,133 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Login SAANA</title>
-    <!-- TUS ESTILOS CSS ORIGINALES AQUÍ (He puesto unos básicos de ejemplo) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SAANA</title>
     <style>
-        body { font-family: sans-serif; background: url('tu-fondo.jpg') no-repeat center center fixed; background-size: cover; color: white; text-align: center; }
-        .login-container { background: rgba(0,0,0,0.7); margin: 100px auto; padding: 40px; width: 300px; border-radius: 20px;}
-        input { display: block; margin: 10px auto; padding: 15px; width: 90%; border-radius: 30px; border: none; background: #aaa;}
-        button { padding: 15px 50px; border-radius: 30px; cursor: pointer; background: #ccc; border: none; font-weight: bold; font-size: 16px; margin-top: 20px;}
-        label { display: block; text-align: left; margin-left: 10px; font-weight: bold;}
+        /* Estilos para recrear la estética de tu captura de pantalla */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Fondo oscuro simulado. Si tenías una imagen, ponla aquí */
+            background-color: #1a1a1a; 
+            background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('tu-imagen-de-fondo.jpg'); /* Reemplaza si tienes imagen */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+        }
+
+        .header-logo {
+            margin-top: 20px;
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            /* Ajusta esto si tienes una imagen de logo real */
+             color: #d4af37; /* Color dorado similar al logo de la foto */
+        }
+
+        .login-wrapper {
+            /* El contenedor transparente de tu diseño */
+            background-color: rgba(255, 255, 255, 0.05); /* Muy transparente */
+            backdrop-filter: blur(5px); /* Efecto borroso si el navegador lo soporta */
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            margin-top: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h2 { letter-spacing: 3px; margin-bottom: 30px; font-weight: 300;}
+
+        /* Estilos de tus etiquetas y campos */
+        .input-group { margin-bottom: 25px; text-align: left; }
+        label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            margin-left: 15px; /* Alineado con el inicio de la curva del input */
+        }
+
+        /* TUS INPUTS GRISES REDONDEADOS */
+        .saana-input {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 30px;
+            border: none;
+            background-color: #808080; /* Color gris de tu diseño */
+            color: #1a1a1a; /* Texto oscuro dentro del input */
+            font-size: 1rem;
+            outline: none;
+            box-sizing: border-box; /* Importante para que el padding no rompa el ancho */
+        }
+        .saana-input::placeholder { color: #444; }
+
+        /* TU BOTÓN REDONDEADO */
+        .btn-saana {
+            width: 60%;
+            padding: 15px;
+            border-radius: 30px;
+            border: none;
+            background-color: #a0a0a0; /* Un gris un poco más claro para el botón */
+            color: #1a1a1a;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        .btn-saana:hover { background-color: #b0b0b0; }
+
+        /* ENLACE DE REGISTRO */
+        .register-link {
+            display: block;
+            margin-top: 30px;
+            color: #aaa;
+            text-decoration: underline;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
-    <!-- LOGO Y HEADER AQUÍ -->
-    <div class="login-container">
-        <!-- IMPORTANTE: El formulario debe tener el ID 'form-login' -->
-        <form id="form-login">
-            <label>CORREO:</label>
-            <!-- IMPORTANTE: El ID debe ser 'login-email' -->
-            <input type="email" id="login-email" placeholder="ivanessa.g.g02@gmail.com" required>
+    <!-- Header simple para el logo -->
+    <div class="header-logo">SAANA</div>
 
-            <label>CONTRASEÑA:</label>
-             <!-- IMPORTANTE: El ID debe ser 'login-password' -->
-            <input type="password" id="login-password" placeholder=".........." required>
+    <div class="login-wrapper">
+        <h2>INICIAR SESIÓN</h2>
 
-            <button type="submit">Sign up (Ingresar)</button>
+        <!-- FORMULARIO: ID IMPORTANTE 'form-login-saana' -->
+        <form id="form-login-saana">
+            
+            <div class="input-group">
+                <label for="login-email">CORREO:</label>
+                <!-- INPUT EMAIL: ID IMPORTANTE 'login-email' -->
+                <input type="email" id="login-email" class="saana-input" placeholder="tu.correo@gmail.com" required>
+            </div>
+
+            <div class="input-group">
+                <label for="login-password">CONTRASEÑA:</label>
+                <!-- INPUT PASSWORD: ID IMPORTANTE 'login-password' -->
+                <input type="password" id="login-password" class="saana-input" placeholder=".........." required>
+            </div>
+
+            <!-- Botón de acción (En tu diseño dice "Sign up" aunque sea login) -->
+            <button type="submit" class="btn-saana">Sign up</button>
+
         </form>
-        <!-- Asegúrate de que este enlace apunte a tu nuevo registro.html -->
-        <p><a href="registro.html" style="color: #aaa; text-decoration: underline;">Necesito registrarme</a></p>
+
+        <!-- Enlace al registro -->
+        <a href="registro.html" class="register-link">Necesito registrarme</a>
     </div>
 
-    <!-- VINCULAR EL ARCHIVO JS AL FINAL DEL BODY -->
+    <!-- CONEXIÓN FUNDAMENTAL CON EL JAVASCRIPT -->
     <script src="auth.js"></script>
 </body>
 </html>
