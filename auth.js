@@ -23,7 +23,7 @@ function initRegistro() {
         e.preventDefault();
         console.log("Intentando registrar...");
 
-        // 1. Recolectar datos (IDs basados en tu diseño del PDF)
+        // 1. Recolectar datos
         const data = {
             nombre: document.getElementById('reg-nombre').value.trim(),
             apellido: document.getElementById('reg-apellido').value.trim(),
@@ -83,7 +83,7 @@ function initLogin() {
 
         // 2. Comparar credenciales
         if (emailInput === registeredUser.email && passInput === registeredUser.password) {
-            // Login exitoso: Creamos la sesión
+            // Login exitoso: Creamos la sesión con nombre y apellido
             sessionStorage.setItem(SESSION_KEY, registeredUser.nombre + " " + registeredUser.apellido);
             console.log("Login correcto. Redirigiendo...");
             window.location.href = 'catalogo.html';
@@ -104,9 +104,10 @@ function initCatalogo() {
         // Si está logueado, mostramos su nombre en el sidebar
         if (userNameDisplay) userNameDisplay.textContent = activeUserName;
     } else {
-        // Si NO está logueado, opcional: redirigir al login
-        // window.location.href = 'login.html'; 
+        // Si NO está logueado
         if (userNameDisplay) userNameDisplay.textContent = "Invitado";
+        // Opcional: redirigir al login
+        // window.location.href = 'login.html'; 
     }
 
     // Funcionalidad del botón Log Out
