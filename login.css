@@ -1,0 +1,124 @@
+/* --- CONFIGURACIÓN BÁSICA --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* El fondo es el mismo que la página principal */
+body {
+    height: 100vh;
+    /* Asegúrate que este nombre sea el mismo que subiste */
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.85)),
+                url('fondo-tienda.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    color: white;
+}
+
+/* --- LOGO SUPERIOR IZQUIERDA (Fijo) --- */
+.logo-container-fixed {
+    position: absolute;
+    top: 30px;
+    left: 50px;
+    display: flex;
+    align-items: center;
+}
+.logo-icon-box {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(45deg, #ff00cc, #333399);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    font-size: 1.5rem;
+}
+.logo-text {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+/* --- CONTENEDOR DEL FORMULARIO --- */
+.login-container {
+    text-align: center;
+    width: 100%;
+    max-width: 450px; /* Ancho máximo del formulario */
+    padding: 20px;
+}
+
+.login-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 50px;
+    letter-spacing: 1px;
+}
+
+/* --- CAMPOS DE TEXTO --- */
+.input-group {
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px 20px;
+    border-radius: 30px; /* Muy redondos */
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    background-color: white;
+    color: #333;
+}
+
+/* --- BOTÓN "SIGN UP" --- */
+.login-submit-btn {
+    width: auto;
+    min-width: 180px;
+    padding: 12px 30px;
+    background-color: white;
+    color: #000;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    transition: transform 0.3s ease;
+}
+
+.login-submit-btn:hover {
+    transform: scale(1.05);
+}
+
+/* --- ENLACE INFERIOR --- */
+.register-link-bottom {
+    color: white;
+    font-size: 1.1rem;
+    text-decoration: underline;
+    display: block;
+    font-weight: 500;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .logo-container-fixed { top: 20px; left: 20px; }
+    .logo-text { display: none; }
+    .login-container { padding: 20px; }
+    .login-title { font-size: 2rem; }
+}
