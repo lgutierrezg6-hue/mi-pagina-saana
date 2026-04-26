@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo - SAANA</title>
+    <link rel="stylesheet" href="catalogo.css">
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        
+        <!-- === BARRA LATERAL (SIDEBAR) === -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <!-- MODO INVITADO: Mostramos el logo en vez del perfil de usuario -->
+                <div class="logo-icon-box">
+                    <i class="fa-brands fa-slack"></i>
+                </div>
+                <span class="logo-text">SAANA</span>
+            </div>
+
+            <nav class="sidebar-menu">
+                <!-- Enlace activo (con fondo blanco) -->
+                <a href="#" class="menu-item active">
+                    <i class="fa-solid fa-house"></i> 
+                    <span>Home</span>
+                    <i class="fa-solid fa-arrow-right-long arrow-icon"></i>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fa-solid fa-chart-simple"></i> 
+                    <span>Tecnología</span>
+                </a>
+                <!-- Enlace con flecha roja como en la imagen -->
+                <a href="#" class="menu-item highlight-red">
+                    <i class="fa-solid fa-grip"></i> 
+                    <span>Accesorios</span>
+                    <i class="fa-solid fa-arrow-pointer red-cursor"></i>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fa-solid fa-cart-shopping"></i> 
+                    <span>Carrito</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <!-- MODO INVITADO: Botón para ir a Iniciar Sesión -->
+                <a href="login.html" class="login-link-sidebar">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                    <span>Iniciar Sesión</span>
+                </a>
+            </div>
+        </aside>
+
+
+        <!-- === CONTENIDO PRINCIPAL (DERECHA) === -->
+        <main class="main-content">
+            
+            <!-- Barra de búsqueda superior -->
+            <header class="content-header">
+                <h2 class="page-title">Home</h2>
+                <div class="search-bar">
+                    <input type="text" placeholder="Buscar productos...">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+            </header>
+
+            <!-- Sección del Banner Principal (Slider) -->
+            <section class="banner-section">
+                <!-- Usamos imágenes de placeholder por ahora. Deberás subir las tuyas. -->
+                <div class="banner-slide">
+                     <img src="https://via.placeholder.com/800x400/e0e0e0/333333?text=Banner+Promocional+1" alt="Banner 1">
+                </div>
+                <div class="banner-slide desktop-only">
+                     <img src="https://via.placeholder.com/800x400/e0e0e0/333333?text=Info+Producto+2" alt="Banner 2">
+                </div>
+            </section>
+
+            <!-- Cuadrícula de Productos -->
+            <section class="products-grid">
+                
+                <!-- Producto 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/250x250/e0e0e0/333333?text=Reloj" alt="Reloj">
+                    </div>
+                    <div class="product-info">
+                        <span class="price">$180.000</span>
+                        <h3 class="product-title">RELOJ AURA-FIT</h3>
+                    </div>
+                </div>
+
+                <!-- Producto 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/250x250/e0e0e0/333333?text=Case+360" alt="Case 360">
+                    </div>
+                    <div class="product-info">
+                        <span class="price">$25000.</span>
+                        <h3 class="product-title">CASE 360°</h3>
+                    </div>
+                </div>
+
+                <!-- Producto 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/250x250/e0e0e0/333333?text=Airpods" alt="Airpods">
+                    </div>
+                    <div class="product-info">
+                        <span class="price">$75.000.</span>
+                        <h3 class="product-title">AIRPODS</h3>
+                    </div>
+                </div>
+                 <!-- Producto 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/250x250/e0e0e0/333333?text=Funda+Wallet" alt="Funda Wallet">
+                    </div>
+                    <div class="product-info">
+                        <span class="price">$25.000.</span>
+                        <h3 class="product-title">FUNDA WALLET</h3>
+                    </div>
+                </div>
+
+            </section>
+
+        </main>
+    </div>
+
+</body>
+</html>
