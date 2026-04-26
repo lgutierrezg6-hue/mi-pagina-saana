@@ -2,26 +2,43 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Catálogo SAANA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo - SAANA</title>
     <style>
-        body { font-family: sans-serif; background: #f4f4f4;}
-        header { background: #333; color: white; padding: 15px; display: flex; justify-content: space-between;}
-        .logo { font-weight: bold; }
-        /* Estilo para el nombre de usuario */
-        .user-info { color: #FFD700; font-weight: bold;}
+        body { font-family: sans-serif; background-color: #f0f0f0; margin: 0;}
+        
+        /* Header de ejemplo para mostrar el nombre */
+        .catalogo-header {
+            background-color: #1a1a1a; color: white; padding: 20px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { color: #d4af37; font-weight: bold; font-size: 1.5rem;}
+        
+        /* ESTE ES EL ELEMENTO DONDE APARECERÁ EL NOMBRE */
+        #header-nombre-usuario { font-weight: bold; color: #d4af37;}
+        
+        .contenido { padding: 20px; }
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo">SAANA LOGO</div>
-        <!-- AQUÍ APARECERÁ EL NOMBRE. Importante el ID: 'nombre-usuario-header' -->
-        <div class="user-info" id="nombre-usuario-header">Bienvenido</div>
-    </header>
+    <!-- ID contenedor para que JS sepa que estamos en el catálogo -->
+    <div id="pagina-catalogo-wrapper">
+        <header class="catalogo-header">
+            <div class="logo">SAANA CATÁLOGO</div>
+            
+            <!-- AQUÍ ES DONDE JS PONDRÁ EL NOMBRE -->
+            <!-- IMPORTANTE: Debe tener el ID 'header-nombre-usuario' -->
+            <div id="header-nombre-usuario">Cargando usuario...</div>
+        </header>
 
-    <h1>Bienvenido al catálogo</h1>
-    <p>Aquí están tus productos...</p>
+        <div class="contenido">
+            <h1>Bienvenido a la sección de productos</h1>
+            <p>Si ves tu nombre arriba a la derecha, ¡el login funcionó correctamente!</p>
+            <!-- Aquí irían tus productos... -->
+        </div>
+    </div>
 
-    <!-- VINCULAR EL ARCHIVO JS AL FINAL DEL BODY TAMBIÉN AQUÍ -->
+    <!-- VINCULAR JS AL FINAL -->
     <script src="auth.js"></script>
 </body>
 </html>
