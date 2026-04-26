@@ -20,45 +20,24 @@ body {
     color: white;
 }
 
-/* --- LOGO SUPERIOR IZQUIERDA (Fijo) --- */
+/* --- LOGO SUPERIOR IZQUIERDA (Fijo y Pequeño) --- */
 .logo-container-fixed {
     position: absolute;
     top: 30px;
     left: 50px;
     display: flex;
     align-items: center;
-}
-.logo-icon-box {
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(45deg, #ff00cc, #333399);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 12px;
-    font-size: 1.5rem;
-}
-.logo-text {
-    font-size: 1.4rem;
-    font-weight: 700;
-    letter-spacing: 2px;
+    /* Aseguramos que el contenedor no sea muy alto */
+    max-height: 50px; 
 }
 
-/* --- CONTENEDOR DEL FORMULARIO --- */
-.login-container {
-    text-align: center;
-    width: 100%;
-    max-width: 450px; /* Ancho máximo del formulario */
-    padding: 20px;
-}
-
-.login-title {
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 50px;
-    letter-spacing: 1px;
-}
+/* Estilos del logo compuesto */
+.logo-compound-fixed { display: flex; align-items: flex-start; }
+.logo-icon-small { font-size: 1rem; color: #d65db1; margin-right: 6px; margin-top: 4px; }
+.logo-text-block { display: flex; flex-direction: column; align-items: center; }
+/* AQUÍ ESTÁ LA CLAVE: width: 35px obliga a que sea pequeño */
+.logo-sa-img-small { width: 35px; height: auto; display: block; }
+.logo-saana-text { font-size: 0.6rem; letter-spacing: 2px; margin-top: 2px; font-weight: 300; }
 
 /* --- CAMPOS DE TEXTO --- */
 .input-group {
