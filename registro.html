@@ -5,83 +5,108 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - SAANA</title>
     <style>
-        /* MISMOS ESTILOS QUE EL LOGIN PARA MANTENER CONSISTENCIA VISUAL */
+        /* Estilos basados en el PDF */
         body {
-            margin: 0; padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1a1a1a; 
-            /* Usa la misma imagen de fondo que en el login si la tienes */
-            background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('tu-imagen-de-fondo.jpg');
-            background-size: cover; background-position: center;
-            height: 100vh; display: flex; flex-direction: column; align-items: center; color: white;
+            margin: 0; padding: 0; font-family: sans-serif;
+            background-color: #1E1E24; /* Color de fondo oscuro del PDF */
+            color: white;
+            display: flex; flex-direction: column; align-items: center; min-height: 100vh;
         }
-        .header-logo {
-            margin-top: 20px; font-size: 2rem; font-weight: bold; letter-spacing: 2px; color: #d4af37;
+        .header { width: 100%; padding: 20px; display: flex; justify-content: space-between; align-items: center;}
+        .logo { font-weight: bold; letter-spacing: 2px;}
+        .sign-up-text { color: #ccc; font-size: 0.9rem;}
+        
+        .main-container {
+            margin-top: 20px; width: 90%; max-width: 500px; text-align: center;
         }
-        .login-wrapper {
-            background-color: rgba(255, 255, 255, 0.05); backdrop-filter: blur(5px);
-            padding: 40px; border-radius: 20px; width: 90%; max-width: 400px;
-            text-align: center; margin-top: 30px; /* Un poco más arriba porque es más largo */
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        h2 { letter-spacing: 3px; margin-bottom: 30px; font-weight: 300;}
-        .input-group { margin-bottom: 20px; text-align: left; } /* Un poco menos de margen */
-        label {
-            display: block; font-size: 0.9rem; font-weight: bold; letter-spacing: 1px;
-            margin-bottom: 10px; margin-left: 15px;
-        }
+        h2 { letter-spacing: 3px; font-weight: 400; margin-bottom: 40px;}
+        
+        /* Estilos del formulario para coincidir con el PDF */
+        .form-group { margin-bottom: 20px; text-align: left;}
+        .form-row { display: flex; gap: 15px; margin-bottom: 20px; }
+        .form-col { flex: 1; text-align: left;}
+        
+        label { display: block; font-size: 0.8rem; font-weight: bold; letter-spacing: 1px; margin-bottom: 8px; margin-left: 10px;}
+        
+        /* Inputs estilo PDF: Grises y redondeados */
         .saana-input {
-            width: 100%; padding: 15px 20px; border-radius: 30px; border: none;
-            background-color: #808080; color: #1a1a1a; font-size: 1rem; outline: none; box-sizing: border-box;
+            width: 100%; padding: 12px 20px; border-radius: 25px;
+            border: none; background-color: #4A4A52; /* Gris del PDF */
+            color: white; outline: none; box-sizing: border-box;
         }
-        .saana-input::placeholder { color: #444; }
-        .btn-saana {
-            width: 60%; padding: 15px; border-radius: 30px; border: none;
-            background-color: #a0a0a0; color: #1a1a1a; font-size: 1.1rem; font-weight: bold;
-            cursor: pointer; margin-top: 20px; transition: background-color 0.3s;
-        }
-        .btn-saana:hover { background-color: #b0b0b0; }
-        .register-link {
-            display: block; margin-top: 30px; color: #aaa; text-decoration: underline; font-size: 0.9rem;
+        .date-input { text-align: center; }
+
+        .btn-registrarse {
+            width: 50%; padding: 15px; border-radius: 30px; border: none;
+            background-color: #A0A0A8; color: #1E1E24;
+            font-weight: bold; letter-spacing: 1px; cursor: pointer;
+            margin-top: 30px; margin-bottom: 50px;
         }
     </style>
 </head>
 <body>
-    <div class="header-logo">SAANA</div>
-
-    <div class="login-wrapper">
-        <h2>CREAR CUENTA</h2>
-
-        <!-- FORMULARIO DE REGISTRO: ID IMPORTANTE 'form-registro-saana' -->
-        <form id="form-registro-saana">
-            
-            <!-- CAMPO NOMBRE (NUEVO) -->
-            <div class="input-group">
-                <label for="reg-nombre">NOMBRE:</label>
-                <!-- ID IMPORTANTE 'reg-nombre' -->
-                <input type="text" id="reg-nombre" class="saana-input" placeholder="Tu Nombre" required>
-            </div>
-
-            <div class="input-group">
-                <label for="reg-email">CORREO:</label>
-                 <!-- ID IMPORTANTE 'reg-email' -->
-                <input type="email" id="reg-email" class="saana-input" placeholder="tu.correo@gmail.com" required>
-            </div>
-
-            <div class="input-group">
-                <label for="reg-password">CONTRASEÑA:</label>
-                 <!-- ID IMPORTANTE 'reg-password' -->
-                <input type="password" id="reg-password" class="saana-input" placeholder=".........." required>
-            </div>
-
-            <button type="submit" class="btn-saana">Registrarme</button>
-
-        </form>
-
-        <a href="login.html" class="register-link">Ya tengo cuenta, ir al login</a>
+    <div class="header">
+        <div class="sign-up-text">Sign up</div>
+        <div class="logo">SAANA</div>
+        <div class="sign-up-text">Sign up</div>
     </div>
 
-    <!-- CONEXIÓN FUNDAMENTAL CON EL JAVASCRIPT -->
+    <div class="main-container">
+        <h2>R E G I S T R A R U S U A R I O</h2>
+
+        <!-- IMPORTANTE: ID del formulario para el JS -->
+        <form id="form-registro-saana">
+            <!-- Fila 1: Nombre y Apellido -->
+            <div class="form-row">
+                <div class="form-col">
+                    <label>N O M B R E :</label>
+                    <input type="text" id="reg-nombre" class="saana-input" required>
+                </div>
+                <div class="form-col">
+                    <label>A P E L L I D O :</label>
+                    <input type="text" id="reg-apellido" class="saana-input" required>
+                </div>
+            </div>
+
+            <!-- Fila 2: Fecha de nacimiento -->
+            <div class="form-group">
+                <label>F E C H A D E N A C I M I E N T O :</label>
+                <div class="form-row">
+                    <input type="text" id="reg-dia" class="saana-input date-input" placeholder="D I A" style="flex:1">
+                    <input type="text" id="reg-mes" class="saana-input date-input" placeholder="M E S" style="flex:1">
+                    <input type="text" id="reg-ano" class="saana-input date-input" placeholder="A Ñ O" style="flex:1">
+                </div>
+            </div>
+
+            <!-- Fila 3: Correo y Teléfono -->
+            <div class="form-row">
+                <div class="form-col">
+                    <label>C O R R E O :</label>
+                    <input type="email" id="reg-email" class="saana-input" required>
+                </div>
+                <div class="form-col">
+                    <label>T E L E F O N O</label>
+                    <input type="tel" id="reg-telefono" class="saana-input">
+                </div>
+            </div>
+
+            <!-- Fila 4: Contraseñas -->
+            <div class="form-row" style="margin-top: 40px;">
+                <div class="form-col">
+                    <label>C R E A R C O N T R A S E Ñ A :</label>
+                    <input type="password" id="reg-password" class="saana-input" placeholder="*********" required>
+                </div>
+                <div class="form-col">
+                    <label>R E P E T I R C O N T R A S E Ñ A</label>
+                    <input type="password" id="reg-confirm-password" class="saana-input" placeholder="*********" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-registrarse">registrarse</button>
+        </form>
+    </div>
+
+    <!-- Conexión con el cerebro JS -->
     <script src="auth.js"></script>
 </body>
 </html>
