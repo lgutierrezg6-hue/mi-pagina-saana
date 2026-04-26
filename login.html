@@ -1,171 +1,110 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión - SAANA</title>
-    <style>
-        /* --- ESTILOS GENERALES --- */
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+/* 
+    auth.js - Motor de autenticación para SAANA (GitHub Pages)
+    Utiliza localStorage para simular una base de datos.
+*/
+
+// CLAVES PARA LOCALSTORAGE (Para no mezclar datos)
+const DB_USER_KEY = 'saana_user_data_v3';    // Datos del registro
+const SESSION_KEY = 'saana_active_session';  // Sesión activa
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Identificar en qué página estamos y activar la función correspondiente
+    if (document.getElementById('form-registro-saana')) initRegistro();
+    if (document.getElementById('form-login-saana')) initLogin();
+    // Usamos el botón de logout para saber que estamos en el catálogo
+    if (document.getElementById('btn-logout')) initCatalogo();
+});
+
+
+// --- FUNCIONALIDAD DE REGISTRO (IGUAL QUE ANTES) ---
+function initRegistro() {
+    const form = document.getElementById('form-registro-saana');
+    
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        console.log("Intentando registrar...");
+
+        // 1. Recolectar datos
+        const data = {
+            nombre: document.getElementById('reg-nombre').value.trim(),
+            apellido: document.getElementById('reg-apellido').value.trim(),
+            email: document.getElementById('reg-email').value.toLowerCase().trim(),
+            pass1: document.getElementById('reg-password').value,
+            pass2: document.getElementById('reg-confirm-password').value
+        };
+
+        // 2. Validaciones
+        if (!data.email || !data.pass1) {
+             alert("Por favor completa los campos obligatorios."); return;
+        }
+        if (data.pass1 !== data.pass2) {
+            alert("Error: Las contraseñas no coinciden."); return;
         }
 
-        body {
-            /* Fondo de la tienda con un filtro oscuro encima */
-            /* REEMPLAZA 'fondo_tienda.jpg' con tu imagen de fondo */
-            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('fondo_tienda.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative; /* Necesario para posicionar el logo absoluto */
-        }
+        // 3. Guardar usuario
+        const userToSave = { ...data }; 
+        delete userToSave.pass1; delete userToSave.pass2;
+        userToSave.password = data.pass1;
 
-        /* --- NUEVO: ESTILO PARA EL LOGO DE IMAGEN EN LA ESQUINA --- */
-        .logo-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            padding: 20px; /* Espacio desde el borde */
-            z-index: 10; /* Asegura que quede por encima del fondo */
+        try {
+            localStorage.setItem(DB_USER_KEY, JSON.stringify(userToSave));
+            alert("¡Registro exitoso! Ahora por favor inicia sesión.");
+            window.location.href = 'login.html';
+        } catch (error) {
+            console.error(error);
+            alert("Hubo un error al guardar los datos.");
         }
+    });
+}
+
+
+// --- FUNCIONALIDAD DE LOGIN (IGUAL QUE ANTES) ---
+function initLogin() {
+    const form = document.getElementById('form-login-saana');
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        console.log("Intentando login...");
+
+        const emailInput = document.getElementById('login-email').value.toLowerCase().trim();
+        const passInput = document.getElementById('login-password').value;
+
+        // 1. Recuperar datos guardados
+        const storedData = localStorage.getItem(DB_USER_KEY);
         
-        .logo-img {
-            width: 100px; /* Tamaño del cuadro del logo. Ajústalo si es necesario */
-            height: auto;
-            display: block;
-            /* Opcional: una pequeña sombra para que resalte como en la imagen */
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        if (!storedData) {
+            alert("Error: Usuario no encontrado. Por favor regístrate primero."); return;
         }
 
-        /* --- CONTENEDOR CENTRAL (Efecto Vidrio - Igual que antes) --- */
-        .login-box {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 25px;
-            padding: 50px 60px;
-            width: 100%;
-            max-width: 450px;
-            text-align: center;
-            color: white;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            box-sizing: border-box;
+        const registeredUser = JSON.parse(storedData);
+
+        // 2. Comparar credenciales
+        if (emailInput === registeredUser.email && passInput === registeredUser.password) {
+            // Login exitoso: Creamos la sesión (aunque no mostremos el nombre, es útil saber que está logueado)
+            sessionStorage.setItem(SESSION_KEY, 'active');
+            console.log("Login correcto. Redirigiendo...");
+            window.location.href = 'catalogo.html';
+        } else {
+            alert("Error: Correo o contraseña incorrectos.");
         }
+    });
+}
 
-        /* --- TÍTULO --- */
-        h2 {
-            margin: 0 0 40px 0;
-            font-size: 28px; /* Un poco más pequeño para ajustar a la imagen */
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
 
-        /* --- GRUPOS DE INPUTS --- */
-        .input-group {
-            margin-bottom: 30px;
-            text-align: left;
-        }
+// --- FUNCIONALIDAD DEL CATÁLOGO (MODIFICADA) ---
+function initCatalogo() {
+    // YA NO BUSCAMOS NI MOSTRAMOS EL NOMBRE DEL USUARIO.
+    console.log("Página de catálogo cargada.");
 
-        label {
-            display: block;
-            margin-bottom: 10px;
-            font-size: 14px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        /* --- ESTILO DE LOS CAMPOS DE TEXTO (Blancos y Redondeados) --- */
-        .saana-input {
-            width: 100%;
-            padding: 15px 20px;
-            border: none;
-            border-radius: 50px;
-            background-color: white;
-            color: #333;
-            font-size: 18px;
-            outline: none;
-            box-sizing: border-box;
-        }
-
-        /* --- BOTÓN "Sign up" --- */
-        .btn-signup {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 50px;
-            background-color: white;
-            color: black;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 10px;
-            text-transform: uppercase; /* Para que diga "SIGN UP" en mayúsculas si quieres */
-        }
-
-        .btn-signup:hover {
-            background-color: #f0f0f0;
-        }
-
-        /* --- ENLACE DE REGISTRO --- */
-        .register-link {
-            display: block;
-            margin-top: 30px;
-            color: white;
-            text-decoration: underline;
-            font-size: 14px;
-            letter-spacing: 0.5px;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- NUEVO: Contenedor para la imagen del logo -->
-    <div class="logo-container">
-        <!-- 
-          IMPORTANTE: Reemplaza 'logo-saana.jpg' con el nombre real 
-          de tu archivo de imagen del logo (el cuadro negro con letras blancas).
-        -->
-        <img src="logo-saana.jpg" alt="Logo SAANA" class="logo-img">
-    </div>
-
-    <!-- Contenedor central con efecto de vidrio -->
-    <div class="login-box">
-        <h2>INICIAR SESIÒN</h2>
-        
-        <!-- ID del formulario para la funcionalidad JS -->
-        <form id="form-login-saana">
-            
-            <div class="input-group">
-                <label for="login-email">CORREO:</label>
-                <!-- ID para JS -->
-                <input type="email" id="login-email" class="saana-input" required>
-            </div>
-
-            <div class="input-group">
-                <label for="login-password">CONTRASEÑA:</label>
-                <!-- ID para JS -->
-                <input type="password" id="login-password" class="saana-input" required>
-            </div>
-
-            <button type="submit" class="btn-signup">Sign up</button>
-
-        </form>
-
-        <a href="registro.html" class="register-link">Necesito registrarme</a>
-    </div>
-
-    <!-- Vinculación con el script JS (asegúrate que esté en la carpeta) -->
-    <script src="auth.js"></script>
-
-</body>
-</html>
+    // Funcionalidad del botón Log Out (ESTO SÍ SE MANTIENE)
+    const logoutBtn = document.getElementById('btn-logout');
+    if(logoutBtn) {
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Borramos la sesión
+            sessionStorage.removeItem(SESSION_KEY); 
+            // Redirigimos al login
+            window.location.href = 'login.html';
+        });
+    }
+}
