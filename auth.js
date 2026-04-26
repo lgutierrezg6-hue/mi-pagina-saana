@@ -4,18 +4,19 @@
 */
 
 // CLAVES PARA LOCALSTORAGE (Para no mezclar datos)
-const DB_USER_KEY = 'saana_user_data_v2';    // Aquí se guardan los datos del registro
-const SESSION_KEY = 'saana_active_session';  // Aquí se guarda quién está logueado ahora
+const DB_USER_KEY = 'saana_user_data_v3';    // Datos del registro
+const SESSION_KEY = 'saana_active_session';  // Sesión activa
 
 document.addEventListener('DOMContentLoaded', () => {
     // Identificar en qué página estamos y activar la función correspondiente
     if (document.getElementById('form-registro-saana')) initRegistro();
     if (document.getElementById('form-login-saana')) initLogin();
-    if (document.getElementById('sidebar-user-name')) initCatalogo();
+    // Usamos el botón de logout para saber que estamos en el catálogo
+    if (document.getElementById('btn-logout')) initCatalogo();
 });
 
 
-// --- FUNCIONALIDAD DE REGISTRO ---
+// --- FUNCIONALIDAD DE REGISTRO (IGUAL QUE ANTES) ---
 function initRegistro() {
     const form = document.getElementById('form-registro-saana');
     
@@ -27,41 +28,37 @@ function initRegistro() {
         const data = {
             nombre: document.getElementById('reg-nombre').value.trim(),
             apellido: document.getElementById('reg-apellido').value.trim(),
-            // Combinamos la fecha
-            dob: `${document.getElementById('reg-dia').value}/${document.getElementById('reg-mes').value}/${document.getElementById('reg-ano').value}`,
             email: document.getElementById('reg-email').value.toLowerCase().trim(),
-            telefono: document.getElementById('reg-telefono').value.trim(),
             pass1: document.getElementById('reg-password').value,
             pass2: document.getElementById('reg-confirm-password').value
         };
 
         // 2. Validaciones
-        if (!data.nombre || !data.email || !data.pass1) {
+        if (!data.email || !data.pass1) {
              alert("Por favor completa los campos obligatorios."); return;
         }
         if (data.pass1 !== data.pass2) {
             alert("Error: Las contraseñas no coinciden."); return;
         }
 
-        // 3. Guardar usuario (Excluyendo la confirmación de password)
+        // 3. Guardar usuario
         const userToSave = { ...data }; 
         delete userToSave.pass1; delete userToSave.pass2;
-        userToSave.password = data.pass1; // Guardamos la contraseña final
+        userToSave.password = data.pass1;
 
         try {
-            // Guardamos en localStorage (simulación de base de datos)
             localStorage.setItem(DB_USER_KEY, JSON.stringify(userToSave));
             alert("¡Registro exitoso! Ahora por favor inicia sesión.");
             window.location.href = 'login.html';
         } catch (error) {
             console.error(error);
-            alert("Hubo un error al guardar los datos en el navegador.");
+            alert("Hubo un error al guardar los datos.");
         }
     });
 }
 
 
-// --- FUNCIONALIDAD DE LOGIN ---
+// --- FUNCIONALIDAD DE LOGIN (IGUAL QUE ANTES) ---
 function initLogin() {
     const form = document.getElementById('form-login-saana');
 
@@ -83,8 +80,8 @@ function initLogin() {
 
         // 2. Comparar credenciales
         if (emailInput === registeredUser.email && passInput === registeredUser.password) {
-            // Login exitoso: Creamos la sesión con nombre y apellido
-            sessionStorage.setItem(SESSION_KEY, registeredUser.nombre + " " + registeredUser.apellido);
+            // Login exitoso: Creamos la sesión (aunque no mostremos el nombre, es útil saber que está logueado)
+            sessionStorage.setItem(SESSION_KEY, 'active');
             console.log("Login correcto. Redirigiendo...");
             window.location.href = 'catalogo.html';
         } else {
@@ -94,29 +91,20 @@ function initLogin() {
 }
 
 
-// --- FUNCIONALIDAD DEL CATÁLOGO ---
+// --- FUNCIONALIDAD DEL CATÁLOGO (MODIFICADA) ---
 function initCatalogo() {
-    // 1. Verificar si hay sesión activa
-    const activeUserName = sessionStorage.getItem(SESSION_KEY);
-    const userNameDisplay = document.getElementById('sidebar-user-name');
+    // YA NO BUSCAMOS NI MOSTRAMOS EL NOMBRE DEL USUARIO.
+    console.log("Página de catálogo cargada.");
 
-    if (activeUserName) {
-        // Si está logueado, mostramos su nombre en el sidebar
-        if (userNameDisplay) userNameDisplay.textContent = activeUserName;
-    } else {
-        // Si NO está logueado
-        if (userNameDisplay) userNameDisplay.textContent = "Invitado";
-        // Opcional: redirigir al login
-        // window.location.href = 'login.html'; 
-    }
-
-    // Funcionalidad del botón Log Out
+    // Funcionalidad del botón Log Out (ESTO SÍ SE MANTIENE)
     const logoutBtn = document.getElementById('btn-logout');
     if(logoutBtn) {
         logoutBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            sessionStorage.removeItem(SESSION_KEY); // Cerrar sesión
-            window.location.href = 'login.html'; // Volver al login
+            // Borramos la sesión
+            sessionStorage.removeItem(SESSION_KEY); 
+            // Redirigimos al login
+            window.location.href = 'login.html';
         });
     }
 }
