@@ -19,13 +19,13 @@
         .brand_logo { font-weight: bold; font-size: 24px; margin-bottom: 30px; letter-spacing: 1px; }
         .brand_logo span { color: #d4af37; }
 
-        /* Perfil de Usuario (MODIFICADO PARA ICONO GENÉRICO) */
+        /* Perfil de Usuario (ICONO GENÉRICO) */
         .user-profile { display: flex; align-items: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #222; }
         .avatar-icon {
             width: 45px; height: 45px; background-color: #333; border-radius: 50%; margin-right: 12px;
             display: flex; justify-content: center; align-items: center; color: #aaa; font-size: 20px;
         }
-        .user-info h3 { font-size: 16px; font-weight: 500; color: white; } /* El nombre será blanco */
+        .user-info h3 { font-size: 16px; font-weight: 500; color: white; }
         .user-info p { font-size: 12px; color: #888; }
 
         /* Menú */
@@ -51,7 +51,7 @@
         /* --- CONTENIDO PRINCIPAL --- */
         .main-content {
             flex: 1; padding: 20px 40px; overflow-y: auto;
-            /* IMPORTANTE: Asegúrate de tener 'fondo_tienda.jpg' en tu carpeta */
+            /* ASEGÚRATE DE QUE 'fondo_tienda.jpg' ESTÉ EN TU CARPETA */
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('fondo_tienda.jpg');
             background-size: cover; background-position: center;
         }
@@ -74,8 +74,8 @@
         .hero-content { flex: 1; padding: 40px; color: #333; display: flex; flex-direction: column; justify-content: center; background: white;}
         .hero-content h1 { font-size: 36px; margin-bottom: 15px; color: black;}
         .hero-content p { font-size: 18px; color: #666;}
-        /* IMPORTANTE: Crea una carpeta 'img' y pon ahí tu 'banner.jpg' */
-        .hero-image { flex: 1.5; background-image: url('img/banner.jpg'); background-size: cover; background-position: center;}
+        /* IMAGEN DEL BANNER DESDE INTERNET */
+        .hero-image { flex: 1.5; background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&auto=format&fit=crop'); background-size: cover; background-position: center;}
 
         /* Paginación */
         .pagination { display: flex; justify-content: flex-end; align-items: center; margin-bottom: 20px; color: white; }
@@ -89,7 +89,7 @@
             cursor: pointer; transition: transform 0.2s;
         }
         .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-        .product-img-container { height: 200px; display: flex; justify-content: center; align-items: center; margin-bottom: 15px; overflow: hidden; }
+        .product-img-container { height: 200px; display: flex; justify-content: center; align-items: center; margin-bottom: 15px; overflow: hidden; background: #f9f9f9; border-radius: 15px;}
         .product-img { max-width: 100%; max-height: 100%; object-fit: contain; }
         .product-info { flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
         .product-price { color: #d450e6; font-weight: bold; font-size: 20px; }
@@ -125,10 +125,10 @@
         <div class="brand_logo"><span>◆</span> SAANA</div>
         <!-- Perfil de Usuario -->
         <div class="user-profile">
-            <!-- Icono genérico en lugar de foto -->
+            <!-- Icono genérico -->
             <div class="avatar-icon"><i class="fas fa-user"></i></div>
             <div class="user-info">
-                <!-- El JS pondrá aquí el nombre real -->
+                <!-- JS pondrá el nombre real aquí -->
                 <h3 id="user-name-display">Cargando...</h3> 
                 <p>@usuario</p>
             </div>
@@ -164,21 +164,20 @@
                 <h1>Nueva Colección</h1>
                 <p>Descubre la tecnología que define tu estilo. Calidad y diseño en cada detalle.</p>
             </div>
-            <!-- Asegúrate de tener 'img/banner.jpg' -->
+            <!-- IMAGEN DEL BANNER DESDE INTERNET -->
             <div class="hero-image"></div>
         </div>
 
-        <!-- GRID DE PRODUCTOS -->
-        <!-- IMPORTANTE: Las rutas 'img/...' deben apuntar a tus fotos reales -->
+        <!-- GRID DE PRODUCTOS CON IMÁGENES DE INTERNET -->
         <div class="product-grid">
             <!-- Producto 1 -->
             <div class="product-card"
                  data-name="Reloj Inteligente Aura"
                  data-price="$180.000"
-                 data-img="img/reloj.jpg"
+                 data-img="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500&auto=format&fit=crop"
                  data-desc="Monitoreo de salud 24/7, GPS integrado, notificaciones y diseño resistente al agua.">
                 <div class="product-img-container">
-                    <img src="img/reloj.jpg" alt="Reloj" class="product-img">
+                    <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500&auto=format&fit=crop" alt="Reloj" class="product-img">
                 </div>
                 <div class="product-info">
                     <span class="product-price">$180.000</span>
@@ -189,10 +188,10 @@
             <div class="product-card"
                  data-name="Audífonos Pro Sound"
                  data-price="$75.000"
-                 data-img="img/audifonos.jpg"
+                 data-img="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop"
                  data-desc="Sonido de alta fidelidad, cancelación de ruido activa y hasta 30 horas de batería.">
                 <div class="product-img-container">
-                    <img src="img/audifonos.jpg" alt="Audífonos" class="product-img">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop" alt="Audífonos" class="product-img">
                 </div>
                 <div class="product-info">
                     <span class="product-price">$75.000</span>
@@ -203,10 +202,10 @@
             <div class="product-card"
                  data-name="Cámara Retro Instax"
                  data-price="$120.000"
-                 data-img="img/camara.jpg"
+                 data-img="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=500&auto=format&fit=crop"
                  data-desc="Captura e imprime tus momentos al instante con un estilo vintage único.">
                 <div class="product-img-container">
-                    <img src="img/camara.jpg" alt="Cámara" class="product-img">
+                    <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=500&auto=format&fit=crop" alt="Cámara" class="product-img">
                 </div>
                 <div class="product-info">
                     <span class="product-price">$120.000</span>
@@ -217,10 +216,10 @@
             <div class="product-card"
                  data-name="Funda de Cuero Slim"
                  data-price="$35.000"
-                 data-img="img/funda.jpg"
+                 data-img="https://images.unsplash.com/photo-1603351154351-5e2d0600bb77?w=500&auto=format&fit=crop"
                  data-desc="Protección elegante y delgada para tu teléfono con acabado de cuero premium.">
                 <div class="product-img-container">
-                    <img src="img/funda.jpg" alt="Funda" class="product-img">
+                    <img src="https://images.unsplash.com/photo-1603351154351-5e2d0600bb77?w=500&auto=format&fit=crop" alt="Funda" class="product-img">
                 </div>
                 <div class="product-info">
                     <span class="product-price">$35.000</span>
