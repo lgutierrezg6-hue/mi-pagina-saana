@@ -124,7 +124,62 @@
             font-size: 16px;
             letter-spacing: 1px;
         }
+        /* =========================================
+           RESPONSIVE: REGLAS PARA MÓVILES
+           (Pega esto al final de tu <style> en login.html y registro.html)
+        ========================================= */
+        
+        /* Cuando la pantalla tenga 768px de ancho o menos (Tablets y Celulares) */
+        @media (max-width: 768px) {
+            /* Reducimos el padding del header */
+            .header {
+                padding: 15px 20px;
+            }
+
+            /* El contenedor principal tiene menos padding */
+            .main-container {
+                padding: 20px;
+                /* En registro, alineamos arriba en vez de al centro verticalmente para que no corte si es muy largo */
+                align-items: flex-start; 
+            }
+
+            /* La caja del formulario (login o registro) ocupa el ancho completo */
+            /* Nota: usamos nombres de clases genéricos para que sirva en ambos archivos si los usaste */
+            .form-box, .login-box, .registro-form-container {
+                padding: 30px 20px; /* Menos relleno interno */
+                max-width: 100%;    /* Ocupa todo el ancho disponible */
+                border-radius: 15px; /* Bordes menos redondeados para ganar espacio */
+            }
+
+            /* Títulos más pequeños */
+            h1, h2 {
+                font-size: 24px;
+                margin-bottom: 25px;
+            }
+
+            /* --- ESPECÍFICO PARA REGISTRO --- */
+            /* Cambiamos la cuadrícula de 2 columnas a 1 sola columna */
+            .form-grid {
+                grid-template-columns: 1fr; /* Una sola columna */
+                gap: 20px; /* Menos espacio entre campos */
+            }
+
+            /* Los inputs de fecha se apilan verticalmente si hace falta, o se mantienen pequeños */
+            .date-group {
+                gap: 5px;
+            }
+            .date-input {
+                padding: 15px 5px; /* Menos padding lateral */
+            }
+
+            /* Botón de registro ocupa todo el ancho */
+            .btn-submit {
+                width: 100%;
+                padding: 15px;
+            }
+        }
     </style>
+    
 </head>
 <body>
     <!-- Header con el logo de texto -->
