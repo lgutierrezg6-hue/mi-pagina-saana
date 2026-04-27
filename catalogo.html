@@ -19,10 +19,13 @@
         .brand_logo { font-weight: bold; font-size: 24px; margin-bottom: 30px; letter-spacing: 1px; }
         .brand_logo span { color: #d4af37; }
 
-        /* Perfil de Usuario */
+        /* Perfil de Usuario (MODIFICADO PARA ICONO GENÉRICO) */
         .user-profile { display: flex; align-items: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #222; }
-        .avatar { width: 45px; height: 45px; background-color: #333; border-radius: 50%; margin-right: 12px; background-image: url('https://i.pravatar.cc/150?img=3'); /* Avatar genérico */ background-size: cover; }
-        .user-info h3 { font-size: 16px; font-weight: 500; }
+        .avatar-icon {
+            width: 45px; height: 45px; background-color: #333; border-radius: 50%; margin-right: 12px;
+            display: flex; justify-content: center; align-items: center; color: #aaa; font-size: 20px;
+        }
+        .user-info h3 { font-size: 16px; font-weight: 500; color: white; } /* El nombre será blanco */
         .user-info p { font-size: 12px; color: #888; }
 
         /* Menú */
@@ -43,12 +46,13 @@
         }
         .bottom-link:hover { color: white; }
         .bottom-link i { margin-right: 10px; }
-        #btn-logout { color: #d450e6; } /* Color rosado para logout */
+        #btn-logout { color: #d450e6; }
 
         /* --- CONTENIDO PRINCIPAL --- */
         .main-content {
             flex: 1; padding: 20px 40px; overflow-y: auto;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('fondo_tienda.jpg'); /* Tu fondo de tienda */
+            /* IMPORTANTE: Asegúrate de tener 'fondo_tienda.jpg' en tu carpeta */
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('fondo_tienda.jpg');
             background-size: cover; background-position: center;
         }
 
@@ -65,13 +69,13 @@
         /* Banner Destacado (Hero) */
         .hero-banner {
             background-color: #e0e0e0; border-radius: 20px; overflow: hidden; margin-bottom: 25px;
-            display: flex; height: 350px; /* Altura fija para el ejemplo */
+            display: flex; height: 300px;
         }
-        /* Placeholder para el contenido del banner */
-        .hero-content { flex: 1; padding: 30px; color: #333; display: flex; flex-direction: column; justify-content: center;}
-        .hero-content h1 { font-size: 32px; margin-bottom: 10px; }
-        .hero-image { flex: 1.5; background-image: url('https://via.placeholder.com/800x400?text=Banner+iFox+Clear'); background-size: cover; background-position: center;}
-
+        .hero-content { flex: 1; padding: 40px; color: #333; display: flex; flex-direction: column; justify-content: center; background: white;}
+        .hero-content h1 { font-size: 36px; margin-bottom: 15px; color: black;}
+        .hero-content p { font-size: 18px; color: #666;}
+        /* IMPORTANTE: Crea una carpeta 'img' y pon ahí tu 'banner.jpg' */
+        .hero-image { flex: 1.5; background-image: url('img/banner.jpg'); background-size: cover; background-position: center;}
 
         /* Paginación */
         .pagination { display: flex; justify-content: flex-end; align-items: center; margin-bottom: 20px; color: white; }
@@ -79,37 +83,37 @@
         .page-num.active { font-weight: bold; }
 
         /* Grid de Productos */
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; }
         .product-card {
             background-color: white; border-radius: 20px; padding: 15px; display: flex; flex-direction: column;
             cursor: pointer; transition: transform 0.2s;
         }
-        .product-card:hover { transform: translateY(-5px); }
-        .product-img-container { height: 180px; display: flex; justify-content: center; align-items: center; margin-bottom: 10px; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .product-img-container { height: 200px; display: flex; justify-content: center; align-items: center; margin-bottom: 15px; overflow: hidden; }
         .product-img { max-width: 100%; max-height: 100%; object-fit: contain; }
         .product-info { flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .product-price { color: #d450e6; font-weight: bold; font-size: 18px; }
-        .product-name { font-size: 14px; font-weight: bold; color: #333; margin-top: 5px; text-transform: uppercase; }
+        .product-price { color: #d450e6; font-weight: bold; font-size: 20px; }
+        .product-name { font-size: 16px; font-weight: bold; color: #333; margin-top: 8px; text-transform: uppercase; }
 
         /* --- MODAL (VENTANA EMERGENTE) --- */
         .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7);
-            display: none; /* Oculto por defecto */
-            justify-content: center; align-items: center; z-index: 1000;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8);
+            display: none; justify-content: center; align-items: center; z-index: 1000;
         }
-        .modal-overlay.active { display: flex; } /* Se muestra al añadir la clase 'active' */
+        .modal-overlay.active { display: flex; }
         .modal-content {
-            background-color: white; padding: 30px; border-radius: 20px; width: 90%; max-width: 500px;
-            position: relative; text-align: center;
+            background-color: white; padding: 30px; border-radius: 25px; width: 90%; max-width: 550px;
+            position: relative; text-align: center; box-shadow: 0 15px 30px rgba(0,0,0,0.3);
         }
-        .modal-close { position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; color: #666; }
-        .modal-img { width: auto; max-height: 250px; margin-bottom: 20px; object-fit: contain; }
-        .modal-title { font-size: 24px; margin-bottom: 10px; color: #333; }
-        .modal-price { color: #d450e6; font-size: 28px; font-weight: bold; margin-bottom: 20px; display: block; }
-        .modal-desc { color: #666; margin-bottom: 25px; line-height: 1.5; }
+        .modal-close { position: absolute; top: 15px; right: 20px; font-size: 28px; cursor: pointer; color: #999; transition: color 0.2s;}
+        .modal-close:hover { color: #333; }
+        .modal-img { width: auto; max-height: 280px; margin-bottom: 25px; object-fit: contain; }
+        .modal-title { font-size: 26px; margin-bottom: 10px; color: #333; font-weight: bold; }
+        .modal-price { color: #d450e6; font-size: 32px; font-weight: bold; margin-bottom: 20px; display: block; }
+        .modal-desc { color: #666; margin-bottom: 30px; line-height: 1.6; font-size: 16px; }
         .modal-btn {
-            padding: 12px 30px; background-color: #d450e6; color: white; border: none; border-radius: 25px;
-            font-size: 16px; font-weight: bold; cursor: pointer; transition: background 0.3s;
+            padding: 15px 40px; background-color: #d450e6; color: white; border: none; border-radius: 30px;
+            font-size: 18px; font-weight: bold; cursor: pointer; transition: background 0.3s; width: 100%;
         }
         .modal-btn:hover { background-color: #b830c4; }
 
@@ -118,26 +122,28 @@
 <body>
     <!-- SIDEBAR -->
     <div class="sidebar">
-        <div class="brand_logo"><span>◆</span> SA</div>
-        <!-- Perfil de Usuario (El nombre se actualizará con JS) -->
+        <div class="brand_logo"><span>◆</span> SAANA</div>
+        <!-- Perfil de Usuario -->
         <div class="user-profile">
-            <div class="avatar"></div> <!-- Muñeco genérico -->
+            <!-- Icono genérico en lugar de foto -->
+            <div class="avatar-icon"><i class="fas fa-user"></i></div>
             <div class="user-info">
-                <h3 id="user-name-display">Usuario</h3> <!-- Aquí irá el nombre -->
+                <!-- El JS pondrá aquí el nombre real -->
+                <h3 id="user-name-display">Cargando...</h3> 
                 <p>@usuario</p>
             </div>
         </div>
-        <!-- Menú Principal -->
+        <!-- Menú -->
         <ul class="menu">
             <li class="menu-item"><a href="#" class="menu-link active"><i class="fas fa-home"></i> Home</a></li>
-            <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-chart-bar"></i> Tecnología</a></li>
-            <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-th-large"></i> Accesorios</a></li>
+            <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-mobile-alt"></i> Tecnología</a></li>
+            <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-headphones"></i> Accesorios</a></li>
             <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-shopping-cart"></i> Carrito</a></li>
         </ul>
         <!-- Links Inferiores -->
         <div class="bottom-links">
-            <a href="#" class="bottom-link"><i class="fas fa-cog"></i> Setting</a>
-            <a href="#" class="bottom-link" id="btn-logout"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+            <a href="#" class="bottom-link"><i class="fas fa-cog"></i> Configuración</a>
+            <a href="#" class="bottom-link" id="btn-logout"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
         </div>
     </div>
 
@@ -145,101 +151,93 @@
     <div class="main-content">
         <!-- Header -->
         <div class="header">
-            <h1 class="page-title">Home</h1>
+            <h1 class="page-title">Catálogo de Productos</h1>
             <div class="search-container">
-                <input type="text" class="search-bar">
+                <input type="text" class="search-bar" placeholder="Buscar productos...">
                 <i class="fas fa-search search-icon"></i>
             </div>
         </div>
 
-        <!-- Hero Banner (Estático por ahora) -->
+        <!-- Banner Principal -->
         <div class="hero-banner">
             <div class="hero-content">
-                <h1>iFox Clear</h1>
-                <p>PC + TPU. Protección de doble capa con absorción de impactos.</p>
+                <h1>Nueva Colección</h1>
+                <p>Descubre la tecnología que define tu estilo. Calidad y diseño en cada detalle.</p>
             </div>
+            <!-- Asegúrate de tener 'img/banner.jpg' -->
             <div class="hero-image"></div>
         </div>
 
-        <!-- Paginación -->
-        <div class="pagination">
-            <i class="fas fa-chevron-left page-btn"></i>
-            <span class="page-num active">1</span>
-            <span class="page-num">2</span>
-            <span class="page-num">3</span>
-            <i class="fas fa-chevron-right page-btn"></i>
-        </div>
-
         <!-- GRID DE PRODUCTOS -->
-        <!-- CADA TARJETA TIENE DATOS (data-...) PARA EL MODAL -->
+        <!-- IMPORTANTE: Las rutas 'img/...' deben apuntar a tus fotos reales -->
         <div class="product-grid">
             <!-- Producto 1 -->
             <div class="product-card"
-                 data-name="Reloj Aura-Fit"
+                 data-name="Reloj Inteligente Aura"
                  data-price="$180.000"
-                 data-img="https://via.placeholder.com/300x300?text=Reloj+Aura"
-                 data-desc="Reloj inteligente con monitoreo de salud, notificaciones y diseño deportivo.">
+                 data-img="img/reloj.jpg"
+                 data-desc="Monitoreo de salud 24/7, GPS integrado, notificaciones y diseño resistente al agua.">
                 <div class="product-img-container">
-                    <img src="https://via.placeholder.com/300x300?text=Reloj+Aura" class="product-img">
+                    <img src="img/reloj.jpg" alt="Reloj" class="product-img">
                 </div>
                 <div class="product-info">
                     <span class="product-price">$180.000</span>
-                    <h3 class="product-name">Reloj Aura-Fit</h3>
+                    <h3 class="product-name">Reloj Aura</h3>
                 </div>
             </div>
             <!-- Producto 2 -->
             <div class="product-card"
-                 data-name="Case 360°"
-                 data-price="$25.000"
-                 data-img="https://via.placeholder.com/300x300?text=Case+360"
-                 data-desc="Funda protectora completa de 360 grados para máxima seguridad de tu dispositivo.">
+                 data-name="Audífonos Pro Sound"
+                 data-price="$75.000"
+                 data-img="img/audifonos.jpg"
+                 data-desc="Sonido de alta fidelidad, cancelación de ruido activa y hasta 30 horas de batería.">
                 <div class="product-img-container">
-                    <img src="https://via.placeholder.com/300x300?text=Case+360" class="product-img">
+                    <img src="img/audifonos.jpg" alt="Audífonos" class="product-img">
                 </div>
                 <div class="product-info">
-                    <span class="product-price">$25.000</span>
-                    <h3 class="product-name">Case 360°</h3>
+                    <span class="product-price">$75.000</span>
+                    <h3 class="product-name">Audífonos Pro</h3>
                 </div>
             </div>
             <!-- Producto 3 -->
             <div class="product-card"
-                 data-name="AirPods"
-                 data-price="$75.000"
-                 data-img="https://via.placeholder.com/300x300?text=AirPods"
-                 data-desc="Auriculares inalámbricos con sonido de alta calidad y estuche de carga.">
+                 data-name="Cámara Retro Instax"
+                 data-price="$120.000"
+                 data-img="img/camara.jpg"
+                 data-desc="Captura e imprime tus momentos al instante con un estilo vintage único.">
                 <div class="product-img-container">
-                    <img src="https://via.placeholder.com/300x300?text=AirPods" class="product-img">
+                    <img src="img/camara.jpg" alt="Cámara" class="product-img">
                 </div>
                 <div class="product-info">
-                    <span class="product-price">$75.000</span>
-                    <h3 class="product-name">AirPods</h3>
+                    <span class="product-price">$120.000</span>
+                    <h3 class="product-name">Cámara Retro</h3>
                 </div>
             </div>
-            <!-- Producto 4 -->
+             <!-- Producto 4 -->
             <div class="product-card"
-                 data-name="Funda Wallet"
-                 data-price="$25.000"
-                 data-img="https://via.placeholder.com/300x300?text=Funda+Wallet"
-                 data-desc="Funda con tarjetero integrado, práctica y elegante para tu día a día.">
+                 data-name="Funda de Cuero Slim"
+                 data-price="$35.000"
+                 data-img="img/funda.jpg"
+                 data-desc="Protección elegante y delgada para tu teléfono con acabado de cuero premium.">
                 <div class="product-img-container">
-                    <img src="https://via.placeholder.com/300x300?text=Funda+Wallet" class="product-img">
+                    <img src="img/funda.jpg" alt="Funda" class="product-img">
                 </div>
                 <div class="product-info">
-                    <span class="product-price">$25.000</span>
-                    <h3 class="product-name">Funda Wallet</h3>
+                    <span class="product-price">$35.000</span>
+                    <h3 class="product-name">Funda Slim</h3>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- VENTANA EMERGENTE (MODAL) - OCULTA INICIALMENTE -->
+    <!-- MODAL (VENTANA EMERGENTE) -->
     <div class="modal-overlay" id="product-modal">
         <div class="modal-content">
             <span class="modal-close" id="close-modal">&times;</span>
             <img src="" alt="" class="modal-img" id="modal-img">
-            <h2 class="modal-title" id="modal-title">Nombre del Producto</h2>
-            <span class="modal-price" id="modal-price">$0.00</span>
-            <p class="modal-desc" id="modal-desc">Descripción del producto...</p>
+            <h2 class="modal-title" id="modal-title"></h2>
+            <span class="modal-price" id="modal-price"></span>
+            <p class="modal-desc" id="modal-desc"></p>
             <button class="modal-btn">Añadir al Carrito</button>
         </div>
     </div>
