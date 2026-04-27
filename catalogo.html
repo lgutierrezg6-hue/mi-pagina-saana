@@ -116,6 +116,100 @@
             font-size: 18px; font-weight: bold; cursor: pointer; transition: background 0.3s; width: 100%;
         }
         .modal-btn:hover { background-color: #b830c4; }
+        /* =========================================
+           RESPONSIVE PARA EL CATÁLOGO
+           (Pega esto al final de tu <style> en catalogo.html)
+        ========================================= */
+
+        @media (max-width: 900px) { /* Activamos esto en tablets y celulares */
+            
+            /* Cambiamos la dirección del cuerpo a columna (vertical) */
+            body {
+                flex-direction: column;
+                height: auto; /* La altura ya no es fija */
+                overflow: auto; /* Permitimos hacer scroll en toda la página */
+            }
+
+            /* --- LA BARRA LATERAL AHORA ES UNA BARRA SUPERIOR --- */
+            .sidebar {
+                width: 100%; /* Ancho completo */
+                height: auto;
+                flex-direction: row; /* Elementos en fila */
+                align-items: center;
+                padding: 10px 20px;
+                border-right: none;
+                border-bottom: 1px solid #222;
+                justify-content: space-between; /* Espacio entre logo y menú */
+                flex-wrap: wrap; /* Permite que los elementos bajen si no caben */
+            }
+
+            .brand_logo { margin-bottom: 0; font-size: 20px; }
+            
+            /* Ocultamos el perfil y algunos enlaces para ahorrar espacio en el móvil */
+            .user-profile, .bottom-links {
+                display: none; 
+            }
+
+            /* El menú se vuelve horizontal */
+            .menu {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                width: 100%;
+                margin-top: 10px;
+            }
+            .menu-item { margin: 0 5px; }
+            .menu-link { padding: 8px 10px; font-size: 13px; }
+            .menu-link i { margin-right: 5px; }
+            
+            /* --- CONTENIDO PRINCIPAL --- */
+            .main-content {
+                padding: 20px;
+                height: auto; /* Altura automática */
+            }
+
+            /* Header del catálogo (Título y búsqueda) se apilan */
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            .search-container { width: 100%; }
+
+            /* --- BANNER DESTACADO SE APILA --- */
+            .hero-banner {
+                flex-direction: column;
+                height: auto;
+            }
+            .hero-image {
+                height: 200px; /* Altura fija para la imagen en móvil */
+                flex: none; /* No intentes estirarte */
+            }
+            .hero-content {
+                padding: 20px;
+            }
+            .hero-content h1 { font-size: 24px; }
+            .hero-content p { font-size: 14px; }
+
+            /* --- GRID DE PRODUCTOS --- */
+            /* Hacemos que las tarjetas sean un poco más pequeñas */
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 15px;
+            }
+            .product-img-container { height: 150px; }
+            .product-price { font-size: 16px; }
+            .product-name { font-size: 13px; }
+
+            /* --- MODAL --- */
+            .modal-content {
+                padding: 20px;
+                width: 95%;
+            }
+            .modal-img { max-height: 200px; }
+            .modal-title { font-size: 20px; }
+            .modal-price { font-size: 24px; }
+        }
 
     </style>
 </head>
