@@ -1,5 +1,5 @@
 /*
-    auth.js - Motor funcional actualizado
+    auth.js - Motor funcional completo
 */
 
 // --- CLAVES DE ALMACENAMIENTO ---
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// --- 1. REGISTRO (Sin cambios importantes) ---
+// --- 1. REGISTRO ---
 function initRegistro() {
     const form = document.getElementById('form-registro-saana');
     form.addEventListener('submit', (e) => {
@@ -31,7 +31,7 @@ function initRegistro() {
         const confirmPassword = document.getElementById('reg-confirm-password').value;
 
         if (password !== confirmPassword) { alert("Las contraseñas no coinciden."); return; }
-        if (!nombre || !email || !password) { alert("Por favor completa los campos obligatorios."); return; }
+        if (!nombre || !apellido || !email || !password) { alert("Por favor completa todos los campos."); return; }
 
         // Guardamos el nombre completo para usarlo luego
         const nuevoUsuario = {
@@ -41,14 +41,17 @@ function initRegistro() {
         };
 
         localStorage.setItem(KEY_DATOS_USUARIO, JSON.stringify(nuevoUsuario));
-        alert("¡Registro exitoso! Inicia sesión.");
+        alert("¡Registro exitoso! Ahora inicia sesión.");
         window.location.href = 'login.html';
     });
 }
 
 
-// --- 2. LOGIN (Sin cambios importantes) ---
+// --- 2. LOGIN ---
 function initLogin() {
+    // Limpiar sesión previa al entrar al login
+    sessionStorage.removeItem(KEY_SESION_ACTIVA);
+
     const form = document.getElementById('form-login-saana');
     form.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -57,39 +60,39 @@ function initLogin() {
         const passInput = document.getElementById('login-password').value;
 
         const datosJSON = localStorage.getItem(KEY_DATOS_USUARIO);
-        if (!datosJSON) { alert("Usuario no encontrado."); return; }
+        if (!datosJSON) { alert("Usuario no registrado. Por favor crea una cuenta."); return; }
 
         const usuario = JSON.parse(datosJSON);
         
         if (emailInput === usuario.email && passInput === usuario.password) {
-            // Login exitoso: Creamos la sesión
+            // Login exitoso: Creamos el "pase" de sesión
             sessionStorage.setItem(KEY_SESION_ACTIVA, 'true');
             window.location.href = 'catalogo.html';
         } else {
-            alert("Credenciales incorrectas.");
+            alert("Correo o contraseña incorrectos.");
         }
     });
 }
 
 
-// --- 3. FUNCIONALIDAD DEL CATÁLOGO (¡NUEVO!) ---
+// --- 3. FUNCIONALIDAD DEL CATÁLOGO ---
 function initCatalogo() {
-    // A. VERIFICACIÓN DE SEGURIDAD (Guardia)
+    // A. GUARDIA DE SEGURIDAD
     if (!sessionStorage.getItem(KEY_SESION_ACTIVA)) {
         window.location.href = 'login.html';
-        return; // Detenemos la ejecución si no hay sesión
+        return;
     }
 
-    // B. MOSTRAR NOMBRE DE USUARIO EN SIDEBAR
+    // B. MOSTRAR NOMBRE REAL DEL USUARIO EN SIDEBAR
     const userNameDisplay = document.getElementById('user-name-display');
     const datosJSON = localStorage.getItem(KEY_DATOS_USUARIO);
     if (datosJSON && userNameDisplay) {
         const usuario = JSON.parse(datosJSON);
-        // Usamos el nombre guardado o "Usuario" si no hay nombre
+        // Si hay nombre guardado lo usamos, si no, ponemos "Usuario"
         userNameDisplay.textContent = usuario.nombreCompleto || "Usuario";
     }
 
-    // C. FUNCIONALIDAD DEL MODAL DE PRODUCTOS
+    // C. FUNCIONALIDAD DEL MODAL (Ventana emergente)
     const modal = document.getElementById('product-modal');
     const closeModalBtn = document.getElementById('close-modal');
     const productCards = document.querySelectorAll('.product-card');
@@ -100,48 +103,33 @@ function initCatalogo() {
     const modalPrice = document.getElementById('modal-price');
     const modalDesc = document.getElementById('modal-desc');
 
-    // Función para abrir el modal con datos
+    // Función para abrir el modal con los datos de la tarjeta
     const openModal = (card) => {
-        // Leemos los datos de los atributos 'data-' de la tarjeta clickeada
-        const name = card.getAttribute('data-name');
-        const price = card.getAttribute('data-price');
-        const img = card.getAttribute('data-img');
-        const desc = card.getAttribute('data-desc');
-
-        // Rellenamos el modal con esos datos
-        modalImg.src = img;
-        modalTitle.textContent = name;
-        modalPrice.textContent = price;
-        modalDesc.textContent = desc;
-
-        // Mostramos el modal
-        modal.classList.add('active');
+        modalImg.src = card.getAttribute('data-img');
+        modalTitle.textContent = card.getAttribute('data-name');
+        modalPrice.textContent = card.getAttribute('data-price');
+        modalDesc.textContent = card.getAttribute('data-desc');
+        modal.classList.add('active'); // Mostrar modal
     };
 
-    // Añadimos el evento de clic a cada tarjeta
+    // Añadimos el clic a cada tarjeta
     productCards.forEach(card => {
         card.addEventListener('click', () => openModal(card));
     });
 
-    // Cerrar el modal al dar clic en la 'X'
-    closeModalBtn.addEventListener('click', () => {
-        modal.classList.remove('active');
-    });
-
-    // Cerrar el modal al dar clic fuera del contenido (en el fondo oscuro)
+    // Cerrar modal con la 'X' o clic fuera
+    closeModalBtn.addEventListener('click', () => modal.classList.remove('active'));
     modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.remove('active');
-        }
+        if (e.target === modal) modal.classList.remove('active');
     });
 
 
-    // D. FUNCIONALIDAD DE LOGOUT
+    // D. FUNCIONALIDAD DE LOGOUT (Cerrar Sesión)
     const btnLogout = document.getElementById('btn-logout');
     if (btnLogout) {
         btnLogout.addEventListener('click', (e) => {
             e.preventDefault();
-            sessionStorage.removeItem(KEY_SESION_ACTIVA);
+            sessionStorage.removeItem(KEY_SESION_ACTIVA); // Romper el pase
             window.location.href = 'login.html';
         });
     }
