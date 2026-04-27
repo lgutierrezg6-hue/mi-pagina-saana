@@ -4,147 +4,243 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo - SAANA</title>
+    <!-- Font Awesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ESTILOS BÁSICOS DEL CATÁLOGO */
-        body { margin: 0; padding: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #121212; color: white; display: flex; height: 100vh; overflow: hidden; }
-        .sidebar { width: 260px; background-color: #000000; padding: 25px; display: flex; flex-direction: column; border-right: 1px solid #333; }
-        .logo { font-weight: bold; font-size: 22px; letter-spacing: 2px; display: flex; align-items: center; margin-bottom: 40px; color: white;}
-        .logo-icon { color: #d4af37; margin-right: 10px; font-size: 26px;}
-        .menu { list-style: none; padding: 0; flex: 1;} .menu-link { color: #888; text-decoration: none; display: block; padding: 10px; margin-bottom: 5px; border-radius: 10px; transition: 0.3s;} .menu-link.active, .menu-link:hover { background: white; color: black;} .menu-link i { margin-right: 10px;}
-        .logout-link { margin-top: auto; color: #d4af37; cursor: pointer; text-decoration: none; display: flex; align-items: center;}
-        
-        .main-content { flex: 1; padding: 30px; overflow-y: auto; background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('fondo_tienda.jpg'); background-size: cover; background-position: center; }
-        .catalog-header { display: flex; justify-content: space-between; margin-bottom: 30px; align-items: center;}
-        .search-bar { background: rgba(255,255,255,0.1); border: none; padding: 10px 20px; border-radius: 20px; color: white; width: 300px;}
-        
-        /* GRID DE PRODUCTOS */
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; }
-        .product-card {
-            background-color: white; border-radius: 20px; overflow: hidden; color: #333;
-            transition: transform 0.3s; cursor: pointer; position: relative;
-        }
-        .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(255,255,255,0.1); }
-        .product-image-container { height: 200px; overflow: hidden; background: #f4f4f4;}
-        .product-image { width: 100%; height: 100%; object-fit: cover; }
-        .product-info { padding: 15px; }
-        .product-price { color: #d450e6; font-size: 18px; font-weight: bold; display: block; }
-        .product-title { font-size: 16px; font-weight: bold; margin: 5px 0 15px; color: black; }
-        .add-to-cart-btn { position: absolute; bottom: 15px; right: 15px; background: #f0f0f0; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 16px; transition: 0.3s;}
-        .add-to-cart-btn:hover { background: #d450e6; color: white; }
+        /* --- ESTILOS GENERALES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+        body { display: flex; height: 100vh; background-color: #121212; overflow: hidden; }
 
-        /* --- ESTILOS DEL MODAL (POP-UP) --- */
+        /* --- SIDEBAR --- */
+        .sidebar {
+            width: 250px; background-color: #000000; padding: 20px; display: flex; flex-direction: column;
+            color: white; border-right: 1px solid #222;
+        }
+        .brand_logo { font-weight: bold; font-size: 24px; margin-bottom: 30px; letter-spacing: 1px; }
+        .brand_logo span { color: #d4af37; }
+
+        /* Perfil de Usuario */
+        .user-profile { display: flex; align-items: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #222; }
+        .avatar { width: 45px; height: 45px; background-color: #333; border-radius: 50%; margin-right: 12px; background-image: url('https://i.pravatar.cc/150?img=3'); /* Avatar genérico */ background-size: cover; }
+        .user-info h3 { font-size: 16px; font-weight: 500; }
+        .user-info p { font-size: 12px; color: #888; }
+
+        /* Menú */
+        .menu { list-style: none; flex-grow: 1; }
+        .menu-item { margin-bottom: 5px; }
+        .menu-link {
+            text-decoration: none; color: #888; display: flex; align-items: center; padding: 10px 15px;
+            border-radius: 10px; transition: all 0.3s; font-size: 15px;
+        }
+        .menu-link:hover, .menu-link.active { background-color: rgba(255,255,255,0.1); color: white; }
+        .menu-link i { margin-right: 15px; width: 20px; text-align: center; }
+
+        /* Botones inferiores */
+        .bottom-links { margin-top: auto; }
+        .bottom-link {
+            text-decoration: none; color: #888; display: flex; align-items: center; padding: 8px 15px;
+            transition: 0.3s; font-size: 14px;
+        }
+        .bottom-link:hover { color: white; }
+        .bottom-link i { margin-right: 10px; }
+        #btn-logout { color: #d450e6; } /* Color rosado para logout */
+
+        /* --- CONTENIDO PRINCIPAL --- */
+        .main-content {
+            flex: 1; padding: 20px 40px; overflow-y: auto;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('fondo_tienda.jpg'); /* Tu fondo de tienda */
+            background-size: cover; background-position: center;
+        }
+
+        /* Header y Barra de Búsqueda */
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+        .page-title { color: white; font-size: 24px; font-weight: bold; }
+        .search-container { position: relative; width: 50%; }
+        .search-bar {
+            width: 100%; padding: 12px 20px; padding-right: 40px; border-radius: 25px; border: none;
+            background-color: white; outline: none;
+        }
+        .search-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #666; }
+
+        /* Banner Destacado (Hero) */
+        .hero-banner {
+            background-color: #e0e0e0; border-radius: 20px; overflow: hidden; margin-bottom: 25px;
+            display: flex; height: 350px; /* Altura fija para el ejemplo */
+        }
+        /* Placeholder para el contenido del banner */
+        .hero-content { flex: 1; padding: 30px; color: #333; display: flex; flex-direction: column; justify-content: center;}
+        .hero-content h1 { font-size: 32px; margin-bottom: 10px; }
+        .hero-image { flex: 1.5; background-image: url('https://via.placeholder.com/800x400?text=Banner+iFox+Clear'); background-size: cover; background-position: center;}
+
+
+        /* Paginación */
+        .pagination { display: flex; justify-content: flex-end; align-items: center; margin-bottom: 20px; color: white; }
+        .page-btn, .page-num { margin: 0 8px; cursor: pointer; }
+        .page-num.active { font-weight: bold; }
+
+        /* Grid de Productos */
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px; }
+        .product-card {
+            background-color: white; border-radius: 20px; padding: 15px; display: flex; flex-direction: column;
+            cursor: pointer; transition: transform 0.2s;
+        }
+        .product-card:hover { transform: translateY(-5px); }
+        .product-img-container { height: 180px; display: flex; justify-content: center; align-items: center; margin-bottom: 10px; }
+        .product-img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .product-info { flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .product-price { color: #d450e6; font-weight: bold; font-size: 18px; }
+        .product-name { font-size: 14px; font-weight: bold; color: #333; margin-top: 5px; text-transform: uppercase; }
+
+        /* --- MODAL (VENTANA EMERGENTE) --- */
         .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7);
             display: none; /* Oculto por defecto */
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.85); z-index: 1000;
-            justify-content: center; align-items: center; padding: 20px;
+            justify-content: center; align-items: center; z-index: 1000;
         }
-        .modal-overlay.active { display: flex; } /* Se muestra cuando tiene esta clase */
+        .modal-overlay.active { display: flex; } /* Se muestra al añadir la clase 'active' */
         .modal-content {
-            background-color: white; color: #333; width: 100%; max-width: 800px;
-            border-radius: 25px; overflow: hidden; display: flex; position: relative;
+            background-color: white; padding: 30px; border-radius: 20px; width: 90%; max-width: 500px;
+            position: relative; text-align: center;
         }
-        .modal-close { position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; z-index: 10; color: #666;}
-        .modal-img-container { flex: 1; background: #f4f4f4; display: flex; align-items: center; justify-content: center;}
-        .modal-img { max-width: 100%; max-height: 400px; object-fit: contain;}
-        .modal-details { flex: 1; padding: 40px; display: flex; flex-direction: column;}
-        .modal-title { font-size: 28px; margin: 0 0 20px;}
-        .modal-desc { font-size: 16px; color: #666; line-height: 1.6; flex-grow: 1;}
-        .modal-price { font-size: 32px; color: #d450e6; font-weight: bold; margin-top: 20px;}
+        .modal-close { position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; color: #666; }
+        .modal-img { width: auto; max-height: 250px; margin-bottom: 20px; object-fit: contain; }
+        .modal-title { font-size: 24px; margin-bottom: 10px; color: #333; }
+        .modal-price { color: #d450e6; font-size: 28px; font-weight: bold; margin-bottom: 20px; display: block; }
+        .modal-desc { color: #666; margin-bottom: 25px; line-height: 1.5; }
+        .modal-btn {
+            padding: 12px 30px; background-color: #d450e6; color: white; border: none; border-radius: 25px;
+            font-size: 16px; font-weight: bold; cursor: pointer; transition: background 0.3s;
+        }
+        .modal-btn:hover { background-color: #b830c4; }
+
     </style>
-    <!-- PEGA ESTO DENTRO DE LA SECCIÓN <HEAD> DE CATALOGO.HTML -->
-    <script>
-        // GUARDIA DE SEGURIDAD:
-        // Verifica si existe el "pase" de sesión. Si no, te expulsa al login.
-        if (!sessionStorage.getItem('saana_session_active')) {
-            window.location.href = 'login.html';
-        }
-    </script>
-    <!-- FIN DEL GUARDIA -->
 </head>
 <body>
+    <!-- SIDEBAR -->
     <div class="sidebar">
-        <div class="logo"><span class="logo-icon">♦</span> SAANA</div>
+        <div class="brand_logo"><span>◆</span> SA</div>
+        <!-- Perfil de Usuario (El nombre se actualizará con JS) -->
+        <div class="user-profile">
+            <div class="avatar"></div> <!-- Muñeco genérico -->
+            <div class="user-info">
+                <h3 id="user-name-display">Usuario</h3> <!-- Aquí irá el nombre -->
+                <p>@usuario</p>
+            </div>
+        </div>
+        <!-- Menú Principal -->
         <ul class="menu">
-            <li><a href="#" class="menu-link active"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="#" class="menu-link"><i class="fas fa-shopping-cart"></i> Carrito</a></li>
+            <li class="menu-item"><a href="#" class="menu-link active"><i class="fas fa-home"></i> Home</a></li>
+            <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-chart-bar"></i> Tecnología</a></li>
+            <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-th-large"></i> Accesorios</a></li>
+            <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-shopping-cart"></i> Carrito</a></li>
         </ul>
-        <a href="login.html" class="logout-link" id="btn-logout"><i class="fas fa-sign-out-alt menu-icon"></i> Log Out</a>
+        <!-- Links Inferiores -->
+        <div class="bottom-links">
+            <a href="#" class="bottom-link"><i class="fas fa-cog"></i> Setting</a>
+            <a href="#" class="bottom-link" id="btn-logout"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+        </div>
     </div>
 
+    <!-- CONTENIDO PRINCIPAL -->
     <div class="main-content">
-        <div class="catalog-header">
-            <h1>Catálogo</h1>
-            <input type="text" class="search-bar" placeholder="Buscar...">
+        <!-- Header -->
+        <div class="header">
+            <h1 class="page-title">Home</h1>
+            <div class="search-container">
+                <input type="text" class="search-bar">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+        </div>
+
+        <!-- Hero Banner (Estático por ahora) -->
+        <div class="hero-banner">
+            <div class="hero-content">
+                <h1>iFox Clear</h1>
+                <p>PC + TPU. Protección de doble capa con absorción de impactos.</p>
+            </div>
+            <div class="hero-image"></div>
+        </div>
+
+        <!-- Paginación -->
+        <div class="pagination">
+            <i class="fas fa-chevron-left page-btn"></i>
+            <span class="page-num active">1</span>
+            <span class="page-num">2</span>
+            <span class="page-num">3</span>
+            <i class="fas fa-chevron-right page-btn"></i>
         </div>
 
         <!-- GRID DE PRODUCTOS -->
-        <!-- NOTA: He puesto enlaces a imágenes de internet para que se vean YA MISMO. -->
-        <!-- Los atributos 'data-' tienen la info para el pop-up -->
+        <!-- CADA TARJETA TIENE DATOS (data-...) PARA EL MODAL -->
         <div class="product-grid">
             <!-- Producto 1 -->
-            <div class="product-card" 
-                 data-nombre="Reloj Inteligente Aura" 
-                 data-precio="$180.000" 
-                 data-descripcion="El compañero perfecto para tu salud y deporte. Monitoreo 24/7, GPS integrado y resistencia al agua."
-                 data-imagen="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500&auto=format&fit=crop">
-                <div class="product-image-container">
-                    <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500&auto=format&fit=crop" alt="Reloj" class="product-image">
+            <div class="product-card"
+                 data-name="Reloj Aura-Fit"
+                 data-price="$180.000"
+                 data-img="https://via.placeholder.com/300x300?text=Reloj+Aura"
+                 data-desc="Reloj inteligente con monitoreo de salud, notificaciones y diseño deportivo.">
+                <div class="product-img-container">
+                    <img src="https://via.placeholder.com/300x300?text=Reloj+Aura" class="product-img">
                 </div>
                 <div class="product-info">
                     <span class="product-price">$180.000</span>
-                    <h3 class="product-title">Reloj Aura</h3>
+                    <h3 class="product-name">Reloj Aura-Fit</h3>
                 </div>
-                <button class="add-to-cart-btn"><i class="fas fa-shopping-cart"></i></button>
             </div>
-
             <!-- Producto 2 -->
-            <div class="product-card" 
-                 data-nombre="Audífonos Pro Sound" 
-                 data-precio="$75.000" 
-                 data-descripcion="Sumérgete en la música con cancelación de ruido activa y hasta 30 horas de batería."
-                 data-imagen="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop">
-                <div class="product-image-container">
-                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop" alt="Audífonos" class="product-image">
+            <div class="product-card"
+                 data-name="Case 360°"
+                 data-price="$25.000"
+                 data-img="https://via.placeholder.com/300x300?text=Case+360"
+                 data-desc="Funda protectora completa de 360 grados para máxima seguridad de tu dispositivo.">
+                <div class="product-img-container">
+                    <img src="https://via.placeholder.com/300x300?text=Case+360" class="product-img">
+                </div>
+                <div class="product-info">
+                    <span class="product-price">$25.000</span>
+                    <h3 class="product-name">Case 360°</h3>
+                </div>
+            </div>
+            <!-- Producto 3 -->
+            <div class="product-card"
+                 data-name="AirPods"
+                 data-price="$75.000"
+                 data-img="https://via.placeholder.com/300x300?text=AirPods"
+                 data-desc="Auriculares inalámbricos con sonido de alta calidad y estuche de carga.">
+                <div class="product-img-container">
+                    <img src="https://via.placeholder.com/300x300?text=AirPods" class="product-img">
                 </div>
                 <div class="product-info">
                     <span class="product-price">$75.000</span>
-                    <h3 class="product-title">Audífonos Pro</h3>
+                    <h3 class="product-name">AirPods</h3>
                 </div>
-                <button class="add-to-cart-btn"><i class="fas fa-shopping-cart"></i></button>
             </div>
-            
-            <!-- Producto 3 -->
-             <div class="product-card" 
-                 data-nombre="Cámara Instantánea Retro" 
-                 data-precio="$120.000" 
-                 data-descripcion="Captura momentos y imprímelos al instante con un estilo vintage único."
-                 data-imagen="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=500&auto=format&fit=crop">
-                <div class="product-image-container">
-                    <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=500&auto=format&fit=crop" alt="Cámara" class="product-image">
+            <!-- Producto 4 -->
+            <div class="product-card"
+                 data-name="Funda Wallet"
+                 data-price="$25.000"
+                 data-img="https://via.placeholder.com/300x300?text=Funda+Wallet"
+                 data-desc="Funda con tarjetero integrado, práctica y elegante para tu día a día.">
+                <div class="product-img-container">
+                    <img src="https://via.placeholder.com/300x300?text=Funda+Wallet" class="product-img">
                 </div>
                 <div class="product-info">
-                    <span class="product-price">$120.000</span>
-                    <h3 class="product-title">Cámara Retro</h3>
+                    <span class="product-price">$25.000</span>
+                    <h3 class="product-name">Funda Wallet</h3>
                 </div>
-                <button class="add-to-cart-btn"><i class="fas fa-shopping-cart"></i></button>
             </div>
         </div>
     </div>
 
-    <!-- ESTRUCTURA DEL MODAL (POP-UP) - OCULTA INICIALMENTE -->
+    <!-- VENTANA EMERGENTE (MODAL) - OCULTA INICIALMENTE -->
     <div class="modal-overlay" id="product-modal">
         <div class="modal-content">
             <span class="modal-close" id="close-modal">&times;</span>
-            <div class="modal-img-container">
-                <img src="" id="modal-img" class="modal-img">
-            </div>
-            <div class="modal-details">
-                <h2 class="modal-title" id="modal-title"></h2>
-                <p class="modal-desc" id="modal-desc"></p>
-                <span class="modal-price" id="modal-price"></span>
-            </div>
+            <img src="" alt="" class="modal-img" id="modal-img">
+            <h2 class="modal-title" id="modal-title">Nombre del Producto</h2>
+            <span class="modal-price" id="modal-price">$0.00</span>
+            <p class="modal-desc" id="modal-desc">Descripción del producto...</p>
+            <button class="modal-btn">Añadir al Carrito</button>
         </div>
     </div>
 
