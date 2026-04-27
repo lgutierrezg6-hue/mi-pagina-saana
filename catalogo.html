@@ -53,6 +53,15 @@
         .modal-desc { font-size: 16px; color: #666; line-height: 1.6; flex-grow: 1;}
         .modal-price { font-size: 32px; color: #d450e6; font-weight: bold; margin-top: 20px;}
     </style>
+    <!-- PEGA ESTO DENTRO DE LA SECCIÓN <HEAD> DE CATALOGO.HTML -->
+    <script>
+        // GUARDIA DE SEGURIDAD:
+        // Verifica si existe el "pase" de sesión. Si no, te expulsa al login.
+        if (!sessionStorage.getItem('saana_session_active')) {
+            window.location.href = 'login.html';
+        }
+    </script>
+    <!-- FIN DEL GUARDIA -->
 </head>
 <body>
     <div class="sidebar">
